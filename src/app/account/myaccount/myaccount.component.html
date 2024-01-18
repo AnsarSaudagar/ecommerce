@@ -1,0 +1,15 @@
+<div class="h-[200px] relative">
+    <img src="../../../assets/account-header.png" alt>
+    <p class=" absolute text-white top-[50%] text-3xl w-full text-center">MY ACCOUNT</p>
+</div>
+<div class="min-h-[400px]  relative flex   justify-center mt-14">
+    <div class=" flex flex-col w-[20%] h-[150px] text-[#878787]">
+        <a [routerLink]="['/account', 'myAccount', 'dashboard']" routerLinkActive="active"
+            class="border flex text-[15px] pl-5 items-center h-[28%] border-[#ddd] ">Dashboard</a>
+        <a [routerLink]="['/account', 'myAccount', 'adress']"
+            class="border flex text-[15px] pl-5 items-center h-[28%] border-[#ddd]"
+            routerLinkActive="active">Addresses</a>
+        <a class="border flex text-[15px] pl-5 items-center h-[28%] border-[#ddd]">Logout</a>
+    </div>
+    <router-outlet></router-outlet>
+</div>

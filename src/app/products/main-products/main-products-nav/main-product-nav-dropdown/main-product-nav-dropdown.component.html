@@ -1,0 +1,30 @@
+<div class="hidden  h-full w-full border border-[#ddd] rounded-[60px] lg:flex justify-between items-center px-3 cursor-pointer"
+    (click)="increaseCount()">
+    <p class="text-[#878787]">{{dropdownMain}}</p>
+    <fa-icon [icon]="getArrows()"></fa-icon>
+</div>
+<div class="lg:hidden h-full lg:border border border-[#ddd] rounded-[60px] flex justify-between items-center px-3 cursor-pointer"
+    (click)="increaseCount()">
+    <p class="text-[#878787]">Sort</p>
+    <fa-icon [icon]="getArrows()"></fa-icon>
+</div>
+
+<div [ngClass]="{hide:count%2===0}" class="dropdown w-64  min-h-44 py-5  absolute top-12 right-0 bg-white ">
+    <ul>
+        <li class=" h-10 flex items-center pl-3 text-[#878787] hover:text-[#56cfe1] cursor-pointer"
+            (click)="changeQuery('All', 'All')">All</li>
+        <li class=" h-10 flex items-center pl-3 text-[#878787] hover:text-[#56cfe1] cursor-pointer"
+            (click)="changeQuery('best-selling', 'Best Selling')">Best Selling</li>
+        <li class=" h-10 flex items-center pl-3 text-[#878787] hover:text-[#56cfe1] cursor-pointer"
+            (click)="changeQuery('ascending-alpha', 'Alphabetically, A-Z')">Alphabetically, A-Z
+        </li>
+        <li class=" h-10 flex items-center pl-3 text-[#878787] hover:text-[#56cfe1] cursor-pointer"
+            (click)="changeQuery('descending-alpha', 'Alphabetically, Z-A')">Alphabetically, Z-A
+        </li>
+        <li class=" h-10 flex items-center pl-3 text-[#878787] hover:text-[#56cfe1] cursor-pointer"
+            (click)="changeQuery('ascending-num', 'Prize, low to high')">Prize, low to high</li>
+        <li class=" h-10 flex items-center pl-3 text-[#878787] hover:text-[#56cfe1] cursor-pointer"
+            (click)="changeQuery('descending-num', 'Prize, high to low')">Prize, high to low
+        </li>
+    </ul>
+</div>

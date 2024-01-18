@@ -1,0 +1,76 @@
+<div class=" h-[80px] lg:max-w-screen flex justify-between items-center px-4 lg:px-8 bg-[#f6f6f8]">
+    <div class="hover:text-[#56cfe1] transition cursor-pointer lg:hidden block">
+        <fa-icon [icon]="faHam" class="text-[21px]"></fa-icon>
+
+    </div>
+    <div class="h-fit logo cursor-pointer" (click)="onClickLogo()">
+        <img src="../../assets/logo.png" alt>
+    </div>
+    <div class="w-[30%] main-nav lg:block hidden">
+        <ul class="flex w-full justify-between">
+            <li class="
+            transition-all
+             cursor-pointer
+              hover:text-[#56cfe1]
+                relative">
+                <!-- <div class="absolute text-xs">New</div> -->
+                <a [routerLink]="['/collections']">Shop</a>
+            </li>
+            <li class="transition-all
+             cursor-pointer
+              hover:text-[#56cfe1]
+               ">
+                <a>Product</a>
+            </li>
+            <li class="transition-all
+             cursor-pointer
+              hover:text-[#56cfe1]
+               ">
+                <a>Sale</a>
+            </li>
+            <li class="transition-all
+             cursor-pointer
+              hover:text-[#56cfe1]
+               " (click)="logout()" *ngIf="loginCheck">
+                <a>Logout</a>
+            </li>
+            <li class="transition-all
+             cursor-pointer
+              hover:text-[#56cfe1]
+               text-[15px]" (click)="onClickLogin()" *ngIf="!loginCheck">
+                <a>Login</a>
+            </li>
+            <!-- #56cfe1; -->
+        </ul>
+    </div>
+    <div class="w-[20%] lg:w-[15%] icons ">
+        <ul class="flex w-full justify-between">
+
+            <li class="text-[18px] cursor-pointer hover:text-[#56cfe1]  relative">
+                <div class="hover:scale-[1.15] transition-all">
+                    <fa-icon [icon]="faSearch" class="text-[21px]"></fa-icon>
+                </div>
+
+            </li>
+            <li class="text-[18px] cursor-pointer hover:text-[#56cfe1] lg:block hidden  relative" *ngIf="loginCheck">
+                <div class="hover:scale-[1.15] transition-all">
+                    <fa-icon [icon]="faUser" class="text-[21px]" (click)="onClickUser()"></fa-icon>
+                </div>
+            </li>
+            <li class="text-[18px] cursor-pointer hover:text-[#56cfe1] lg:block  hidden relative">
+                <app-icon-badge></app-icon-badge>
+
+                <div class="hover:scale-[1.15] transition-all" (click)="onClickWishlist()">
+                    <fa-icon [icon]="faHeart" class="text-[21px]"></fa-icon>
+                </div>
+
+            </li>
+            <li class="text-[18px] cursor-pointer hover:text-[#56cfe1] relative">
+                <app-icon-badge></app-icon-badge>
+                <div class="hover:scale-[1.15]  transition-all">
+                    <fa-icon [icon]="faCart" (click)="onClickCart()" class="text-[21px]"></fa-icon>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

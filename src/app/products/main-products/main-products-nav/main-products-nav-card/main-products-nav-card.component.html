@@ -1,0 +1,39 @@
+<div class=" h-full flex items-center justify-between">
+    <a class="border border-black h-[60%] w-8 lg:h-[80%] lg:w-10 flex flex-col justify-evenly items-center opacity-50 cursor-pointer hover:opacity-100 duration-300"
+        [ngClass]="{'show':getOpacity('row')}" (click)="changeQuery('row')">
+        <div class="w-[90%] bg-black h-[20%]"></div>
+        <div class="w-[90%] bg-black h-[20%]"></div>
+        <div class="w-[90%] bg-black h-[20%]"></div>
+    </a>
+    <a class="border border-black lg:hidden h-[60%] w-8 lg:h-[80%] lg:w-10 flex flex-col justify-evenly items-center opacity-50 cursor-pointer hover:opacity-100 duration-300"
+        [ngClass]="{'show':getOpacity('one')}">
+        <div class="w-[90%] bg-black h-[90%]" (click)="changeQuery('one')"></div>
+    </a>
+    <a class="border border-black h-[60%] w-8 lg:h-[80%] lg:w-10 flex justify-evenly items-center opacity-50 cursor-pointer hover:opacity-100 duration-300"
+        [ngClass]="{'show':getOpacity('two')}" (click)="changeQuery('two')">
+        <div class="w-[40%] bg-black h-[90%]"></div>
+        <div class="w-[40%] bg-black h-[90%]"></div>
+    </a>
+    <a class="border border-black h-[80%] w-14 lg:flex justify-evenly items-center opacity-50 cursor-pointer hover:opacity-100 duration-300 hidden"
+        [ngClass]="{'show':getOpacity('three')}" (click)="changeQuery('three')">
+        <div class="w-[27%] bg-black h-[90%]"></div>
+        <div class="w-[27%] bg-black h-[90%]"></div>
+        <div class="w-[27%] bg-black h-[90%]"></div>
+    </a>
+    <a class="border border-black h-[80%] w-20 lg:flex justify-evenly items-center opacity-50 cursor-pointer hover:opacity-100 duration-300 hidden"
+        [ngClass]="{'show':getOpacity('four')}" (click)="changeQuery('four')">
+        <div class="w-[20%] bg-black h-[90%]"></div>
+        <div class="w-[20%] bg-black h-[90%]"></div>
+        <div class="w-[20%] bg-black h-[90%]"></div>
+        <div class="w-[20%] bg-black h-[90%]"></div>
+    </a>
+    <a class="border border-black h-[80%] w-28 lg:flex justify-evenly items-center opacity-50 cursor-pointer hover:opacity-100 duration-300 hidden"
+        [ngClass]="{'show':getOpacity('five')}" (click)="changeQuery('five')">
+        <div class=" w-[15%] bg-black h-[90%]">
+        </div>
+        <div class="w-[15%] bg-black h-[90%]"></div>
+        <div class="w-[15%] bg-black h-[90%]"></div>
+        <div class="w-[15%] bg-black h-[90%]"></div>
+        <div class="w-[15%] bg-black h-[90%]"></div>
+    </a>
+</div>

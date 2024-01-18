@@ -1,0 +1,57 @@
+<!-- <div class="main-card h-[270px]  border border-[#ddd] justify-between items-center px-5" *ngFor="let product of productArr | paginate :{ -->
+<div class="two-col-card">
+    <div class="main-card h-[270px] border border-[#ddd] justify-between items-center px-5" *ngFor="let product of productArr | paginate :{
+        itemsPerPage: tableSize,
+        currentPage: page,
+        totalItems: count
+    }; index as i">
+
+        <div class="h-[85%] relative border overflow-hidden">
+            <!-- <icon [icon]="faHeart" (click)="onClickHeart()" [ngClass]="{'text-red-500':productArrWish[index]}"
+                class="absolute left-3 top-3 transition cursor-pointer text-black hover:text-red-500 "></icon> -->
+            <img src="https://cdn.shopify.com/s/files/1/0616/9480/4174/products/20046729-1-offwhite.jpg?v=1652169256&width=700"
+                alt class="transition duration-500 w-full cursor-pointer hover:scale-125"
+                (click)="showProduct(product.id)">
+        </div>
+        <div class="h-fit">
+            <p class="font-medium sm:text-[12px] sm:w-full cursor-pointer" (click)="showProduct(product.id)">
+                {{product.title}}
+            </p>
+            <!-- <p>{{product.id}}</p> -->
+            <p class="text-[15px]">${{product.price}}</p>
+            <p class="text-sm hidden lg:block">{{product.description}}</p>
+        </div>
+        <div class="card-btn">
+            <button
+                class="border border-[black] text-[black] rounded-[80px] w-full h-10 hover:text-white hover:bg-[black] duration-300"
+                *ngIf="url.split('/')[1]==='wishlist'" (click)="onClickRemove(product.id)">Remove</button>
+            <button
+                class="border border-[#56cfe1] text-[#56cfe1] rounded-[80px] w-full h-10 hover:text-white hover:bg-[#56cfe1] duration-300"
+                *ngIf="url.split('/')[1]==='collections'">Quick
+                View</button>
+            <div class="card-btns h-10 rounded-[80px] w-full overflow-hidden flex items-center text-white mt-5">
+                <p class="w-[15%] h-full cursor-pointer bg-[#23b2c7] flex items-center justify-center"
+                    (click)="onClickMinus(i)">
+                    -
+                </p>
+                <p class="w-[15%] h-full cursor-pointer bg-[#23b2c7] flex items-center justify-center">
+                    {{productArrCount[i]}}</p>
+                <p class="w-[15%] h-full cursor-pointer bg-[#23b2c7] flex items-center justify-center"
+                    (click)="onClickPlus(i)">
+                    +
+                </p>
+                <p class="w-[55%] h-full cursor-pointer text-sm bg-[#56cfe1] flex items-center justify-center hover:text-[#56cfe1] hover:bg-[white] duration-300 hover:border-[#56cfe1] hover:border rounded-r-[80px] lg:text-base text-[12px]"
+                    style="font-size: 12px;" (click)="onClickAddToCart(product.id, index)">
+                    Add to cart
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="text-center mt-10" *ngIf="productArr.length > 0">
+        <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+        </pagination-controls>
+    </div>
+    <div class="mt-10" *ngIf="productArr.length===0">
+        <p class="text-center">No items in wishlist</p>
+    </div>
+</div>

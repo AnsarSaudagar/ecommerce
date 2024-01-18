@@ -1,0 +1,15 @@
+<app-header-bottom [headerName]="'Collection'"></app-header-bottom>
+
+<div class="main-box  mt-10 w-[80%] m-auto lg:max-h-[130vh] min-h-[130vh] relative">
+
+    <div *ngFor="let category of categoryArr; let i = index"
+        class="lg:h-[60vh] h-[30vh] border-none cursor-pointer relative" (click)="onClickCategory(category)">
+        <img [src]="categoryImg[i]" alt="{{category}}">
+        <button
+            class="absolute bottom-10 lg:left-[30%] left-[10%] lg:w-40 w-32 font-semibold text-sm bg-white h-10 shadow-lg shadow-[#0000001a] hover:bg-black hover:text-white duration-500 z-20">{{category}}</button>
+
+    </div>
+    <div class="bg-white absolute top-0 h-full w-full z-30 flex justify-center  items-center" *ngIf="showSpinner">
+        <app-spinner></app-spinner>
+    </div>
+</div>

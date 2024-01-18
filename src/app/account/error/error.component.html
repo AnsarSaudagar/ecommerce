@@ -1,0 +1,25 @@
+<div class="min-w-full  min-h-[100px] mb-4">
+    <p>
+        <fa-icon [icon]="faError" class="text-red-500 mr-2"></fa-icon>
+        PLEASE ADJUST THE FOLLOWING:
+    </p>
+    <ul class="list-disc w-full ml-11 text-[14px] mt-2 text-[#878787]">
+        <li *ngIf="!formMain.get('email').valid && formMain.get('email').touched && !formMain.get('email').value">
+            Invalid email</li>
+        <!-- <li *ngIf="!formMain.get('email').valid && formMain.get('email').value">
+            Email not exist</li> -->
+        <li *ngIf="!formMain.get('password').valid && formMain.get('password').value">Invalid Password: Password
+            should be greater than 5 letters</li>
+        <li
+            *ngIf="!formMain.get('password').valid && formMain.get('password').touched && !formMain.get('password').value">
+            Invalid Password: It shouldnt be
+            empty</li>
+        <li *ngIf="!formMain.get('username').valid && formMain.get('username').value ">Username already taken</li>
+        <li *ngIf="!formMain.get('email').valid && formMain.get('email').value ">Email already taken</li>
+        <li
+            *ngIf="!formMain.get('username').valid && formMain.get('username').touched && !formMain.get('username').value">
+            Username is compulsory</li>
+
+
+    </ul>
+</div>

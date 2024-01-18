@@ -1,0 +1,65 @@
+<div class="w-[800px] ml-10 text-[#878787] ">
+    <p class="text-[15px]">
+        Hello <span class="font-semibold"> Ansar Saudagar</span> (not <span class="font-semibold">Ansar Saudagar</span>?
+        <span class="underline cursor-pointer hover:text-[#56cfe1] transition">Log out</span>)
+    </p>
+    <p class="text-black font-medium text-[17px] mt-5">Order History:</p>
+    <p class=" text-lg mt-4">
+        <icon [icon]="faTick" class="text-[#428445]"></icon>
+        <span class="underline mx-2 cursor-pointer Log out hover:text-[#56cfe1] transition">Make your first Order</span>
+        You
+        haven't placed any orders yet
+    </p>
+    <div class="mt-14">
+        <p class="text-black font-medium text-[17px]">Account details:</p>
+        <div class="text-[#878787] text-[15px] mt-5">
+            <p>{{data.firstName.toUpperCase()}} {{data.lastName.toUpperCase()}}</p>
+            <p>A/301, AL-MAJID COMPLEX, KAUSA</p>
+            <p>400612 MUMBRA MH</p>
+            <p>India</p>
+        </div>
+    </div>
+    <table class=" w-full text-left text-[#878787] mt-5">
+        <tr>
+            <th>First Name:</th>
+            <td class="flex justify-between">
+                {{data.firstName}}
+                <button class="underline hover:text-[#56cfe1] transition"
+                    (click)="clickUpdate('First Name')">Update</button>
+            </td>
+        </tr>
+        <tr>
+            <th>Last Name:</th>
+            <td class="flex justify-between">
+                {{data.lastName}}
+                <button class="underline hover:text-[#56cfe1] transition"
+                    (click)="clickUpdate('Last Name')">Update</button>
+            </td>
+        </tr>
+        <tr>
+            <th>Email:</th>
+            <td class="flex justify-between">
+                {{data.email}}
+                <button class="underline hover:text-[#56cfe1] transition" (click)="clickUpdate('Email')">Update</button>
+            </td>
+        </tr>
+        <tr>
+            <th>Password:</th>
+            <td class="flex justify-between">
+                {{data.password | stars}}
+                <button class="underline hover:text-[#56cfe1] transition"
+                    (click)="clickUpdate('Password')">Update</button>
+            </td>
+        </tr>
+        <tr>
+            <td class="flex justify-between" colspan="2">
+                <button (click)="onDeleteAccount()">Delete Account</button>
+            </td>
+        </tr>
+
+    </table>
+    <div class="bg-white absolute top-0 h-full w-[800px] flex justify-center  items-center" *ngIf="showSpinner">
+        <app-spinner></app-spinner>
+    </div>
+</div>
+<app-update-modal [ngClass]="{'show':showModal()}" (closeEvent)="closeModal()"></app-update-modal>

@@ -1,0 +1,24 @@
+@keyframes example {
+  0% {
+    opacity: 0;
+  }
+
+
+
+
+
+  75% {
+    opacity: 0.8;
+
+  }
+
+  100% {
+    opacity: 1;
+
+  }
+}
+
+.main {
+  animation-name: example;
+  animation-duration: 2s;
+}

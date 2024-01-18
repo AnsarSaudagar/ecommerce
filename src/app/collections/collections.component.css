@@ -1,0 +1,17 @@
+.main-box {
+  display: grid;
+  grid-template-columns: 30% 30% 30%;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+@media (max-width: 768px) {
+  .main-box {
+    width: 90%;
+    grid-template-columns: 45% 40%;
+    min-height: 100vh;
+    border: 1px solid black;
+    row-gap: 20px;
+  }
+}

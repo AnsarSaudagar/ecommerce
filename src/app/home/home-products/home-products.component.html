@@ -1,0 +1,30 @@
+<div *ngIf="!isLoading" class="main-products h-fit mt-6">
+    <div *ngFor="let product of productsArr; let i=index" class=" h-fit relative cursor-pointer">
+
+        <div class="h-[80%] relative" (click)="onClickProduct(product.id, product.category)">
+            <div class="absolute left-2  cursor-pointer ">
+                <icon [icon]="faHeart"
+                    class="absolute left-3 transition  top-3 cursor-pointer hover:text-[red] text-black"></icon>
+
+            </div>
+            <div class="absolute bottom-2 right-2 ">
+                <div
+                    class="bg-[white] h-10 w-10 rounded-full grid place-items-center text-base hover:bg-black hover:text-white transition duration-300 mb-2 border border-black cursor-pointer ">
+                    <fa-icon [icon]="faEye"></fa-icon>
+
+                </div>
+                <div
+                    class="bg-[white] h-10 w-10 rounded-full grid place-items-center text-base hover:bg-black hover:text-white transition duration-300 mb-2 border border-black cursor-pointer ">
+                    <fa-icon [icon]="faCart"></fa-icon>
+
+                </div>
+
+            </div>
+            <!-- <img [src]="product.imageUrl[0]" alt=""> -->
+
+            <img src="{{product.category.image}}" class="lg:h-[400px] h-[250px]" alt="">
+        </div>
+        <p class="font-medium text-sm my-2">{{product.title}}</p>
+        <p class="text-[#878787] text-[15px]">${{product.price}}</p>
+    </div>
+</div>

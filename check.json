@@ -1,0 +1,80 @@
+{
+  "products": {
+    "first": {
+      "category": {
+        "creationAt": "2023-06-16T04:01:46.000Z",
+        "id": 1,
+        "image": "https://demo-kalles-4-1.myshopify.com/cdn/shop/products/prch20_9.jpg?v=1651799900&width=600",
+        "name": "Clothes",
+        "updatedAt": "2023-06-16T04:01:46.000Z"
+      },
+      "creationAt": "2023-06-16T04:01:46.000Z",
+      "description": "Go kalles this summer with this vintage navy and white striped v-neck t-shirt from the Nike. Perfect for pairing with denim and white kicks for a stylish kalles vibe.",
+      "id": 1,
+      "images": [
+        "https://demo-kalles-4-1.myshopify.com/cdn/shop/products/prch20_9.jpg?v=1651799900&width=600",
+        "https://demo-kalles-4-1.myshopify.com/cdn/shop/products/prch20_10.jpg?v=1651799900&width=600",
+        "https://demo-kalles-4-1.myshopify.com/cdn/shop/products/prch20_11.jpg?v=1651799900&width=600",
+        "https://demo-kalles-4-1.myshopify.com/cdn/shop/products/prch20_12.jpg?v=1651799900&width=600"
+      ],
+      "price": 100,
+      "purchaseCount": 80,
+      "title": "Combat Hoodie",
+      "updatedAt": "2023-06-16T06:25:48.000Z",
+      "viewCount": 67,
+      "size": ["S", "M", "L", "XL"],
+      "genders": "Male",
+      "reviews": [
+        {
+          "name": "Ansar",
+          "email": "ansar@gmail.com",
+          "reviewTitle": "Good",
+          "reviewContent": "This is perfect product",
+          "reviewImage": [
+            "https://demo-kalles-4-1.myshopify.com/cdn/shop/products/701_25589a8f-1777-4cc4-b8b5-1d3dca7c09e5.jpg?v=1652079363&width=600"
+          ]
+        }
+      ],
+      "color": ["Grey"],
+      "countStocks": 30
+    },
+    "second": {
+      "category": {
+        "creationAt": "2023-06-16T04:01:46.000Z",
+        "id": 1,
+        "image": "https://demo-kalles-4-1.myshopify.com/cdn/shop/products/prch20_9.jpg?v=1651799900&width=600",
+        "name": "Clothes",
+        "updatedAt": "2023-06-16T04:01:46.000Z"
+      },
+      "creationAt": "2023-06-16T04:01:46.000Z",
+      "description": "Go kalles this summer with this vintage navy and white striped v-neck t-shirt from the Nike. Perfect for pairing with denim and white kicks for a stylish kalles vibe.",
+      "id": 1,
+      "images": [
+        "https://demo-kalles-4-1.myshopify.com/cdn/shop/products/prch20_9.jpg?v=1651799900&width=600",
+        "https://demo-kalles-4-1.myshopify.com/cdn/shop/products/prch20_10.jpg?v=1651799900&width=600",
+        "https://demo-kalles-4-1.myshopify.com/cdn/shop/products/prch20_11.jpg?v=1651799900&width=600",
+        "https://demo-kalles-4-1.myshopify.com/cdn/shop/products/prch20_12.jpg?v=1651799900&width=600"
+      ],
+      "price": 100,
+      "purchaseCount": 80,
+      "title": "Combat Hoodie",
+      "updatedAt": "2023-06-16T06:25:48.000Z",
+      "viewCount": 67,
+      "size": ["S", "M", "L", "XL"],
+      "genders": "Male",
+      "reviews": [
+        {
+          "name": "Ansar",
+          "email": "ansar@gmail.com",
+          "reviewTitle": "Good",
+          "reviewContent": "This is perfect product",
+          "reviewImage": [
+            "https://demo-kalles-4-1.myshopify.com/cdn/shop/products/701_25589a8f-1777-4cc4-b8b5-1d3dca7c09e5.jpg?v=1652079363&width=600"
+          ]
+        }
+      ],
+      "color": ["Grey"],
+      "countStocks": 30
+    }
+  }
+}

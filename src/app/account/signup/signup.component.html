@@ -1,0 +1,44 @@
+<app-header-bottom [headerName]="'SIGNUP'"></app-header-bottom>
+<div class="min-h-[200px] w-[90%] lg:w-[35%] m-auto mt-20">
+    <form [formGroup]="signupForm" (ngSubmit)="OnSubmit(signupForm)" class="h-full w-full">
+        <app-error [formMain]="signupForm"
+            *ngIf="(!signupForm.get('email').valid && signupForm.get('email').touched) ||(!signupForm.get('password').valid && signupForm.get('password').touched) || (!signupForm.get('username').valid && signupForm.get('username').touched)"></app-error>
+        <input type="text"
+            class="border border-[#ddd] w-full h-10 placeholder:font-[300] placeholder:pl-4 placeholder:text-[#878787] "
+            placeholder="First Name" [formControlName]="'first-name'">
+        <input type="text"
+            class="border border-[#ddd] w-full h-10 placeholder:font-[300] placeholder:pl-4 placeholder:text-[#878787] mt-8"
+            placeholder="last Name" [formControlName]="'last-name'">
+        <input type="text"
+            class="border border-[#ddd] w-full h-10 placeholder:font-[300] placeholder:pl-4 placeholder:text-[#878787] my-8"
+            placeholder="Username*" [formControlName]="'username'"
+            [ngClass]="{'border-[red]':!signupForm.get('username').valid && signupForm.get('username').touched}"
+            required>
+        <input type="email"
+            class="border border-[#ddd] w-full h-10 placeholder:font-[300] placeholder:pl-4 placeholder:text-[#878787]"
+            placeholder="Email*" [formControlName]="'email'"
+            [ngClass]="{'border-[red]':!signupForm.get('email').valid && signupForm.get('email').touched}" required
+            email>
+        <input type="{{passType}}"
+            class="border border-[#ddd] w-full h-10 placeholder:font-[300] placeholder:pl-4 placeholder:text-[#878787] mt-8"
+            placeholder="Password*"
+            [ngClass]="{'border-[red]':!signupForm.get('password').valid && signupForm.get('password').touched}"
+            [formControlName]="'password'" required>
+        <label for="">
+            <input type="checkbox" name="" id="" (click)="onClick()">
+            Check Password
+        </label>
+        <!-- <a class="text-sm cursor-pointer underline text-[#878787] hover:text-[#56cfe1] transition mt-4 block">
+            Forgot your password?
+        </a> -->
+
+        <button type="submit" class="text-white bg-black w-full h-11 rounded-3xl my-8 text-[15px]">
+            REGISTER
+        </button>
+
+        <a [routerLink]="['/account','login']"
+            class="text-sm cursor-pointer underline text-[#878787] hover:text-[#56cfe1] transition block ">
+            Already have an account? Login here
+        </a>
+    </form>
+</div>

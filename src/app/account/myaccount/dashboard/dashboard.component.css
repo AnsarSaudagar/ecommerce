@@ -1,0 +1,14 @@
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 7px;
+  font-size: 14px;
+}
+
+th {
+  width: 30%;
+}
+
+.show {
+  display: none;
+}

@@ -1,0 +1,8 @@
+<app-header-bottom [headerName]="'WISHLIST'"></app-header-bottom>
+<div class=" min-h-[200px]   relative">
+    <app-main-products></app-main-products>
+    <div class="bg-white  absolute top-0 h-full w-full flex justify-center items-center" *ngIf="showSpinner">
+
+        <app-spinner></app-spinner>
+    </div>
+</div>

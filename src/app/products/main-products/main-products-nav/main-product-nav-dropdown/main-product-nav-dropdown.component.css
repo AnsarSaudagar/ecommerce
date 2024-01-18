@@ -1,0 +1,11 @@
+.dropdown {
+  box-shadow: 0 0 20px rgb(0 0 0 / 20%)
+}
+
+li:hover {
+  background-color: rgba(86, 207, 225, 0.08)
+}
+
+.hide {
+  display: none;
+}

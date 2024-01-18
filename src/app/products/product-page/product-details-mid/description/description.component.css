@@ -1,0 +1,4 @@
+.card {
+  grid-template-columns: 40% 40%;
+  grid-template-rows: 40% 40%;
+}

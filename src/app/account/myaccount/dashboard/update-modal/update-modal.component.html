@@ -1,0 +1,9 @@
+<div class="bg fixed top-0 left-0 flex justify-center items-center h-screen w-screen" (click)="check()">
+</div>
+<div class="bg-white top-0 rounded-lg h-[50vh] w-[70vh] flex flex-col absolute items-center">
+    <p class="font-semibold text-3xl text-center">Update {{topic}} </p>
+    <input type="text" class="border border-black w-[80%]" [placeholder]="topic" [(ngModel)]="value">
+    <button type="submit" class="text-white bg-black w-[80%] h-11 rounded-3xl my-8 text-[15px]" (click)="updateData()">
+        Update
+    </button>
+</div>
