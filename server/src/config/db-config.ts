@@ -13,7 +13,7 @@ const AppDataSource = new DataSource({
   migrations: ['src/migrations/*.ts'],
   // autoLoadEntities: true,
   synchronize: false,
-  logging: false
+  logging: false,
 });
 
 export default AppDataSource;

@@ -3,12 +3,12 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
-import { Users } from './users/entities/user.entity';
+import { Repository } from 'typeorm';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
-
-
 @Module({
   imports: [
+    TypeOrmModule.forFeature([Repository]),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: process.env.DATABASE_HOST,
@@ -19,7 +19,7 @@ require('dotenv').config();
       entities: [],
       autoLoadEntities: true,
       synchronize: false,
-      logging: process.env.LOGGING === 'true'
+      logging: process.env.LOGGING === 'true',
     }),
     UsersModule,
   ],
