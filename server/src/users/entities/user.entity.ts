@@ -21,6 +21,6 @@ export class Users {
   @Column({ nullable: false })
   passwordHash: string;
 
-//   @Column({ nullable: false, default: UserRole.GUEST })
-//   role: number;
+  @Column({ default: UserRole.GUEST })
+  role: string;
 }
