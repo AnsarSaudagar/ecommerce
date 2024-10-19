@@ -12,6 +12,7 @@ export class ProductCategoryService {
    }
 
   getProductCategories(){
-    
+    return this.http.get(environment.backendUrl + "product-categories");
   }
+
 }

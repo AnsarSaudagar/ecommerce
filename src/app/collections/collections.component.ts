@@ -11,7 +11,8 @@ import { ProductCategoryService } from '../services/product-category.service';
 export class CollectionsComponent implements OnInit {
   categoryArr: any = [];
 
-  defaultCategoryImg = "https://www.shutterstock.com/image-vector/image-icon-trendy-flat-style-600nw-643080895.jpg";
+  defaultCategoryImg =
+    'https://www.shutterstock.com/image-vector/image-icon-trendy-flat-style-600nw-643080895.jpg';
   categoryImg = [
     'https://cdn.vox-cdn.com/thumbor/Y3phG98xTqqbt4KypEV-58uDE60=/0x0:1280x960/920x613/filters:focal(538x378:742x582):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/63708474/20151008-everlane-retail-clothing.0.1537464045.0.jpg',
     'https://m.media-amazon.com/images/I/71H2fTuroLL._AC_UF894,1000_QL80_.jpg',
@@ -21,40 +22,29 @@ export class CollectionsComponent implements OnInit {
 
   showSpinner = true;
 
-  constructor(private dataService: DataService, private router: Router, private productCategoryService: ProductCategoryService) {
-    
-   }
+  constructor(
+    private dataService: DataService,
+    private router: Router,
+    private productCategoryService: ProductCategoryService
+  ) {}
 
   ngOnInit(): void {
-    this.dataService.getProductsCategory().subscribe(
-      (data) => {
-        this.categoryArr = data;
-        setTimeout(() => {
-
-          this.showSpinner = false;
-        }, 500);
-      },
-      () => { },
+    this.productCategoryService.getProductCategories().subscribe(
+      category => {
+        console.log(category);
+        
+        this.categoryArr = category;
+      }, err => {},
       () => {
-        this.categoryArr.forEach((data, i: number) => {
-          // console.log(data);
-
-          if (data === 'Others') {
-            this.categoryArr.splice(i, 1);
-          }
-        });
-        this.categoryArr.push('others');
-        // console.log(this.categoryArr);
+        setTimeout(()=>{
+          this.showSpinner = false;
+        }, 500)
       }
-    );
+    )
+
   }
 
   onClickCategory(category: string) {
-    // console.log(category);
-    this.router.navigate(['/collections', category]);
-    // this.router.navigate(['/collections', category], {
-    //   queryParams: { show: 'row' }
-    // });
-
+    this.router.navigate(['/collections', category.toLowerCase()]);
   }
 }
