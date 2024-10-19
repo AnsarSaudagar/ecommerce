@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { Router } from '@angular/router';
+import { ProductCategoryService } from '../services/product-category.service';
 
 @Component({
   selector: 'app-collections',
@@ -20,7 +21,9 @@ export class CollectionsComponent implements OnInit {
 
   showSpinner = true;
 
-  constructor(private dataService: DataService, private router: Router) { }
+  constructor(private dataService: DataService, private router: Router, private productCategoryService: ProductCategoryService) {
+    
+   }
 
   ngOnInit(): void {
     this.dataService.getProductsCategory().subscribe(
@@ -34,20 +37,20 @@ export class CollectionsComponent implements OnInit {
       () => { },
       () => {
         this.categoryArr.forEach((data, i: number) => {
-          console.log(data);
+          // console.log(data);
 
           if (data === 'Others') {
             this.categoryArr.splice(i, 1);
           }
         });
         this.categoryArr.push('others');
-        console.log(this.categoryArr);
+        // console.log(this.categoryArr);
       }
     );
   }
 
   onClickCategory(category: string) {
-    console.log(category);
+    // console.log(category);
     this.router.navigate(['/collections', category]);
     // this.router.navigate(['/collections', category], {
     //   queryParams: { show: 'row' }
