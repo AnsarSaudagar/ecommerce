@@ -17,7 +17,7 @@ export interface ProductDetails {
   };
   images: string[];
   creationAt: Date;
-  updatedAt: Date;
+  updatedAt: Date;  
   viewCount?: number;
   discount?: number;
   purchaseCount?: number;

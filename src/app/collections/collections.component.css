@@ -6,6 +6,10 @@
 
 }
 
+.category-img{
+  object-fit: cover;
+}
+
 @media (max-width: 768px) {
   .main-box {
     width: 90%;
