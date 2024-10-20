@@ -7,18 +7,33 @@
   >
     <!-- <app-error [formMain]="signupForm"
             *ngIf="(!signupForm.get('email').valid && signupForm.get('email').touched) ||(!signupForm.get('password').valid && signupForm.get('password').touched) || (!signupForm.get('username').valid && signupForm.get('username').touched)"></app-error> -->
-    <div class="input-divs" style="" >
+    <div class="input-divs"  >
       <input
         type="text"
         class="border border-[#ddd] w-full h-10 placeholder:font-[300] placeholder:pl-4 placeholder:text-[#878787]"
-        placeholder="First Name"
-        [formControlName]="'first-name'"
+        placeholder="First Name*"
+        [formControlName]="'first_name'"
+        [ngClass]="{
+            'border-[red]':
+              !signupForm.get('first_name').valid && signupForm.get('first_name').touched
+          }"
+      />
+      <input
+        type="text"
+        class="border border-[#ddd] w-full h-10 placeholder:font-[300] placeholder:pl-4 placeholder:text-[#878787]"
+        placeholder="Middle Name"
+        [formControlName]="'middle_name'"
+        
       />
       <input
         type="text"
         class="border border-[#ddd] w-full h-10 placeholder:font-[300] placeholder:pl-4 placeholder:text-[#878787] mt-8"
-        placeholder="last Name"
-        [formControlName]="'last-name'"
+        placeholder="Last Name*"
+        [formControlName]="'last_name'"
+        [ngClass]="{
+            'border-[red]':
+              !signupForm.get('last_name').valid && signupForm.get('last_name').touched
+          }"
       />
       <!-- <input type="text"
             class="border border-[#ddd] w-full h-10 placeholder:font-[300] placeholder:pl-4 placeholder:text-[#878787] my-8"

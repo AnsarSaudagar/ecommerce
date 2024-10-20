@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ModalService } from '../modal.service';
-import { AuthService } from 'src/app/auth/auth.service';
-import { UserDataService } from 'src/app/auth/user-data.service';
+import { AuthService } from 'src/app/auth-old/auth.service';
+import { UserDataService } from 'src/app/auth-old/user-data.service';
 
 @Component({
   selector: 'app-update-modal',

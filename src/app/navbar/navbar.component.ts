@@ -2,7 +2,7 @@ import { Component, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { faHeart, faUser } from '@fortawesome/free-regular-svg-icons';
 import { faBars, faCartShopping, faSearch } from '@fortawesome/free-solid-svg-icons';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../auth-old/auth.service';
 
 @Component({
   selector: 'app-navbar',

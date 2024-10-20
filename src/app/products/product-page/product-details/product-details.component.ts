@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
-import { UserDataService } from 'src/app/auth/user-data.service';
+import { UserDataService } from 'src/app/auth-old/user-data.service';
 import { DataService, ProductDetails } from 'src/app/data.service';
 
 @Component({

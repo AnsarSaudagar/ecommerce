@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserDataService } from 'src/app/auth/user-data.service';
+import { UserDataService } from 'src/app/auth-old/user-data.service';
 
 @Component({
   selector: 'app-product-page',

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../auth-old/auth.service';
 import { HttpClient } from '@angular/common/http';
-import { UserDataService } from '../auth/user-data.service';
+import { UserDataService } from '../auth-old/user-data.service';
 
 @Component({
   selector: 'app-home',

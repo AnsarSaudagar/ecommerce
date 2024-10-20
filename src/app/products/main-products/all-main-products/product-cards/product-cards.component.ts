@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
-import { AuthService } from 'src/app/auth/auth.service';
-import { UserDataService } from 'src/app/auth/user-data.service';
+import { AuthService } from 'src/app/auth-old/auth.service';
+import { UserDataService } from 'src/app/auth-old/user-data.service';
 import { DataService, ProductDetails } from 'src/app/data.service';
 
 @Component({

@@ -3,8 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { Observable, Subject, map } from 'rxjs';
-import { AuthResponseData, AuthService } from 'src/app/auth/auth.service';
-import { UserDataService } from 'src/app/auth/user-data.service';
+import { AuthResponseData, AuthService } from 'src/app/auth-old/auth.service';
+import { UserDataService } from 'src/app/auth-old/user-data.service';
 
 @Component({
   selector: 'app-login',
