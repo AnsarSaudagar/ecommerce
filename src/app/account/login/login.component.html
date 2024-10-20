@@ -1,9 +1,9 @@
-<app-header-bottom [headerName]="'SIGNUP'"></app-header-bottom>
+<app-header-bottom [headerName]="'LOGIN'"></app-header-bottom>
 <div class="min-h-[200px] w-[90%] lg:w-[35%] m-auto mt-20">
     <form [formGroup]="loginForm" (ngSubmit)="OnSubmit(loginForm)" class="h-full w-full">
         <!-- <app-error [formMain]="loginForm"
             *ngIf="(!loginForm.get('email').valid && loginForm.get('email').touched) ||(!loginForm.get('password').valid && loginForm.get('password').touched)"></app-error> -->
-        <div class="min-w-full  min-h-[100px] mb-4"
+        <!-- <div class="min-w-full  min-h-[100px] mb-4"
             *ngIf="(!loginForm.get('email').valid && loginForm.get('email').touched) ||(!loginForm.get('password').valid && loginForm.get('password').touched)">
             <p>
                 <fa-icon [icon]="faError" class="text-red-500 mr-2"></fa-icon>
@@ -21,7 +21,7 @@
                     Invalid Password: It shouldnt be
                     empty</li>
             </ul>
-        </div>
+        </div> -->
         <input type="email"
             class="border border-[#ddd] w-full h-10 placeholder:font-[300] placeholder:pl-4 placeholder:text-[#878787]"
             placeholder="Email*" [formControlName]="'email'"

@@ -1,0 +1,11 @@
+.input-divs {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 25px;
+}
+
+.input-divs > *{
+    margin: 0;
+    padding: 0;
+}
