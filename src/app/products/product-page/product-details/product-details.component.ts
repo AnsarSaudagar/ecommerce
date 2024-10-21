@@ -63,8 +63,8 @@ export class ProductDetailsComponent {
     "https://demo-kalles-4-1.myshopify.com/cdn/shop/products/20046729-2.jpg?v=1652169256&width=600",
     "https://demo-kalles-4-1.myshopify.com/cdn/shop/products/20046729-3.jpg?v=1652169256&width=600",
     "https://demo-kalles-4-1.myshopify.com/cdn/shop/products/20046729-4.jpg?v=1652169256&width=600"
-  ]
-  imgArrStyle = [true, false, false, false]
+  ];
+  imgArrStyle = [true, false, false, false];
   mainImg = this.imgArr[0]
 
   ngOnInit(): void {

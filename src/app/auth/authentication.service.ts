@@ -44,29 +44,44 @@ export class AuthenticationService {
       });
   }
 
-  login(account: Account) {
-    return this.http
-      .post<AuthResponseData>(
-        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' +
-          this.key,
-        {
-          email: account.email,
-          password: account.password,
-          returnSecureToken: true,
+  login(credentials: any){
+    return this.http.post<any>(environment.backendUrl + "login", credentials).pipe(
+      // catchError(this.handleErrors),
+      tap(
+        res => {
+          this.handleAuthentication(
+            res.email,
+            res.userId,
+            res.idToken,
+          );
         }
       )
-      .pipe(
-        catchError(this.handleErrors),
-        tap((resData) => {
-          this.handleAuthentication(
-            resData.email,
-            resData.localId,
-            resData.idToken,
-            +resData.expiresIn
-          );
-        })
-      );
+    )
   }
+
+  // login(account: Account) {
+  //   return this.http
+  //     .post<AuthResponseData>(
+  //       'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' +
+  //         this.key,
+  //       {
+  //         email: account.email,
+  //         password: account.password,
+  //         returnSecureToken: true,
+  //       }
+  //     )
+  //     .pipe(
+  //       catchError(this.handleErrors),
+  //       tap((resData) => {
+  //         this.handleAuthentication(
+  //           resData.email,
+  //           resData.localId,
+  //           resData.idToken,
+  //           +resData.expiresIn
+  //         );
+  //       })
+  //     );
+  // }
 
   autoLogin() {
     const userData: {
@@ -181,13 +196,17 @@ export class AuthenticationService {
     email: string,
     userId: string,
     token: string,
-    expiresIn: number
+    expiresIn: number = null
   ) {
-    const expirationData = new Date(new Date().getTime() + +expiresIn * 1000);
+    const expirationData = new Date(new Date().getTime());
     const user = new User(email, userId, token, expirationData);
+    console.log(user);
+    
     this.user.next(user);
-    this.autoLogout(expiresIn * 1000);
-    localStorage.setItem('userData', JSON.stringify(user));
+    // this.autoLogout(expiresIn * 1000);
+    const check = localStorage.setItem('userData', JSON.stringify(user));
+    console.log(localStorage.getItem('userData'));
+    
   }
 
   getData(loggedData: any) {

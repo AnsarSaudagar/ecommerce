@@ -174,7 +174,8 @@ export class AuthService {
     const user = new User(email, userId, token, expirationData)
     this.user.next(user);
     this.autoLogout(expiresIn * 1000)
-    localStorage.setItem('userData', JSON.stringify(user))
+    const check = localStorage.setItem('userData', JSON.stringify(user))
+    
   }
 
   getData(loggedData: any) {

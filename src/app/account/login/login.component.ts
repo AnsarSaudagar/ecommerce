@@ -5,6 +5,7 @@ import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { Observable, Subject, map } from 'rxjs';
 import { AuthResponseData, AuthService } from 'src/app/auth-old/auth.service';
 import { UserDataService } from 'src/app/auth-old/user-data.service';
+import { AuthenticationService } from 'src/app/auth/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private userDataService: UserDataService) { }
+    private userDataService: UserDataService,
+    private authenticationService: AuthenticationService) { }
   faError = faExclamationCircle
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -37,8 +39,8 @@ export class LoginComponent implements OnInit {
   }
 
   OnSubmit(form: any) {
-    // console.log(this.loginForm.value);
-    let authObs: Observable<AuthResponseData> = this.authService.login(form.value)
+    console.log(this.loginForm.value);
+    let authObs: Observable<any> = this.authenticationService.login(form.value)
 
     authObs.subscribe(resData => {
       console.log(resData);
@@ -46,7 +48,6 @@ export class LoginComponent implements OnInit {
       this.authService.loginEmit.next(true);
     }, (error) => {
       console.log(error);
-
     })
   }
   // passType = 'password'

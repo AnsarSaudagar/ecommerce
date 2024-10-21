@@ -5,7 +5,7 @@ import { AccountService } from '../account.service';
 import { AuthService } from 'src/app/auth-old/auth.service';
 import { UserDataService } from 'src/app/auth-old/user-data.service';
 import { Router } from '@angular/router';
-import { AuthenticationService } from 'src/app/auth/auth.service';
+import { AuthenticationService } from 'src/app/auth/authentication.service';
 
 @Component({
   selector: 'app-signup',

@@ -13,9 +13,10 @@ export class HomeComponent {
   loggedData: { email: string; id: string; _token: string, _tokenExpirationData: string } = JSON.parse(localStorage.getItem('userData'))
   ngOnInit() {
     if (this.loggedData) {
-      this.auth.getData(this.loggedData).subscribe(data => {
-        // console.log(data);
-      })
+      console.log(this.loggedData);
+      // this.auth.getData(this.loggedData).subscribe(data => {
+      //   // console.log(data);
+      // })
     }
 
 
