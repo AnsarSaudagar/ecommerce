@@ -11,8 +11,8 @@ export class ProductCategoryService {
 
    }
 
-  getProductCategories(){
-    return this.http.get(environment.backendUrl + "product-categories");
+  getProductCategories() : any{
+    return this.http.get<any>(environment.backendUrl + "product-categories");
   }
 
 }
