@@ -1,6 +1,6 @@
 <!-- <div class="main-card h-[270px]  border border-[#ddd] justify-between items-center px-5" *ngFor="let product of productArr | paginate :{ -->
 <div class="two-col-card">
-    <div class="main-card h-[270px] border border-[#ddd] justify-between items-center px-5" *ngFor="let product of productArr | paginate :{
+    <div class="main-card h-[270px] border border-[#ddd] justify-between items-center px-5" *ngFor="let product of productArr | async | paginate :{
         itemsPerPage: tableSize,
         currentPage: page,
         totalItems: count

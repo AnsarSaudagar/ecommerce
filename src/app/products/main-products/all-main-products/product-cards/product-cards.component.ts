@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class ProductCardsComponent implements OnInit {
   email = '';
   userData!: any;
   cartCount = 1;
-  productArr = [];
+  productArr: any = [];
   category = '';
   dropDownFilter = '';
 
@@ -34,11 +35,12 @@ export class ProductCardsComponent implements OnInit {
 
   ngOnInit(): void {
     // Fetching the data for showing products category wise
-    this.route.params.subscribe(queryParams => {
-        const categoryId = +queryParams.category_id;
-        this.productsService.getProductsByCategory(categoryId).subscribe(products => {
-            this.productArr = products;
-        }) 
-    });
+
+    this.productArr = this.route.paramMap.pipe(
+      switchMap((params) => {
+        const categoryId = +params.get('category_id');
+        return this.productsService.getProductsByCategory(categoryId);
+      })
+    );
   }
 }
