@@ -44,7 +44,7 @@ export class CollectionsComponent implements OnInit {
 
   }
 
-  onClickCategory(category: string) {
-    this.router.navigate(['/collections', category.toLowerCase()]);
+  onClickCategory(category_id: number) {
+    this.router.navigate(['/collections', category_id]);
   }
 }

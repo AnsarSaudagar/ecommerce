@@ -3,7 +3,7 @@
 <div class="main-box  mt-10 w-[80%] m-auto lg:max-h-[130vh] min-h-[130vh] relative">
 
     <div *ngFor="let category of categoryArr | slice:0:5; let i = index"
-        class="lg:h-[60vh] h-[30vh] border-none cursor-pointer relative" (click)="onClickCategory(category.name)">
+        class="lg:h-[60vh] h-[30vh] border-none cursor-pointer relative" (click)="onClickCategory(category.id)">
         <img class="category-img" [src]="category.image ? category.image : defaultCategoryImg" alt="{{category}}">
         <button
             class="absolute bottom-10 lg:left-[30%] left-[10%] lg:w-40 w-32 font-semibold text-sm bg-white h-10 shadow-lg shadow-[#0000001a] hover:bg-black hover:text-white duration-500 z-20">{{category.name}}</button>
