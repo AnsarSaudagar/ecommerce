@@ -71,10 +71,10 @@ const appRoutes = [
   { path: 'wishlist', component: WishlistComponent },
   { path: 'cart', component: CartComponent },
   {
-    path: 'collections/:category', component: ProductsComponent
+    path: 'collections/:category_id', component: ProductsComponent
   },
   {
-    path: 'collections/:category/products/:productId', component: ProductPageComponent
+    path: 'collections/:category_id/products/:productId', component: ProductPageComponent
   }
 ]
 
