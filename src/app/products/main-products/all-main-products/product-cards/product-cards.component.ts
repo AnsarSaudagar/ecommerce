@@ -38,7 +38,11 @@ export class ProductCardsComponent implements OnInit {
     this.getProductsCategoryWise();
   }
 
-  /** Fetching the data for showing products category wise */
+  /**
+   * 
+   * 
+   * @description Fetching the data for showing products category wise with the help of category id from URL
+   */
   getProductsCategoryWise() {
     this.productArr = this.route.paramMap.pipe(
       switchMap((params) => {
@@ -48,7 +52,6 @@ export class ProductCardsComponent implements OnInit {
     );
   }
 
-  /** This function will redirect to main product page */
   /**
    * 
    * @param id 
