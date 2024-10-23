@@ -1,31 +1,38 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
+import { map, switchMap, tap } from 'rxjs';
 import { UserDataService } from 'src/app/auth-old/user-data.service';
 import { DataService, ProductDetails } from 'src/app/data.service';
+import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
-  styleUrls: ['./product-details.component.css']
+  styleUrls: ['./product-details.component.css'],
 })
 export class ProductDetailsComponent {
   constructor(
     private dataService: DataService,
     private route: ActivatedRoute,
-    private userDataService: UserDataService) { }
+    private userDataService: UserDataService,
+
+    // New product service
+    private productsService: ProductsService
+  ) {}
 
   productId!: number;
   productArr: ProductDetails[];
+
   product: ProductDetails = {
     id: 0,
-    title: "",
+    title: '',
     price: 0,
-    description: "",
+    description: '',
     category: {
       id: 0,
-      name: "",
-      image: "",
+      name: '',
+      image: '',
       creationAt: new Date(),
       updatedAt: new Date(),
     },
@@ -39,57 +46,69 @@ export class ProductDetailsComponent {
     countStocks: 0,
     sale: 0,
     color: [],
-    gender: "",
-    reviews: []
-  }
-  faHeart = faHeart
+    gender: '',
+    reviews: [],
+  };
+  faHeart = faHeart;
   productCount = 1;
   userData: any = {
     address: [],
     cart: [],
-    email: "",
-    firstName: "",
-    key: "",
-    lastName: "",
-    password: "",
-    username: "",
-    wishlist: []
+    email: '',
+    firstName: '',
+    key: '',
+    lastName: '',
+    password: '',
+    username: '',
+    wishlist: [],
   };
   // userDataLocal = this.userData;
-  userEmail: string = ""
+  userEmail: string = '';
 
-
-  imgArr = ["https://demo-kalles-4-1.myshopify.com/cdn/shop/products/20046729-1-offwhite.jpg?v=1652169256&width=600",
-    "https://demo-kalles-4-1.myshopify.com/cdn/shop/products/20046729-2.jpg?v=1652169256&width=600",
-    "https://demo-kalles-4-1.myshopify.com/cdn/shop/products/20046729-3.jpg?v=1652169256&width=600",
-    "https://demo-kalles-4-1.myshopify.com/cdn/shop/products/20046729-4.jpg?v=1652169256&width=600"
+  imgArr = [
+    'https://demo-kalles-4-1.myshopify.com/cdn/shop/products/20046729-1-offwhite.jpg?v=1652169256&width=600',
+    'https://demo-kalles-4-1.myshopify.com/cdn/shop/products/20046729-2.jpg?v=1652169256&width=600',
+    'https://demo-kalles-4-1.myshopify.com/cdn/shop/products/20046729-3.jpg?v=1652169256&width=600',
+    'https://demo-kalles-4-1.myshopify.com/cdn/shop/products/20046729-4.jpg?v=1652169256&width=600',
   ];
   imgArrStyle = [true, false, false, false];
-  mainImg = this.imgArr[0]
+  mainImg = this.imgArr[0];
+
+  // New code
+
+  productData: any = {};
 
   ngOnInit(): void {
-    //////////////////////////////////
     if (localStorage.getItem('userData')) {
-
-      this.userEmail = JSON.parse(localStorage.getItem('userData')).email
+      this.userEmail = JSON.parse(localStorage.getItem('userData')).email;
     }
 
-    this.userDataService.getSpecificUserData(this.userEmail).subscribe(data => {
-      this.userData = data
-      console.log(this.userData);
-
-    })
+    this.userDataService
+      .getSpecificUserData(this.userEmail)
+      .subscribe((data) => {
+        this.userData = data;
+        console.log(this.userData);
+      });
 
     this.route.params.subscribe((params: Params) => {
-      this.dataService.getProductsByCategory().subscribe((products => {
-        this.productArr = products;
-      }), () => {
+      this.dataService.getProductsByCategory().subscribe(
+        (products) => {
+          this.productArr = products;
+        },
+        () => {},
+        () => {
+          this.productId = +params['productId'];
+          this.product = this.dataService.getProductById(
+            this.productId,
+            this.productArr
+          );
+        }
+      );
+    });
 
-      }, () => {
-        this.productId = +params['productId'];
-        this.product = this.dataService.getProductById(this.productId, this.productArr)
-      });
-    })
+    // New code
+
+    this.getProductData();
   }
 
   onClickHeart() {
@@ -97,9 +116,9 @@ export class ProductDetailsComponent {
   }
 
   clickSubImg(index: number) {
-    this.mainImg = this.imgArr[index]
-    this.imgArrStyle = [false, false, false, false]
-    this.imgArrStyle[index] = true
+    this.mainImg = this.imgArr[index];
+    this.imgArrStyle = [false, false, false, false];
+    this.imgArrStyle[index] = true;
   }
 
   addProduct() {
@@ -117,13 +136,28 @@ export class ProductDetailsComponent {
       if (this.userData['wishlist'].includes(this.productId)) {
         return true;
       } else {
-        return false
+        return false;
       }
     }
   }
 
   onClickAddCart() {
-    this.userDataService.addProductCart(this.userData, this.productId, this.productCount)
+    this.userDataService.addProductCart(
+      this.userData,
+      this.productId,
+      this.productCount
+    );
   }
 
+  // New backend codes integration
+
+  /** Fetching the data and displaying */
+  getProductData() {
+    this.route.params
+      .pipe(
+        switchMap((productId) => this.productsService.getProduct(+productId)),
+        tap((product) => (this.productData = product)) 
+      )
+      .subscribe();
+  }
 }

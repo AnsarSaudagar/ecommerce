@@ -39,22 +39,17 @@ export class ProductCardsComponent implements OnInit {
   }
 
   /** Fetching the data for showing products category wise */
-  getProductsCategoryWise(){
+  getProductsCategoryWise() {
     this.productArr = this.route.paramMap.pipe(
-        switchMap((params) => {
-          const categoryId = +params.get('category_id');
-          return this.productsService.getProductsByCategory(categoryId);
-        })
-      );
+      switchMap((params) => {
+        const categoryId = +params.get('category_id');
+        return this.productsService.getProductsByCategory(categoryId);
+      })
+    );
   }
 
   /** This function will redirect to main product page */
   showProduct(id: number) {
-    
-    const url = this.router.url;
-
-    this.router.navigate([url, 'products', id])
+    this.router.navigate(['products', id]);
   }
-
-
 }

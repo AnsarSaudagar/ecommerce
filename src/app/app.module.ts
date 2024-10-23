@@ -46,6 +46,7 @@ import { AdressComponent } from './account/myaccount/adress/adress.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { CartComponent } from './cart/cart.component';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { environment } from 'src/environments/environment.development';
 
 
 const appRoutes = [
@@ -74,7 +75,7 @@ const appRoutes = [
     path: 'collections/:category_id', component: ProductsComponent
   },
   {
-    path: 'collections/:category_id/products/:productId', component: ProductPageComponent
+    path: 'products/:product_id', component: ProductPageComponent
   }
 ]
 
@@ -134,6 +135,10 @@ const appRoutes = [
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
       multi: true,
+    },
+    {
+      provide: 'API_BASE_URL',
+      useValue: environment.backendUrl
     }
   ],
   bootstrap: [AppComponent]
