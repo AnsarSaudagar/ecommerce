@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Account } from '../account/account.model';
 import { BehaviorSubject, Subject, catchError, tap, throwError } from 'rxjs';
 import { User } from './user';
@@ -28,60 +28,37 @@ export class AuthenticationService {
     _token: string;
     _tokenExpirationData: string;
   } = JSON.parse(localStorage.getItem('userData'));
+
   user = new BehaviorSubject<User>(null);
+
   private tokenExpirationTimer: any;
 
-  constructor(private http: HttpClient, private router: Router) {
-    console.log(this.user);
-  }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    @Inject('API_BASE_URL') private apiUrl: string
+  ) {}
+
   key = 'AIzaSyBUHG5LFJg2r_hhboaP48Ig4vldvya5gCQ';
 
   register(userData: any) {
     this.http
-      .post<any>(environment.backendUrl + 'register', userData)
+      .post<any>(this.apiUrl + 'register', userData)
       .subscribe((data) => {
         console.log(data);
       });
   }
 
-  login(credentials: any){
-    return this.http.post<any>(environment.backendUrl + "login", credentials).pipe(
-      // catchError(this.handleErrors),
-      tap(
-        res => {
-          this.handleAuthentication(
-            res.email,
-            res.userId,
-            res.idToken,
-          );
-        }
-      )
-    )
+  login(credentials: any) {
+    return this.http
+      .post<any>(this.apiUrl + 'login', credentials)
+      .pipe(
+        // catchError(this.handleErrors),
+        tap((res) => {
+          this.handleAuthentication(res.email, res.userId, res.idToken);
+        })
+      );
   }
-
-  // login(account: Account) {
-  //   return this.http
-  //     .post<AuthResponseData>(
-  //       'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' +
-  //         this.key,
-  //       {
-  //         email: account.email,
-  //         password: account.password,
-  //         returnSecureToken: true,
-  //       }
-  //     )
-  //     .pipe(
-  //       catchError(this.handleErrors),
-  //       tap((resData) => {
-  //         this.handleAuthentication(
-  //           resData.email,
-  //           resData.localId,
-  //           resData.idToken,
-  //           +resData.expiresIn
-  //         );
-  //       })
-  //     );
-  // }
 
   autoLogin() {
     const userData: {
@@ -201,12 +178,11 @@ export class AuthenticationService {
     const expirationData = new Date(new Date().getTime());
     const user = new User(email, userId, token, expirationData);
     console.log(user);
-    
+
     this.user.next(user);
     // this.autoLogout(expiresIn * 1000);
     const check = localStorage.setItem('userData', JSON.stringify(user));
     console.log(localStorage.getItem('userData'));
-    
   }
 
   getData(loggedData: any) {

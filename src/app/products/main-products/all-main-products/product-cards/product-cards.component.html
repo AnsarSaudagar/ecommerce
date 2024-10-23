@@ -29,21 +29,9 @@
                 class="border border-[#56cfe1] text-[#56cfe1] rounded-[80px] w-full h-10 hover:text-white hover:bg-[#56cfe1] duration-300"
                 *ngIf="url.split('/')[1]==='collections'">Quick
                 View</button>
-            <div class="card-btns h-10 rounded-[80px] w-ful l overflow-hidden flex items-center text-white mt-5">
-                <p class="w-[15%] h-full cursor-pointer bg-[#23b2c7] flex items-center justify-center"
-                    (click)="onClickMinus(i)">
-                    -
-                </p>
-                <p class="w-[15%] h-full cursor-pointer bg-[#23b2c7] flex items-center justify-center">
-                    {{productArrCount[i]}}</p>
-                <p class="w-[15%] h-full cursor-pointer bg-[#23b2c7] flex items-center justify-center"
-                    (click)="onClickPlus(i)">
-                    +
-                </p>
-                <p class="w-[55%] h-full cursor-pointer text-sm bg-[#56cfe1] flex items-center justify-center hover:text-[#56cfe1] hover:bg-[white] duration-300 hover:border-[#56cfe1] hover:border rounded-r-[80px] lg:text-base text-[12px]"
-                    style="font-size: 12px;" (click)="onClickAddToCart(product.id, index)">
-                    Add to cart
-                </p>
+            <div class="h-10 text-sm text-white cursor-pointer bg-[#56cfe1] flex items-center justify-center hover:text-[#56cfe1] hover:bg-[white] duration-300 hover:border-[#56cfe1] hover:border rounded-[80px] "
+                 (click)="onClickAddToCart(product.id, index)">
+                Add to cart
             </div>
         </div>
     </div>

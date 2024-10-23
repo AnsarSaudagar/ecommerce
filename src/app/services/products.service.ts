@@ -12,10 +12,19 @@ export class ProductsService {
     @Inject('API_BASE_URL') private apiUrl: string
   ) {}
 
+  /**
+   * 
+   * @returns An observable with all the products
+   */
   getAllProducts(): any {
     return this.http.get<any>(this.apiUrl + 'products');
   }
 
+  /**
+   * 
+   * @param id 
+   * @returns An observable with a single product data stored
+   */
   getProduct(id: number): any {
     return this.http.get<any>(this.apiUrl + 'product/' + id);
   }

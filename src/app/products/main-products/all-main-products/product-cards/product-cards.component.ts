@@ -49,6 +49,12 @@ export class ProductCardsComponent implements OnInit {
   }
 
   /** This function will redirect to main product page */
+  /**
+   * 
+   * @param id 
+   * 
+   * @description this function will redirect to specific product page
+   */
   showProduct(id: number) {
     this.router.navigate(['products', id]);
   }
