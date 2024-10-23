@@ -30,17 +30,31 @@ export class ProductCardsComponent implements OnInit {
 
   constructor(
     private productsService: ProductsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    // Fetching the data for showing products category wise
-
-    this.productArr = this.route.paramMap.pipe(
-      switchMap((params) => {
-        const categoryId = +params.get('category_id');
-        return this.productsService.getProductsByCategory(categoryId);
-      })
-    );
+    this.getProductsCategoryWise();
   }
+
+  /** Fetching the data for showing products category wise */
+  getProductsCategoryWise(){
+    this.productArr = this.route.paramMap.pipe(
+        switchMap((params) => {
+          const categoryId = +params.get('category_id');
+          return this.productsService.getProductsByCategory(categoryId);
+        })
+      );
+  }
+
+  /** This function will redirect to main product page */
+  showProduct(id: number) {
+    
+    const url = this.router.url;
+
+    this.router.navigate([url, 'products', id])
+  }
+
+
 }
