@@ -55,7 +55,7 @@ export class AuthenticationService {
       .pipe(
         // catchError(this.handleErrors),
         tap((res) => {
-          this.handleAuthentication(res.email, res.userId, res.idToken);
+          this.handleAuthentication(res.email, res.id, res.idToken);
         })
       );
   }
