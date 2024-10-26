@@ -37,4 +37,10 @@ export class CartsService {
   deleteSingleProductCart(user_id: number, product_id : number){
     return this.http.delete(`${this.apiUrl}carts/${user_id}/${product_id}`);  
   }
+
+  updateCartCount(cart_id: number, count: number){
+    return this.http.patch(this.apiUrl + 'carts/' + cart_id, {
+      count: count
+    });
+  }
 }

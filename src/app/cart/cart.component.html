@@ -2,7 +2,8 @@
     <h1>Shopping Cart</h1>
     <div class="cart">
         <div class="cart-cards flex flex-col">
-            <div class="cart-card border border-gray-200 flex items-center " *ngFor="let product of cartProducts$ | async">
+            <div class="cart-card border border-gray-200 flex items-center "
+                *ngFor="let product of cartProducts">
                 <img src="https://cdn.shopify.com/s/files/1/0616/9480/4174/products/20046729-1-offwhite.jpg?v=1652169256&width=700"
                     alt="">
                 <div class="card-detail flex flex-col">
@@ -22,15 +23,18 @@
 
                     </div>
                 </div>
-                <div
-                    style="width: 10%; font-size: 16px;"
+                <div style="width: 10%; font-size: 16px;"
                     class="border border-black  flex justify-between items-center h-8 rounded-[60px] font-medium text-xl px-3 mr-3">
-                    <button class="cursor-pointer hover:text-[#56cfe1] duration-300 flex">-</button>
-                    <span  >{{product.count}}</span>
-                    <button class="cursor-pointer hover:text-[#56cfe1] duration-300">+</button>
+                    <button (click)="onClickOperator(product.cart_id, -1)" class="cursor-pointer hover:text-[#56cfe1] duration-300 flex">
+                        -
+                    </button>
+                    <span>{{product.count}}</span>
+                    <button (click)="onClickOperator(product.cart_id, 1)" class="cursor-pointer hover:text-[#56cfe1] duration-300">
+                        +
+                    </button>
                 </div>
-                <div style="font-size: 20px; width: 10%; text-align: center; font-weight: 500;" >
-                    {{product.count * product.price | currency}} 
+                <div style="font-size: 20px; width: 10%; text-align: center; font-weight: 500;">
+                    {{product.count * product.price | currency}}
                 </div>
             </div>
         </div>
