@@ -30,7 +30,7 @@ export class ProductCardsComponent implements OnInit {
   url = '';
   allProducts = [];
 
-  cartProductIds : any = [];
+  cartProductIds: any = [];
 
   constructor(
     private productsService: ProductsService,
@@ -42,7 +42,7 @@ export class ProductCardsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProductsCategoryWise();
-    this.getCartCategoryWise()
+    this.getCartCategoryWise();
   }
 
   /**
@@ -68,11 +68,11 @@ export class ProductCardsComponent implements OnInit {
   }
 
   /**
-   * 
+   *
    * @param product_id
-   * @returns 
-   * 
-   * @description If the user is logged in then it will add the product to cart or else will navigate to login page 
+   * @returns
+   *
+   * @description If the user is logged in then it will add the product to cart or else will navigate to login page
    */
   onClickAddToCart(product_id: number) {
     if (!this.authenticationService.loggedData) {
@@ -81,29 +81,34 @@ export class ProductCardsComponent implements OnInit {
     }
 
     const user = this.authenticationService.loggedData;
-    const cartData ={
-        user_id: user.id,
-        product_id: product_id,
-    }
+    const cartData = {
+      user_id: user.id,
+      product_id: product_id,
+    };
 
-    this.cartsService.addProductToCart(cartData);
+    // when product is added we are calling the function to handle the add to cart button
+    this.cartsService.addProductToCart(cartData).subscribe(
+      (data) => {},
+      (err) => {},
+      () => this.getCartCategoryWise()
+    );
   }
-
 
   /**
    * @description It will fetch the ids of the products which are in carts and assign it to array for using this in template
    */
-  getCartCategoryWise(){
+  getCartCategoryWise() {
     const user_id = +this.authenticationService.loggedData.id;
 
     let category_id: number;
-    this.route.params.subscribe(param => {
-        category_id = +param.category_id;
-    })
-    
-    this.cartsService.getCartProductsIdByCategory(user_id, category_id).subscribe((ids : number[]) => {
+    this.route.params.subscribe((param) => {
+      category_id = +param.category_id;
+    });
+
+    this.cartsService
+      .getCartProductsIdByCategory(user_id, category_id)
+      .subscribe((ids: number[]) => {
         this.cartProductIds = ids;
-    })
-    
+      });
   }
 }

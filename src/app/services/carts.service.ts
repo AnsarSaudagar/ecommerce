@@ -19,7 +19,7 @@ export class CartsService {
    * @description it will add the product to the user cart
    */
   addProductToCart(product_data: any) {
-    return this.http.post(this.apiUrl + 'add-cart', product_data).subscribe();
+    return this.http.post(this.apiUrl + 'add-cart', product_data);
   }
 
   activeCartProducts(user_id: number) {
