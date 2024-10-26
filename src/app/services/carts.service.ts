@@ -33,4 +33,8 @@ export class CartsService {
       })
     );
   }
+
+  deleteSingleProductCart(user_id: number, product_id : number){
+    return this.http.delete(`${this.apiUrl}carts/${user_id}/${product_id}`);  
+  }
 }

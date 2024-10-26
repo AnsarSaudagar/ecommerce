@@ -94,6 +94,16 @@ export class ProductCardsComponent implements OnInit {
     );
   }
 
+  onClickRemoveFromCart(product_id: number) {
+    const user_id = +this.authenticationService.loggedData.id;
+
+    this.cartsService.deleteSingleProductCart(user_id, product_id).subscribe(
+      (data) => {},
+      (err) => {},
+      () => this.getCartCategoryWise()
+    );
+  }
+
   /**
    * @description It will fetch the ids of the products which are in carts and assign it to array for using this in template
    */
