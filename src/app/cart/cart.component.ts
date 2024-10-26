@@ -13,12 +13,11 @@ export class CartComponent implements OnInit{
     private cartsService: CartsService
   ){}
 
+  cartProducts$ : any;
+
   ngOnInit() : void{
     const userId = +this.authenticationService.loggedData.id;
 
-    this.cartsService.getActiveCartProducts(userId).subscribe(products => {
-      console.log(products);
-    })
-    
+    this.cartProducts$ = this.cartsService.getActiveCartProducts(userId);
   }
 }
