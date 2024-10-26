@@ -22,7 +22,7 @@ export class CartsService {
     return this.http.post(this.apiUrl + 'add-cart', product_data);
   }
 
-  activeCartProducts(user_id: number) {
+  getActiveCartProducts(user_id: number) {
     return this.http.get(this.apiUrl + 'carts/' + user_id);
   }
 

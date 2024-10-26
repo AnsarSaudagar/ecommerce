@@ -1,3 +1,52 @@
 .bg {
   background-color: rgba(0, 0, 0, .5);
 }
+
+.cart-div{
+  margin: 30px;
+}
+
+.cart-div h1{
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.cart{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.cart-cards{
+  width: 70%;
+  min-height: 300px;
+  gap: 20px;
+}
+
+.cart-card{
+  height: 170px;
+  border-radius: 10px;
+  padding: 12px;
+  gap: 20px;
+}
+
+.cart-card img{
+  width: 15%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-detail{
+  height: 100%;
+  width: 60%;
+}
+
+.card-detail h3{
+  font-size: 18px;
+}
+
+.cart-summary{
+  width: 25%;
+  height: 200px;
+  border: 1px solid red;
+}
