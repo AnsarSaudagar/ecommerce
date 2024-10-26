@@ -24,12 +24,15 @@ export class CartComponent implements OnInit {
     });
   }
 
-  onClickOperator(cart_id: number, count: number) {
+  onClickOperator(cart_id: number, count: number, current_count: number) {
+
+    if(current_count === 1 && count === -1) return;
+
     this.cartsService
       .updateCartCount(cart_id, count)
       .subscribe((count_value: any) => {
         this.cartProducts.map((product) => {
-          if (+product.cart_id === cart_id) {
+          if (+product.cart_id === cart_id ) {
             product.count = count_value.count;
           }
         });
