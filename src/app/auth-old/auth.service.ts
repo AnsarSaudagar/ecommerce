@@ -29,7 +29,7 @@ export class AuthService {
   private tokenExpirationTimer: any;
 
   constructor(private http: HttpClient, private router: Router) {
-    console.log(this.user);
+    // console.log(this.user);
 
   }
   key = 'AIzaSyBUHG5LFJg2r_hhboaP48Ig4vldvya5gCQ'
@@ -44,8 +44,8 @@ export class AuthService {
       }
     ).subscribe(data => {
       this.userDataSignup(data.idToken, account.username).subscribe(signData => {
-        console.log(signData);
-        console.log(account);
+        // console.log(signData);
+        // console.log(account);
 
         this.userCreated(signData.displayName, signData.email, account.password, account['first-name'], account['last-name'])
       });
@@ -87,12 +87,12 @@ export class AuthService {
       userData.id,
       userData._token,
       new Date(userData._tokenExpirationDate));
-    console.log(loadedUser.email);
+    // console.log(loadedUser.email);
 
     if (loadedUser.token) {
       this.user.next(loadedUser)
       const expirationDuration = new Date(userData._tokenExpirationDate).getTime() - new Date().getTime();
-      console.log(expirationDuration);
+      // console.log(expirationDuration);
 
       this.autoLogout(expirationDuration)
     }
@@ -209,14 +209,14 @@ export class AuthService {
 
       }
     }
-    console.log(`${environment.firebaseMainUrl}users/${key}/${name}.json`);
-    console.log(main());
+    // console.log(`${environment.firebaseMainUrl}users/${key}/${name}.json`);
+    // console.log(main());
 
     this.http.patch(`${environment.firebaseMainUrl}users/${key}/${name}.json`, { [`${main()}`]: value }).subscribe()
   }
 
   updateFullUser(key: string, name: string, value: any) {
-    console.log(`${environment.firebaseMainUrl}users /${key}.json`);
+    // console.log(`${environment.firebaseMainUrl}users /${key}.json`);
 
     this.http.patch(`${environment.firebaseMainUrl}users/${key}.json`, { [name]: value }).subscribe()
   }

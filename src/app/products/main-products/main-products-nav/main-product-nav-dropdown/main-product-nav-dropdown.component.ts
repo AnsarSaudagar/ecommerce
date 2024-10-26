@@ -17,7 +17,7 @@ export class MainProductNavDropdownComponent {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params: Params) => {
-      console.log(params['filterDropdown']);
+      // console.log(params['filterDropdown']);
       switch (params['filterDropdown']) {
         case undefined:
           this.dropdownMain = 'All'

@@ -26,7 +26,7 @@ export class AllMainProductsComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.dataService.getProductsByCategory().subscribe((products => {
         this.productsArr = products;
-        console.log(this.productsArr);
+        // console.log(this.productsArr);
         setTimeout(() => {
           this.showSpinner = false;
 

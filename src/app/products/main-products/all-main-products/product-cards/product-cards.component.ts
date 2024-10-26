@@ -30,6 +30,8 @@ export class ProductCardsComponent implements OnInit {
   url = '';
   allProducts = [];
 
+  cartProductIds : any = [];
+
   constructor(
     private productsService: ProductsService,
     private route: ActivatedRoute,
@@ -40,6 +42,7 @@ export class ProductCardsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProductsCategoryWise();
+    this.getCartCategoryWise()
   }
 
   /**
@@ -84,5 +87,23 @@ export class ProductCardsComponent implements OnInit {
     }
 
     this.cartsService.addProductToCart(cartData);
+  }
+
+
+  /**
+   * @description It will fetch the ids of the products which are in carts and assign it to array for using this in template
+   */
+  getCartCategoryWise(){
+    const user_id = +this.authenticationService.loggedData.id;
+
+    let category_id: number;
+    this.route.params.subscribe(param => {
+        category_id = +param.category_id;
+    })
+    
+    this.cartsService.getCartProductsIdByCategory(user_id, category_id).subscribe((ids : number[]) => {
+        this.cartProductIds = ids;
+    })
+    
   }
 }

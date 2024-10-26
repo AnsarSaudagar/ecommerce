@@ -5,7 +5,6 @@
         currentPage: page,
         totalItems: count
     }; index as i">
-
         <div class="h-[85%] relative border overflow-hidden">
             <!-- <icon [icon]="faHeart" (click)="onClickHeart()" [ngClass]="{'text-red-500':productArrWish[index]}"
                 class="absolute left-3 top-3 transition cursor-pointer text-black hover:text-red-500 "></icon> -->
@@ -29,10 +28,18 @@
                 class="border border-[#56cfe1] text-[#56cfe1] rounded-[80px] w-full h-10 hover:text-white hover:bg-[#56cfe1] duration-300"
                 *ngIf="url.split('/')[1]==='collections'">Quick
                 View</button>
-            <div class="h-10 text-sm text-white cursor-pointer bg-[#56cfe1] flex items-center justify-center hover:text-[#56cfe1] hover:bg-[white] duration-300 hover:border-[#56cfe1] hover:border rounded-[80px] "
-                 (click)="onClickAddToCart(product.id)">
+
+            <div *ngIf="!cartProductIds.includes(product.id); else removeCart"
+                class="h-10 text-sm text-white cursor-pointer bg-[#56cfe1] flex items-center justify-center hover:text-[#56cfe1] hover:bg-[white] duration-300 hover:border-[#56cfe1] hover:border rounded-[80px] "
+                (click)="onClickAddToCart(product.id)">
                 Add to cart
             </div>
+            <ng-template #removeCart>
+                <div
+                    class="h-10 mt-2 text-sm text-white cursor-pointer bg-[#ed3535] flex items-center justify-center hover:text-[#ed3535] hover:bg-[white] duration-300 hover:border-[#ed3535] hover:border rounded-[80px] ">
+                    Remove From Cart
+                </div>
+            </ng-template>
         </div>
     </div>
     <div class="text-center mt-10" *ngIf="productArr.length > 0">
