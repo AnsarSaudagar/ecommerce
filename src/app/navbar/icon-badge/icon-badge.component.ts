@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-icon-badge',
@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./icon-badge.component.css']
 })
 export class IconBadgeComponent {
-
+  @Input() count: number;
 }

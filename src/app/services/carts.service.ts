@@ -1,11 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { BehaviorSubject, map, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartsService {
+
+  // cartCountSubject = new Subject<any>();
+
   constructor(
     private http: HttpClient,
     @Inject('API_BASE_URL') private apiUrl: string
@@ -42,5 +45,9 @@ export class CartsService {
     return this.http.patch(this.apiUrl + 'carts/' + cart_id, {
       count: count
     });
+  }
+
+  getCartCount(user_id: number){
+    return this.http.get(this.apiUrl + 'cart-count/' + user_id);
   }
 }

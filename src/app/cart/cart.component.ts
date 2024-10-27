@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../auth/authentication.service';
 import { CartsService } from '../services/carts.service';
+import { CartSharedDataService } from '../services/cart-shared-data.service';
 
 @Component({
   selector: 'app-cart',
@@ -11,7 +12,7 @@ export class CartComponent implements OnInit {
   constructor(
     private authenticationService: AuthenticationService,
     private cartsService: CartsService,
-    private cdr: ChangeDetectorRef
+    private cartSharedDataService: CartSharedDataService
   ) {}
 
   cartProducts: any;
@@ -28,6 +29,8 @@ export class CartComponent implements OnInit {
 
     if(current_count === 1 && count === -1) return;
 
+    this.cartSharedDataService.sendData(count);
+    
     this.cartsService
       .updateCartCount(cart_id, count)
       .subscribe((count_value: any) => {
