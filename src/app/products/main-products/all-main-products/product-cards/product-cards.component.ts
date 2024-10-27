@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { AuthenticationService } from 'src/app/auth/authentication.service';
+import { CartSharedDataService } from 'src/app/services/cart-shared-data.service';
 import { CartsService } from 'src/app/services/carts.service';
 import { ProductsService } from 'src/app/services/products.service';
 
@@ -37,7 +38,8 @@ export class ProductCardsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private cartsService: CartsService
+    private cartsService: CartsService,
+    private cartSharedDataService: CartSharedDataService
   ) {}
 
   ngOnInit(): void {
@@ -58,9 +60,7 @@ export class ProductCardsComponent implements OnInit {
   }
 
   /**
-   *
    * @param id
-   *
    * @description this function will redirect to specific product page
    */
   showProduct(id: number) {
@@ -86,22 +86,30 @@ export class ProductCardsComponent implements OnInit {
       product_id: product_id,
     };
 
+    // Sending data for increasing cart count 
+    this.cartSharedDataService.sendData(1);
+
     // when product is added we are calling the function to handle the add to cart button
-    this.cartsService.addProductToCart(cartData).subscribe(
-      (data) => {},
-      (err) => {},
-      () => this.getCartCategoryWise()
-    );
+    this.cartsService.addProductToCart(cartData).subscribe({
+      complete: () => this.getCartCategoryWise(),
+    });
   }
 
+  /**
+   * 
+   * @param product_id 
+   * 
+   * 
+   */
   onClickRemoveFromCart(product_id: number) {
     const user_id = +this.authenticationService.loggedData.id;
 
-    this.cartsService.deleteSingleProductCart(user_id, product_id).subscribe(
-      (data) => {},
-      (err) => {},
-      () => this.getCartCategoryWise()
-    );
+    // Sending data for decreasing 
+    this.cartSharedDataService.sendData(-1);
+
+    this.cartsService.deleteSingleProductCart(user_id, product_id).subscribe({
+      complete: () => this.getCartCategoryWise(),
+    });
   }
 
   /**
