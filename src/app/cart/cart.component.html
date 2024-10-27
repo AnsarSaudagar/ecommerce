@@ -15,7 +15,9 @@
                             style="background-color: #56cfe1; color: white; font-size: 12px; width: 100px; border-radius: 5px; height: 26px;">
                             Add to wishlist
                         </button>
-                        <button class="card-remove "
+                        <button 
+                            (click)="onClickRemoveCart(product.id)"
+                            class="card-remove "
                             style="background-color: black; color: white; font-size: 12px; width: 50px; border-radius: 5px;">
                             Remove
                         </button>

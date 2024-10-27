@@ -31,12 +31,12 @@ export class CartComponent implements OnInit {
   }
 
   /**
-   * 
-   * @param cart_id 
-   * @param count 
-   * @param current_count 
-   * 
-   * It will increase/decrease the cart count of the specific product 
+   *
+   * @param cart_id
+   * @param count
+   * @param current_count
+   *
+   * It will increase/decrease the cart count of the specific product
    */
   onClickOperator(cart_id: number, count: number, current_count: number) {
     if (current_count === 1 && count === -1) return;
@@ -56,7 +56,7 @@ export class CartComponent implements OnInit {
   }
 
   /**
-   * Calculating the total price 
+   * Calculating the total price
    */
   calculateTotalPrice() {
     let total = 0;
@@ -66,5 +66,34 @@ export class CartComponent implements OnInit {
     });
     this.originalPrice = total;
     this.totalPrice = this.originalPrice - this.discount + this.tax;
+  }
+
+  /**
+   *
+   * @param product_id
+   *
+   * Removing the product from the cart list and updating the cart list
+   */
+  onClickRemoveCart(product_id: number) {
+    const userId = +this.authenticationService.loggedData.id;
+
+    this.cartsService.deleteSingleProductCart(userId, product_id).subscribe({
+      complete: this.filterProductList(product_id),
+    });
+  }
+
+  /**
+   *
+   * @param product_id
+   *
+   * helper function for filtering the cart list
+   */
+  private filterProductList(product_id: number) {
+    return () => {
+      this.cartProducts = this.cartProducts.filter((prod) => {
+        return prod.id !== product_id;
+      });
+      this.calculateTotalPrice();
+    };
   }
 }
