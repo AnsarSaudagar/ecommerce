@@ -86,6 +86,9 @@ export class NavbarComponent {
     }
   }
 
+  /**
+   * Getting the user cart count and updating the value whenever the product value is increased or decreased
+   */
   getCartCount() {
     const user_id = this.authenticationService.loggedData?.id;
 
@@ -93,6 +96,10 @@ export class NavbarComponent {
       this.cartCount = +data.cart_count;
 
       this.cartSharedDataService.cartSubject.subscribe((d) => {
+        if (d === 0) {
+          this.cartCount = 0;
+          return;
+        }
         this.cartCount += +d;
       });
     });

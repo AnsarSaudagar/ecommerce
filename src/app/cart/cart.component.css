@@ -71,3 +71,23 @@
   justify-content: space-between;
   margin: 5px 0;
 }
+
+#delete-all-btn{
+  height: 40px;
+  width: 100px;
+  border : 1px solid gray;
+  border-radius: 24px;
+  transition-duration: 0.2s;
+}
+
+#delete-all-btn:hover{
+  color: white;
+  background-color: black;
+}
+
+.cart-header{
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

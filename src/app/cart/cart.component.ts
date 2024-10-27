@@ -75,7 +75,7 @@ export class CartComponent implements OnInit {
    * Removing the product from the cart list and updating the cart list
    */
   onClickRemoveCart(product_id: number) {
-    const userId = +this.authenticationService.loggedData.id;
+    const userId = +this.authenticationService.loggedData?.id;
 
     this.cartsService.deleteSingleProductCart(userId, product_id).subscribe({
       complete: this.filterProductList(product_id),
@@ -95,5 +95,20 @@ export class CartComponent implements OnInit {
       });
       this.calculateTotalPrice();
     };
+  }
+
+  /**
+   * Removing all the cart products
+   */
+  onClickDeleteAll(){
+    const userId = +this.authenticationService.loggedData?.id;
+
+    this.cartsService.deleteFullUserCart(userId).subscribe({
+      complete: ()=>{
+        this.cartProducts = [];
+        this.cartSharedDataService.sendData(0);
+      }
+    })
+
   }
 }

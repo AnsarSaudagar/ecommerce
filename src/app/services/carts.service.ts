@@ -6,7 +6,6 @@ import { BehaviorSubject, map, Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class CartsService {
-
   // cartCountSubject = new Subject<any>();
 
   constructor(
@@ -32,22 +31,26 @@ export class CartsService {
   getCartProductsIdByCategory(user_id: number, category_id: number) {
     return this.http.get(`${this.apiUrl}carts/${user_id}/${category_id}`).pipe(
       map((carts: any) => {
-         return carts.map((cart) => cart.product_id);
+        return carts.map((cart) => cart.product_id);
       })
     );
   }
 
-  deleteSingleProductCart(user_id: number, product_id : number){
-    return this.http.delete(`${this.apiUrl}carts/${user_id}/${product_id}`);  
+  deleteSingleProductCart(user_id: number, product_id: number) {
+    return this.http.delete(`${this.apiUrl}carts/${user_id}/${product_id}`);
   }
 
-  updateCartCount(cart_id: number, count: number){
+  updateCartCount(cart_id: number, count: number) {
     return this.http.patch(this.apiUrl + 'carts/' + cart_id, {
-      count: count
+      count: count,
     });
   }
 
-  getCartCount(user_id: number){
+  getCartCount(user_id: number) {
     return this.http.get(this.apiUrl + 'cart-count/' + user_id);
+  }
+
+  deleteFullUserCart(user_id: number) {
+    return this.http.delete(this.apiUrl + 'carts/' + user_id);
   }
 }
