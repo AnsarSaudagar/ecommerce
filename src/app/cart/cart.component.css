@@ -47,6 +47,27 @@
 
 .cart-summary{
   width: 25%;
-  height: 200px;
-  border: 1px solid red;
+  min-height: 200px;
+  height: 280px;
+  padding: 20px;
+}
+
+.cart-summary h3{
+  font-weight: 500;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.cart-summary ul li p:first-child{
+  color: rgb(107 114 128 / 1);
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.cart-summary ul li{
+  display: flex;
+  font-size: 18px;
+  align-items: center;
+  justify-content: space-between;
+  margin: 5px 0;
 }

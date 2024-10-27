@@ -87,7 +87,7 @@ export class NavbarComponent {
   }
 
   getCartCount() {
-    const user_id = this.authenticationService.loggedData.id;
+    const user_id = this.authenticationService.loggedData?.id;
 
     this.cartsService.getCartCount(+user_id).subscribe((data: any) => {
       this.cartCount = +data.cart_count;
