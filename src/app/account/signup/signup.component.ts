@@ -83,8 +83,14 @@ export class SignupComponent {
       return;
     }
 
-    this.authenticationService.register(form.value)
-    this.signupForm.reset();
-    this.router.navigate(['/account', 'login'])
+    this.authenticationService.register(form.value).subscribe(
+      (user) => {
+        this.signupForm.reset();
+        this.router.navigate(['/account', 'login']);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }

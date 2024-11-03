@@ -139,6 +139,10 @@ const appRoutes = [
     {
       provide: 'API_BASE_URL',
       useValue: environment.backendUrl
+    },
+    {
+      provide: 'API_BASE_NODE_URL',
+      useValue: environment.backendNodeUrl
     }
   ],
   bootstrap: [AppComponent]

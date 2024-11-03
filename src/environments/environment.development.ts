@@ -5,5 +5,6 @@ export const environment = {
     apiUrl: 'https://api.escuelajs.co/api/v1/',
     apiKey: 'AIzaSyBUHG5LFJg2r_hhboaP48Ig4vldvya5gCQ',
     // backendUrl: process.env['BACKEND_URL']
-    backendUrl: "http://localhost:8000/api/"
+    backendUrl: "http://localhost:8000/api/",
+    backendNodeUrl: "http://localhost:9000/",
 };

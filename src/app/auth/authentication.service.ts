@@ -36,17 +36,17 @@ export class AuthenticationService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    @Inject('API_BASE_URL') private apiUrl: string
-  ) {}
+    @Inject('API_BASE_URL') private apiUrl: string,
+    @Inject('API_BASE_NODE_URL') private apiNodeUrl: string
+  ) {
+    this.apiNodeUrl += "auth/";
+  }
 
   key = 'AIzaSyBUHG5LFJg2r_hhboaP48Ig4vldvya5gCQ';
 
   register(userData: any) {
-    this.http
-      .post<any>(this.apiUrl + 'register', userData)
-      .subscribe((data) => {
-        console.log(data);
-      });
+    return this.http
+      .post<any>(this.apiNodeUrl + 'register', userData);
   }
 
   login(credentials: any) {
