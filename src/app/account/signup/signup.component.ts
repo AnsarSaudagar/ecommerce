@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/auth-old/auth.service';
 import { UserDataService } from 'src/app/auth-old/user-data.service';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/auth/authentication.service';
+import { UserModel } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-signup',
@@ -83,14 +84,14 @@ export class SignupComponent {
       return;
     }
 
-    this.authenticationService.register(form.value).subscribe(
-      (user) => {
+    this.authenticationService.register(form.value).subscribe({
+      next: (user) => {
         this.signupForm.reset();
         this.router.navigate(['/account', 'login']);
       },
-      (error) => {
-        console.log(error);
-      }
-    );
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 }

@@ -1,10 +1,11 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Account } from '../account/account.model';
-import { BehaviorSubject, Subject, catchError, tap, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, catchError, tap, throwError } from 'rxjs';
 import { User } from './user';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment.development';
+import { UserModel } from '../models/user.model';
 
 export interface AuthResponseData {
   kind: string;
@@ -36,26 +37,35 @@ export class AuthenticationService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    @Inject('API_BASE_URL') private apiUrl: string,
     @Inject('API_BASE_NODE_URL') private apiNodeUrl: string
   ) {
-    this.apiNodeUrl += "auth/";
+    this.apiNodeUrl += 'auth/';
   }
 
   key = 'AIzaSyBUHG5LFJg2r_hhboaP48Ig4vldvya5gCQ';
 
-  register(userData: any) {
+  register(userData: UserModel): Observable<UserModel> {
     return this.http
-      .post<any>(this.apiNodeUrl + 'register', userData);
+      .post<UserModel>(this.apiNodeUrl + 'register', userData)
+      .pipe(
+        catchError((error) => {
+          console.error('Registration error:', error);
+          return throwError(
+            () => new Error('Registration failed. Please try again.')
+          );
+        })
+      );
   }
 
-  login(credentials: any) {
+  login(credentials: { email: string; password: string }) {
     return this.http
-      .post<any>(this.apiUrl + 'login', credentials)
+      .post<{ user: UserModel; token: string }>(
+        this.apiNodeUrl + 'login',
+        credentials
+      )
       .pipe(
-        // catchError(this.handleErrors),
-        tap((res) => {
-          this.handleAuthentication(res.email, res.id, res.idToken);
+        tap(({ user, token }) => {
+          this.handleAuthentication(user.email, user.id, token);
         })
       );
   }
@@ -92,7 +102,6 @@ export class AuthenticationService {
 
   logout() {
     this.user.next(null);
-    // this.router.navigate(['/acoount', 'login']);
     localStorage.removeItem('userData');
     if (this.tokenExpirationTimer) {
       clearTimeout(this.tokenExpirationTimer);
@@ -102,7 +111,6 @@ export class AuthenticationService {
   }
 
   autoLogout(expirationDuration: number) {
-    // console.log(expirationDuration);
 
     this.tokenExpirationTimer = setTimeout(() => {
       this.logout();
@@ -171,7 +179,7 @@ export class AuthenticationService {
 
   private handleAuthentication(
     email: string,
-    userId: string,
+    userId: number | string,
     token: string,
     expiresIn: number = null
   ) {
@@ -182,7 +190,7 @@ export class AuthenticationService {
     this.user.next(user);
     // this.autoLogout(expiresIn * 1000);
     const check = localStorage.setItem('userData', JSON.stringify(user));
-    console.log(localStorage.getItem('userData'));
+    // console.log(localStorage.getItem('userData'));
   }
 
   getData(loggedData: any) {
