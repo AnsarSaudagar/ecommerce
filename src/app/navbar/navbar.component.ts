@@ -35,9 +35,10 @@ export class NavbarComponent {
   userData!: any;
   loginCheck!: boolean;
 
-  checkLogin() {
+  checkLogin() : boolean {
     this.userData = localStorage.getItem('userData');
     this.loginCheck = this.userData ? true : false;
+    return true;
   }
 
   ngDoCheck(): void {
@@ -47,11 +48,13 @@ export class NavbarComponent {
   ngOnInit(): void {
     this.checkLogin();
     this.authService.loginEmit.subscribe((data) => {
-      console.log(data);
-      this.checkLogin();
+      // console.log(data);
+      if(this.checkLogin()){
+        this.getCartCount();
+      }
     });
 
-    this.getCartCount();
+
   }
 
   onClickUser() {

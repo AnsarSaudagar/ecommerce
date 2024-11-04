@@ -87,7 +87,6 @@ export class AuthenticationService {
       userData._token,
       new Date(userData._tokenExpirationDate)
     );
-    console.log(loadedUser.email);
 
     if (loadedUser.token) {
       this.user.next(loadedUser);
