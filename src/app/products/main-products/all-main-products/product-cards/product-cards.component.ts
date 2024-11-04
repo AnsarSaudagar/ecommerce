@@ -44,7 +44,7 @@ export class ProductCardsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProductsCategoryWise();
-    this.getCartCategoryWise();
+    // this.getCartCategoryWise();
   }
 
   /**

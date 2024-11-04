@@ -4,6 +4,7 @@ import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { map, switchMap, tap } from 'rxjs';
 import { UserDataService } from 'src/app/auth-old/user-data.service';
 import { DataService, ProductDetails } from 'src/app/data.service';
+import { ProductModel } from 'src/app/models/product.model';
 import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
@@ -76,7 +77,12 @@ export class ProductDetailsComponent {
 
   // New code
 
-  productData: any = {};
+  productData: ProductModel ={
+    id: 0,
+    name: '',
+    price: 0,
+    category_id: 0
+  };
 
   ngOnInit(): void {
     if (localStorage.getItem('userData')) {
@@ -153,10 +159,10 @@ export class ProductDetailsComponent {
 
   /** Fetching the data and displaying */
   getProductData() {
-    this.route.params
+    this.route.paramMap
       .pipe(
-        switchMap((productId) => this.productsService.getProduct(+productId)),
-        tap((product) => (this.productData = product)) 
+        switchMap((params) => this.productsService.getProduct(+params.get("product_id"))),
+        tap((product: ProductModel) => (this.productData = product)) 
       )
       .subscribe();
   }
