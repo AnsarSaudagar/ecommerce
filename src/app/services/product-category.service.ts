@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
+import { ProductCategoryModel } from '../models/product_category.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -8,10 +10,13 @@ import { environment } from 'src/environments/environment.development';
 export class ProductCategoryService {
   constructor(
     private http: HttpClient,
-    @Inject('API_BASE_URL') private apiUrl: string
+    @Inject('API_BASE_URL') private apiUrl: string,
+    @Inject('API_BASE_NODE_URL') private apiNodeUrl: string
   ) {}
 
-  getProductCategories(): any {
-    return this.http.get<any>(this.apiUrl + 'product-categories');
+  getProductCategories(): Observable<ProductCategoryModel[]> {
+    return this.http.get<ProductCategoryModel[]>(
+      this.apiNodeUrl + 'product-category'
+    );
   }
 }
