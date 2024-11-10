@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { BehaviorSubject, map, Subject } from 'rxjs';
+import { BehaviorSubject, map, Observable, Subject } from 'rxjs';
 import { CartModel } from '../models/cart.model';
 
 @Injectable({
@@ -12,7 +12,7 @@ export class CartsService {
   constructor(
     private http: HttpClient,
     @Inject('API_BASE_URL') private apiUrl: string,
-    @Inject("API_BASE_NODE_URL") private apiNodeUrl: string
+    @Inject('API_BASE_NODE_URL') private apiNodeUrl: string
   ) {}
 
   /**
@@ -22,20 +22,25 @@ export class CartsService {
    *
    * @description it will add the product to the user cart
    */
-  addProductToCart(product_data: CartModel) {
-    return this.http.post(this.apiNodeUrl + 'cart', product_data);
+  addProductToCart(product_data: CartModel): Observable<CartModel> {
+    return this.http.post<CartModel>(this.apiNodeUrl + 'cart', product_data);
   }
 
-   getActiveCartProducts(user_id: number) {
-    return this.http.get(this.apiUrl + 'carts/' + user_id);
+  getActiveCartProducts(user_id: number): Observable<CartModel[]> {
+    return this.http.get<CartModel[]>(this.apiUrl + 'cart/' + user_id);
   }
 
-  getCartProductsIdByCategory(user_id: number, category_id: number) {
-    return this.http.get(`${this.apiUrl}carts/${user_id}/${category_id}`).pipe(
-      map((carts: any) => {
-        return carts.map((cart) => cart.product_id);
-      })
-    );
+  getCartProductsIdByCategory(
+    user_id: number,
+    category_id: number
+  ): Observable<number[]> {
+    return this.http
+      .get<CartModel[]>(`${this.apiNodeUrl}cart/${user_id}/${category_id}`)
+      .pipe(
+        map((carts: CartModel[]) => {
+          return carts.map((cart: CartModel) => cart.product_id);
+        })
+      );
   }
 
   deleteSingleProductCart(user_id: number, product_id: number) {
