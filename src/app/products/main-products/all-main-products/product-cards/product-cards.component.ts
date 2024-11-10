@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { AuthenticationService } from 'src/app/auth/authentication.service';
+import { CartModel } from 'src/app/models/cart.model';
 import { CartSharedDataService } from 'src/app/services/cart-shared-data.service';
 import { CartsService } from 'src/app/services/carts.service';
 import { ProductsService } from 'src/app/services/products.service';
@@ -81,8 +82,8 @@ export class ProductCardsComponent implements OnInit {
     }
 
     const user = this.authenticationService.loggedData;
-    const cartData = {
-      user_id: user.id,
+    const cartData : CartModel = {
+      user_id: +user.id,
       product_id: product_id,
     };
 

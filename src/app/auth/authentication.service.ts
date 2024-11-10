@@ -4,8 +4,8 @@ import { Account } from '../account/account.model';
 import { BehaviorSubject, Observable, Subject, catchError, tap, throwError } from 'rxjs';
 import { User } from './user';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment.development';
 import { UserModel } from '../models/user.model';
+import { environment } from 'src/environments/environment.development';
 
 export interface AuthResponseData {
   kind: string;
