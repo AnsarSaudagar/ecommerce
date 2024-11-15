@@ -26,6 +26,8 @@ export class CartComponent implements OnInit {
 
     this.cartsService.getActiveCartProducts(userId).subscribe((carts: any) => {
       this.cartProducts = carts;
+      console.log(this.cartProducts);
+
       this.calculateTotalPrice();
     });
   }
@@ -43,11 +45,12 @@ export class CartComponent implements OnInit {
 
     this.cartSharedDataService.sendData(count);
 
+    const update_type = 2; // Update enum for calculation 
     this.cartsService
-      .updateCartCount(cart_id, count)
+      .updateCartCount(cart_id, count, update_type)
       .subscribe((count_value: any) => {
         this.cartProducts.map((product) => {
-          if (+product.cart_id === cart_id) {
+          if (+product.id === +cart_id) {
             product.count = count_value.count;
             this.calculateTotalPrice();
           }
@@ -62,7 +65,7 @@ export class CartComponent implements OnInit {
     let total = 0;
 
     this.cartProducts.forEach((prod) => {
-      total += +prod.price * prod.count;
+      total += +prod.product.price * prod.count;
     });
     this.originalPrice = total;
     this.totalPrice = this.originalPrice - this.discount + this.tax;
@@ -91,8 +94,9 @@ export class CartComponent implements OnInit {
   private filterProductList(product_id: number) {
     return () => {
       this.cartProducts = this.cartProducts.filter((prod) => {
-        return prod.id !== product_id;
+        return prod.product_id !== product_id;
       });
+      
       this.calculateTotalPrice();
     };
   }
@@ -100,15 +104,14 @@ export class CartComponent implements OnInit {
   /**
    * Removing all the cart products
    */
-  onClickDeleteAll(){
+  onClickDeleteAll() {
     const userId = +this.authenticationService.loggedData?.id;
 
     this.cartsService.deleteFullUserCart(userId).subscribe({
-      complete: ()=>{
+      complete: () => {
         this.cartProducts = [];
         this.cartSharedDataService.sendData(0);
-      }
-    })
-
+      },
+    });
   }
 }

@@ -5,6 +5,8 @@ import { map, switchMap, tap } from 'rxjs';
 import { UserDataService } from 'src/app/auth-old/user-data.service';
 import { DataService, ProductDetails } from 'src/app/data.service';
 import { ProductModel } from 'src/app/models/product.model';
+import { CartSharedDataService } from 'src/app/services/cart-shared-data.service';
+import { CartsService } from 'src/app/services/carts.service';
 import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
@@ -19,7 +21,9 @@ export class ProductDetailsComponent {
     private userDataService: UserDataService,
 
     // New product service
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private cartService: CartsService,
+    private cartSharedService: CartSharedDataService
   ) {}
 
   productId!: number;
@@ -148,11 +152,13 @@ export class ProductDetailsComponent {
   }
 
   onClickAddCart() {
-    this.userDataService.addProductCart(
-      this.userData,
-      this.productId,
-      this.productCount
-    );
+    this.cartService.createOrUpdateCart(this.productData.id, this.productCount).subscribe(
+      {
+        complete: ()=>{
+          this.cartSharedService.sendData(this.productCount);
+        }
+      }
+    )
   }
 
   // New backend codes integration

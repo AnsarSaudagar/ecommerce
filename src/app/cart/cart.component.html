@@ -11,7 +11,7 @@
                 <div class="card-detail flex flex-col">
                     <!-- <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae libero, sapiente vitae soluta
                         ipsa velit harum sint atque cupiditate ea? </h3> -->
-                    <h3>{{product.name}} - {{product.description}}</h3>
+                    <h3>{{product.product.name}} - {{product.product.description}}</h3>
                     <div style="flex: 1;"></div>
                     <div class="card-action flex" style="gap: 5px;">
                         <button class="card-wish"
@@ -19,7 +19,7 @@
                             Add to wishlist
                         </button>
                         <button 
-                            (click)="onClickRemoveCart(product.id)"
+                            (click)="onClickRemoveCart(product.product_id)"
                             class="card-remove "
                             style="background-color: black; color: white; font-size: 12px; width: 60px; border-radius: 24px;">
                             Remove
@@ -29,18 +29,18 @@
                 </div>
                 <div style="width: 10%; font-size: 16px;"
                     class="border border-black  flex justify-between items-center h-8 rounded-[60px] font-medium text-xl px-3 mr-3">
-                    <button (click)="onClickOperator(product.cart_id, -1, product.count)"
+                    <button (click)="onClickOperator(product.id, -1, product.count)"
                         class="cursor-pointer hover:text-[#56cfe1] duration-300 flex">
                         -
                     </button>
                     <span>{{product.count}}</span>
-                    <button (click)="onClickOperator(product.cart_id, 1)"
+                    <button (click)="onClickOperator(product.id, 1)"
                         class="cursor-pointer hover:text-[#56cfe1] duration-300">
                         +
                     </button>
                 </div>
                 <div style="font-size: 20px; width: 10%; text-align: center; font-weight: 500;">
-                    {{product.count * product.price | currency}}
+                    {{product.count * product.product.price | currency}}    
                 </div>
             </div>
         </div>

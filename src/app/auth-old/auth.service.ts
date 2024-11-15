@@ -90,11 +90,13 @@ export class AuthService {
     // console.log(loadedUser.email);
 
     if (loadedUser.token) {
+      console.log(loadedUser);
       this.user.next(loadedUser)
+      
       const expirationDuration = new Date(userData._tokenExpirationDate).getTime() - new Date().getTime();
       // console.log(expirationDuration);
 
-      this.autoLogout(expirationDuration)
+      // this.autoLogout(expirationDuration)
     }
   }
 
