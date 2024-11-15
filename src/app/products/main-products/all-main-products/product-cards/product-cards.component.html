@@ -40,11 +40,17 @@
             </ng-template>
         </div>
     </div>
-    <div class="text-center mt-10" *ngIf="productArr.length > 0">
+    @if (productArr.length > 0) {
+    <div class="text-center mt-10">
         <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
         </pagination-controls>
     </div>
-    <div class="mt-10" *ngIf="productArr.length===0">
+    }
+    
+    @if (productArr.length===0) {
+    <div class="mt-10">
         <p class="text-center">No items in wishlist</p>
     </div>
+    }
+    
 </div>
