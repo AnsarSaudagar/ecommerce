@@ -1,4 +1,4 @@
-<!-- <div class="main-card h-[270px]  border border-[#ddd] justify-between items-center px-5" *ngFor="let product of productArr | paginate :{ -->
+
 <div class="two-col-card">
     <div class="main-card h-[270px] border border-[#ddd] justify-between items-center px-5" *ngFor="let product of productArr | async | paginate :{
         itemsPerPage: tableSize,
@@ -6,8 +6,6 @@
         totalItems: count
     }; index as i">
         <div class="h-[85%] relative border overflow-hidden">
-            <!-- <icon [icon]="faHeart" (click)="onClickHeart()" [ngClass]="{'text-red-500':productArrWish[index]}"
-                class="absolute left-3 top-3 transition cursor-pointer text-black hover:text-red-500 "></icon> -->
             <img src="https://cdn.shopify.com/s/files/1/0616/9480/4174/products/20046729-1-offwhite.jpg?v=1652169256&width=700"
                 alt class="transition duration-500 w-full cursor-pointer hover:scale-125"
                 (click)="showProduct(product.id)">
