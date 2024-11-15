@@ -78,7 +78,7 @@ export class CartComponent implements OnInit {
    * Removing the product from the cart list and updating the cart list
    */
   onClickRemoveCart(product_id: number) {
-    const userId = +this.authenticationService.user
+    const userId = +JSON.parse(localStorage.getItem("userData"))?.id;
 
     this.cartsService.deleteSingleProductCart(userId, product_id).subscribe({
       complete: this.filterProductList(product_id),
