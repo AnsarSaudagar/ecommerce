@@ -7,10 +7,12 @@
     </div>
     <div class="flex w-[80%] m-auto h-[80vh] justify-between mt-10">
         <div class="w-[8%] h-full flex flex-col justify-between ">
-            <div class="imgsub" [ngClass]="{'opacity-40':!imgArrStyle[i]}" class="hover:opacity-100 duration-500"
-                *ngFor="let img of imgArr;let i = index" (click)="clickSubImg(i)">
+            @for (img of imgArr; track $index) {
+            <div class="imgsub" [ngClass]="{'opacity-40':!imgArrStyle[$index]}" class="hover:opacity-100 duration-500"
+                (click)="clickSubImg($index)">
                 <img [src]="img" alt class="h-[120px]">
             </div>
+            }
         </div>
 
         <div class="h-full w-[35%]">
