@@ -37,7 +37,7 @@ export class NavbarComponent {
 
   checkLogin() : boolean {
     this.userData = localStorage.getItem('userData');
-    // this.loginCheck = this.userData ? true : false;
+    this.loginCheck = this.userData ? true : false;
     return this.userData;
   }
 
@@ -52,18 +52,6 @@ export class NavbarComponent {
       
       this.getCartCount();
     }
-    
-    // this.checkLogin();
-    // this.authService.loginEmit.subscribe((data) => {
-
-    //   if(this.checkLogin()){
-    //     console.log("logged");
-        
-    //     this.getCartCount();
-    //   }
-    // });
-
-
   }
 
   onClickUser() {
