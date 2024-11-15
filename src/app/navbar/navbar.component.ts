@@ -38,7 +38,7 @@ export class NavbarComponent {
   checkLogin() : boolean {
     this.userData = localStorage.getItem('userData');
     // this.loginCheck = this.userData ? true : false;
-    return true;
+    return this.userData;
   }
 
   ngDoCheck(): void {
