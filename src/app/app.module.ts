@@ -47,6 +47,7 @@ import { WishlistComponent } from './wishlist/wishlist.component';
 import { CartComponent } from './cart/cart.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { environment } from 'src/environments/environment.development';
+import { CommonModule } from '@angular/common';
 
 
 const appRoutes = [
@@ -128,7 +129,8 @@ const appRoutes = [
     ReactiveFormsModule,
     HttpClientModule,
     NgxPaginationModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    CommonModule
   ],
   providers: [
     {
