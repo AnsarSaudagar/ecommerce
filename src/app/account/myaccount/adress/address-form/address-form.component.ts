@@ -10,6 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AddressFormComponent {
   addressForm: FormGroup;
+  inputClass : string = "border h-10 w-full mt-4 indent-2 focus:outline-none"
 
   @Output() cancelEmitter = new EventEmitter<any>();
 
@@ -25,11 +26,10 @@ export class AddressFormComponent {
     });
   }
 
-  inputClass : string = "border h-10 w-full mt-4 indent-2 focus:outline-none"
-
   onSubmitNewAdress(){
-    console.log(this.addressForm.valid);
-    
+    if(this.addressForm.valid){
+      this.addressForm.reset();
+    }
   }
   
   onClickCancel(){

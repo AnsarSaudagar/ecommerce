@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./adress.component.css']
 })
 export class AdressComponent {
-  showAddressForm : boolean= true;
+  showAddressForm : boolean= false;
 
   onClickNewAddress(){
     this.showAddressForm = !this.showAddressForm;
