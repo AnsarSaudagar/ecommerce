@@ -1,3 +1,6 @@
 <div class="w-[800px] ml-10 ">
-    <button class="m-auto block h-10 w-52 text-white bg-black text-sm">Add a New Address</button>
+    <button class="m-auto block h-10 w-52 text-white bg-black text-sm" (click)="onClickNewAddress()" >Add a New Address</button>
+    @if (showAddressForm) {
+        <app-address-form (cancelEmitter)="onCancelEmitter()" ></app-address-form>
+    }
 </div>

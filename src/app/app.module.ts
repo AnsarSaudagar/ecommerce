@@ -48,6 +48,7 @@ import { CartComponent } from './cart/cart.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { environment } from 'src/environments/environment.development';
 import { CommonModule } from '@angular/common';
+import { AddressFormComponent } from "./account/myaccount/adress/address-form/address-form.component";
 
 
 const appRoutes = [
@@ -120,6 +121,7 @@ const appRoutes = [
     WishlistComponent,
     CartComponent,
     SpinnerComponent,
+    AddressFormComponent
   ],
   imports: [
     BrowserModule,
@@ -130,8 +132,8 @@ const appRoutes = [
     HttpClientModule,
     NgxPaginationModule,
     BrowserAnimationsModule,
-    CommonModule
-  ],
+    CommonModule,
+],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
