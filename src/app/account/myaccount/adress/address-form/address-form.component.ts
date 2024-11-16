@@ -20,7 +20,8 @@ export class AddressFormComponent {
       address: ['', [Validators.required]],
       city: ['', [Validators.required]],
       pincode: [null, [Validators.required]],
-      phone_number: [null, [Validators.minLength(10), Validators.maxLength(10)]]
+      phone_number: [null, [Validators.minLength(10), Validators.maxLength(10)]],
+      default: [false]
     });
   }
 
