@@ -16,13 +16,13 @@ export class AddressFormComponent {
 
   constructor(private fb: FormBuilder){
     this.addressForm = this.fb.group({
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
+      first_name: ['', [Validators.required]],
+      last_name: ['', [Validators.required]],
       address: ['', [Validators.required]],
       city: ['', [Validators.required]],
       pincode: [null, [Validators.required]],
       phone_number: [null, [Validators.minLength(10), Validators.maxLength(10)]],
-      default: [false]
+      is_default: [false]
     });
   }
 

@@ -3,8 +3,8 @@
     <h1 class="font-semibold text-center text-lg m-8">Add a New Address</h1>
     <form [formGroup]="addressForm" (ngSubmit)="onSubmitNewAdress()">
         <div class="flex justify-between">
-            <input type="text" class=" w-[48%] {{inputClass}}" placeholder="First Name" formControlName="firstName">
-            <input type="text" class=" w-[48%] {{inputClass}}" placeholder="Last Name" formControlName="lastName">
+            <input type="text" class=" w-[48%] {{inputClass}}" placeholder="First Name" formControlName="first_name">
+            <input type="text" class=" w-[48%] {{inputClass}}" placeholder="Last Name" formControlName="last_name">
         </div>
         <input type="text" class="{{inputClass}}" placeholder="Address" formControlName="address">
         <input type="text" class="{{inputClass}}" placeholder="City" formControlName="city">
@@ -12,7 +12,7 @@
         <input type="number" class="{{inputClass}}" placeholder="Phone number" formControlName="phone_number">
 
         <label for="" class="block text-sm mt-4">
-            <input type="checkbox" formControlName="default" >
+            <input type="checkbox" formControlName="is_default" >
             Set as default address
         </label>
         <button type="submit" class=" h-10 w-40 text-white bg-black text-sm mt-4">Add Address</button>
