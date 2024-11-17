@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AddressModel } from 'src/app/models/address.model';
 import { AddressService } from 'src/app/services/address.service';
 
 @Component({
@@ -9,12 +10,13 @@ import { AddressService } from 'src/app/services/address.service';
 export class AdressComponent implements OnInit {
   showAddressForm: boolean = false;
 
+  addresses: AddressModel[];
   constructor(private addressService: AddressService) {}
 
   ngOnInit(): void {
     this.addressService.getAddresses().subscribe({
-      next: (address) => {
-        console.log(address);
+      next: (addresses : AddressModel[]) => {
+        this.addresses = addresses;
       },
     });
   }
