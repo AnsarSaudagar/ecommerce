@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { Router } from '@angular/router';
 import { ProductCategoryService } from '../services/product-category.service';
@@ -16,12 +16,16 @@ export class CollectionsComponent implements OnInit {
     'https://www.shutterstock.com/image-vector/image-icon-trendy-flat-style-600nw-643080895.jpg';
 
   showSpinner: boolean = true;
+  s3_folder_path: string = "/category-images/";
 
   constructor(
     private dataService: DataService,
     private router: Router,
-    private productCategoryService: ProductCategoryService
-  ) {}
+    private productCategoryService: ProductCategoryService,
+    @Inject("S3_BUCKET_URL") private s3BucketUrl: string
+  ) {
+ 
+  }
 
   ngOnInit(): void {
     this.productCategoryService.getProductCategories().subscribe({

@@ -147,6 +147,10 @@ const appRoutes = [
     {
       provide: 'API_BASE_NODE_URL',
       useValue: environment.backendNodeUrl
+    },
+    {
+      provide: "S3_BUCKET_URL",
+      useValue: environment.aws_s3_bucket_url
     }
   ],
   bootstrap: [AppComponent]
