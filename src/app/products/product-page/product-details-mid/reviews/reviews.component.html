@@ -1,6 +1,8 @@
-<div>
-    <div>
-        <h2>4.7</h2>
-    </div>
-    <div></div>
+<div class="text-sm text-center text-[#878787] mt-16">
+    <p class="traking-normal">There are no reviews.</p>
+    <p class="mt-4 traking-normal">Be the first to <span class="text-[#fdbc00] hover:cursor-pointer" (click)="onClickWriteReview()" >Write a review</span></p>
 </div>
+
+@if (showReviewModal) {
+    <app-review-modal></app-review-modal>
+}

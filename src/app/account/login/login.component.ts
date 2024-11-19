@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   faError = faExclamationCircle
   ngOnInit(): void {
     this.loginForm = new FormGroup({
-      'email': new FormControl(null, [this.invalidEmail.bind(this), Validators.required, Validators.email]),
+      'email': new FormControl(null, [Validators.required, Validators.email]),
       'password': new FormControl(null),
     })
 
@@ -55,12 +55,12 @@ export class LoginComponent implements OnInit {
     this.passType = this.passType === 'password' ? 'text' : 'password'
   }
 
-  invalidEmail(control: FormControl): { [s: string]: boolean } {
-    if (!this.emails.includes(control.value)) {
-      return { 'emailNotExists': true }
-    }
-    return null
-  }
+  // invalidEmail(control: FormControl): { [s: string]: boolean } {
+  //   if (!this.emails.includes(control.value)) {
+  //     return { 'emailNotExists': true }
+  //   }
+  //   return null
+  // }
   // checkAuth(control: FormGroup): { [s: string]: boolean } {
   //   let mainData = {
   //     email: '',

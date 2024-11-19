@@ -1,11 +1,11 @@
 <div class=" bg-[#f6f6f8] min-h-[260px] pt-8">
     <div class="flex justify-center">
-        <button [ngClass]="{'border border-black':tabsArr[0]}" (click)="clickTab(0)"
-            class=" text-sm font-semibold w-32 rounded-[60px] h-10">Description</button>
-        <button (click)="clickTab(1)" [ngClass]="{'border border-black':tabsArr[1]}"
-            class=" text-sm font-semibold w-32 rounded-[60px] h-10">Custom tab</button>
-        <button (click)="clickTab(2)" [ngClass]="{'border border-black':tabsArr[2]}"
-            class=" text-sm font-semibold w-32 rounded-[60px] h-10">Reviews</button>
+        <button [ngClass]="{'border border-black text-black':tabsArr[0]}" (click)="clickTab(0)"
+            class=" text-sm font-semibold w-32 rounded-[60px] h-10 text-[#878787] transition-all hover:text-black ">Description</button>
+        <button (click)="clickTab(1)" [ngClass]="{'border border-black text-black':tabsArr[1]}"
+            class=" text-sm font-semibold w-32 rounded-[60px] h-10 text-[#878787] transition-all hover:text-black ">Custom tab</button>
+        <button (click)="clickTab(2)" [ngClass]="{'border border-black text-black':tabsArr[2]}"
+            class=" text-sm font-semibold w-32 rounded-[60px] h-10 text-[#878787] transition-all hover:text-black ">Reviews</button>
     </div>
     <app-description *ngIf="tabsArr[0]"></app-description>
     <app-custom-tab *ngIf="tabsArr[1]"></app-custom-tab>

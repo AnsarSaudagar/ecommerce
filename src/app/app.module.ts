@@ -49,6 +49,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { environment } from 'src/environments/environment.development';
 import { CommonModule } from '@angular/common';
 import { AddressFormComponent } from "./account/myaccount/adress/address-form/address-form.component";
+import { ProductFormComponent } from './product-form/product-form.component';
+import { ReviewModalComponent } from './products/product-page/product-details-mid/reviews/review-modal/review-modal.component';
 
 
 const appRoutes = [
@@ -78,6 +80,9 @@ const appRoutes = [
   },
   {
     path: 'products/:product_id', component: ProductPageComponent
+  },
+  {
+    path: 'product-form', component: ProductFormComponent
   }
 ]
 
@@ -121,7 +126,9 @@ const appRoutes = [
     WishlistComponent,
     CartComponent,
     SpinnerComponent,
-    AddressFormComponent
+    AddressFormComponent,
+    ProductFormComponent,
+    ReviewModalComponent
   ],
   imports: [
     BrowserModule,

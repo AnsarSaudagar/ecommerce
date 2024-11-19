@@ -1,0 +1,63 @@
+<!-- src/app/product-form/product-form.component.html -->
+
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Product Name</label>
+      <input
+        type="text"
+        id="name"
+        formControlName="name"
+        class="form-control"
+        placeholder="Enter product name"
+      />
+      <div *ngIf="formControls.name.invalid && formControls.name.touched">
+        <small *ngIf="formControls.name.errors?.required">Name is required.</small>
+        <small *ngIf="formControls.name.errors?.maxlength">Name cannot exceed 255 characters.</small>
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label for="price">Price</label>
+      <input
+        type="number"
+        id="price"
+        formControlName="price"
+        class="form-control"
+        placeholder="Enter price"
+      />
+      <div *ngIf="formControls.price.invalid && formControls.price.touched">
+        <small *ngIf="formControls.price.errors?.required">Price is required.</small>
+        <small *ngIf="formControls.price.errors?.min">Price cannot be negative.</small>
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        formControlName="description"
+        class="form-control"
+        rows="3"
+        placeholder="Enter product description (optional)"
+      ></textarea>
+      <div *ngIf="formControls.description.invalid && formControls.description.touched">
+        <small *ngIf="formControls.description.errors?.maxlength">Description cannot exceed 1024 characters.</small>
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label for="category_id">Category</label>
+      <select id="category_id" formControlName="category_id" class="form-control">
+        <option value="" disabled>Select a category</option>
+        <!-- <option *ngFor="let category of categories" [value]="category.id">
+          {{ category.name }}
+        </option> -->
+      </select>
+      <div *ngIf="formControls.category_id.invalid && formControls.category_id.touched">
+        <small *ngIf="formControls.category_id.errors?.required">Category is required.</small>
+      </div>
+    </div>
+  
+    <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid">Submit</button>
+  </form>
+  
