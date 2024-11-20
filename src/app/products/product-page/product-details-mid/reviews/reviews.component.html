@@ -1,3 +1,7 @@
+@if (showReviewModal) {
+<app-review-modal (crossEmitter)="hideReviewModal($event)"></app-review-modal>
+}
+
 @if (productReviews?.length === 0) {
 <div class="text-sm text-center text-[#878787] mt-16">
     <p class="traking-normal">There are no reviews.</p>
@@ -6,10 +10,7 @@
 </div>
 }
 
-@if (showReviewModal) {
-<app-review-modal (crossEmitter)="hideReviewModal($event)"></app-review-modal>
-}
-
+@if (productReviews?.length !== 0) {
 <div class="w-[80%] m-auto mt-10 pb-8">
     <div class="w-fit">
         <p class="text-center text-4xl font-bold text-[#878787]">{{average}}</p>
@@ -44,3 +45,4 @@
         }
     </div>
 </div>
+}
