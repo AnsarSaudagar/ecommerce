@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { ProductReview } from 'src/app/models/product_review.model';
+import { ProductReviewService } from 'src/app/services/product-review.service';
 
 @Component({
   selector: 'app-review-modal',
@@ -10,8 +13,21 @@ export class ReviewModalComponent {
   @Output() crossEmitter = new EventEmitter<boolean>();
   reviewForm: FormGroup;
   isSubmitted: boolean = false;
+  product_id : number;
+  user_id: number;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private productReviewService: ProductReviewService,
+    private route: ActivatedRoute
+  ) {
+
+    this.route.params.subscribe(routes => {
+      this.product_id = +routes.product_id
+    })
+
+    this.user_id = JSON.parse(localStorage.getItem("userData"))?.id;
+
     // For handling background when modal is active
     document.querySelector('body').style.overflow = 'hidden';
 
@@ -33,8 +49,21 @@ export class ReviewModalComponent {
   onSubmitReview() {
     this.isSubmitted = true;
 
-    if(this.reviewForm.valid){
-      console.log(this.reviewForm.value);
+    if (this.reviewForm.valid) {
+
+      const review : ProductReview = {
+        ...this.reviewForm.value,
+        product_id: this.product_id,
+        user_id : this.user_id ? this.user_id : null
+      }
+
+      this.productReviewService.submitNewReview(review).subscribe({
+        complete: () => {
+          this.reviewForm.reset();
+          this.isSubmitted = false;
+          this.onClickCross();
+        },
+      });
       
     }
   }
