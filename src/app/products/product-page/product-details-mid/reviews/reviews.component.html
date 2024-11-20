@@ -4,5 +4,5 @@
 </div>
 
 @if (showReviewModal) {
-    <app-review-modal></app-review-modal>
+    <app-review-modal (crossEmitter)="hideReviewModal($event)" ></app-review-modal>
 }

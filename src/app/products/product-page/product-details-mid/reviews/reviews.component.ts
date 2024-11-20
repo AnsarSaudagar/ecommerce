@@ -11,4 +11,8 @@ export class ReviewsComponent {
   onClickWriteReview(){
     this.showReviewModal = true;
   }
+
+  hideReviewModal(modalStatus : boolean){
+    this.showReviewModal = modalStatus;
+  }
 }

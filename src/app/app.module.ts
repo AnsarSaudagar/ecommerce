@@ -51,6 +51,7 @@ import { CommonModule } from '@angular/common';
 import { AddressFormComponent } from "./account/myaccount/adress/address-form/address-form.component";
 import { ProductFormComponent } from './product-form/product-form.component';
 import { ReviewModalComponent } from './products/product-page/product-details-mid/reviews/review-modal/review-modal.component';
+import { MatIconModule } from '@angular/material/icon';
 
 
 const appRoutes = [
@@ -140,6 +141,7 @@ const appRoutes = [
     NgxPaginationModule,
     BrowserAnimationsModule,
     CommonModule,
+    MatIconModule
 ],
   providers: [
     {
