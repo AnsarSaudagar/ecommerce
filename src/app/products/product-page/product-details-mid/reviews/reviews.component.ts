@@ -12,6 +12,8 @@ export class ReviewsComponent implements OnInit {
   showReviewModal: boolean = false;
   productReviews: ProductReview[];
   product_id: number;
+  count: number;
+  average: number;
 
   constructor(
     private productReviewsService: ProductReviewService,
@@ -19,19 +21,26 @@ export class ReviewsComponent implements OnInit {
   ) {
     this.route.params.subscribe({
       next: (params) => {
-        this.product_id = params.product_id;        
-      }
-    })
+        this.product_id = params.product_id;
+      },
+    });
   }
 
   ngOnInit(): void {
-    this.productReviewsService.getProductReviews(this.product_id).subscribe({
-      next: (reviews : ProductReview[]) =>{
-        console.log(reviews);
-        
+    this.productReviewsService.reviews$.subscribe({
+      next: (reviews: ProductReview[]) => {
         this.productReviews = reviews;
-      }
-    })
+        this.count = reviews.length;
+        let sum = 0;
+        this.productReviews.forEach(review => {
+          sum += review.rating;
+        })
+
+        this.average = +(sum /this.count).toFixed(1);
+      },
+    });
+
+    this.productReviewsService.getProductReviews(this.product_id)
   }
 
   onClickWriteReview() {

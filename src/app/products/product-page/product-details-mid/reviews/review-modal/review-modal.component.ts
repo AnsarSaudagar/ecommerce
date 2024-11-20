@@ -62,6 +62,7 @@ export class ReviewModalComponent {
           this.reviewForm.reset();
           this.isSubmitted = false;
           this.onClickCross();
+          this.productReviewService.getProductReviews(this.product_id);
         },
       });
       
