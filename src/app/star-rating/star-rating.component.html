@@ -1,8 +1,11 @@
-<div class="flex">
+<div class="flex" >
     <!-- {{stars| json}} -->
-    <svg *ngFor="let star of stars; let i = index"
+    <svg 
+    *ngFor="let star of stars; let i = index"
          [attr.fill]="star === 'full' ? activeColor : (star === 'partial' ? 'url(#gradient)' : inactiveColor)"
-         (click)="rate(i + 1)" viewBox="0 0 12.166 11.777" style="height: 20px; margin-right: 4px; cursor: pointer;">
+         (click)="rate(i + 1)" viewBox="0 0 12.166 11.777" style="height: 20px; margin-right: 4px;" [ngStyle]="{
+            'cursor': isInteractive ? 'pointer': null
+         }">
       <defs>
         <!-- Gradient for partial stars -->
         <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">

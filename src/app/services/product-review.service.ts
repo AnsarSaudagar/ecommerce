@@ -12,6 +12,10 @@ export class ProductReviewService {
     @Inject('API_BASE_NODE_URL') private apiNodeUrl: string
   ) {}
 
+  getProductReviews(product_id: number){
+    return this.http.get(this.apiNodeUrl + "product-review/" + product_id);
+  }
+
   submitNewReview(review_details: ProductReview){
     return this.http.post(this.apiNodeUrl + 'product-review/add', review_details);
   }

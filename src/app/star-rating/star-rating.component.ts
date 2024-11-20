@@ -18,6 +18,7 @@ export class StarRatingComponent {
   @Input() inactiveColor: string = '#e6e6e6';
   @Input() isInteractive: boolean = true;
   @Output() ratingChange = new EventEmitter<number>();
+  isHover: boolean = false;
 
   private onChange: (value: number) => void = () => {};
   private onTouched: () => void = () => {};
