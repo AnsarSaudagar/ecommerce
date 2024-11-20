@@ -54,6 +54,7 @@ import { ReviewModalComponent } from './products/product-page/product-details-mi
 import { MatIconModule } from '@angular/material/icon';
 import { StarRatingComponent } from './star-rating/star-rating.component';
 import { StarRatingViewComponent } from './star-rating-view/star-rating-view.component';
+import { TimeAgoPipe } from './time-ago.pipe';
 
 
 const appRoutes = [
@@ -133,7 +134,8 @@ const appRoutes = [
     ProductFormComponent,
     ReviewModalComponent,
     StarRatingComponent,
-    StarRatingViewComponent
+    StarRatingViewComponent,
+    TimeAgoPipe
   ],
   imports: [
     BrowserModule,

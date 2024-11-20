@@ -28,6 +28,11 @@
                     {{review.name[0] | uppercase}}</div>
                 <div class="name text-sm font-bold">{{review.name}}</div>
             </div>
+            <div class="mt-5 flex items-center">
+                <app-star-rating-view [rating]="review.rating" starSize="12px" ></app-star-rating-view>
+                 <mat-icon class="text-[#66c345] text-base ml-2" fontIcon="check_circle"></mat-icon>
+                 <p class="text-xs text-[#878787]">{{review.created_at | timeAgo}}</p>
+            </div>
             <p class="mt-3 text-base font-bold text-[#878787]">{{review.title}}</p>
             <p class="mt-3 text-sm  text-[#878787]">{{review.content}}</p>
             <div class="mt-3 flex gap-2">

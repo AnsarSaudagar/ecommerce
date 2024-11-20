@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductReview } from 'src/app/models/product_review.model';
 import { ProductReviewService } from 'src/app/services/product-review.service';
+import { formatDistanceToNow } from 'date-fns';
 
 @Component({
   selector: 'app-reviews',
