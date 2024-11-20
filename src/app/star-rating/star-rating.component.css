@@ -1,0 +1,11 @@
+.flex {
+    display: flex;
+    align-items: center;
+  }
+  svg {
+    transition: fill 0.3s;
+  }
+  svg:hover {
+    fill: #f5a623; /* Optional hover effect */
+  }
+  

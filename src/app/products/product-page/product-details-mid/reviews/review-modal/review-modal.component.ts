@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 
 @Component({
@@ -10,7 +11,9 @@ export class ReviewModalComponent {
 
   @Output() crossEmitter = new EventEmitter<boolean>();
 
-  constructor(){
+  constructor(
+    private fb: FormBuilder
+  ){
     document.querySelector("body").style.overflow = "hidden"
   }
 

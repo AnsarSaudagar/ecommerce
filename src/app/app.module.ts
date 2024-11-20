@@ -52,6 +52,7 @@ import { AddressFormComponent } from "./account/myaccount/adress/address-form/ad
 import { ProductFormComponent } from './product-form/product-form.component';
 import { ReviewModalComponent } from './products/product-page/product-details-mid/reviews/review-modal/review-modal.component';
 import { MatIconModule } from '@angular/material/icon';
+import { StarRatingComponent } from './star-rating/star-rating.component';
 
 
 const appRoutes = [
@@ -129,7 +130,8 @@ const appRoutes = [
     SpinnerComponent,
     AddressFormComponent,
     ProductFormComponent,
-    ReviewModalComponent
+    ReviewModalComponent,
+    StarRatingComponent
   ],
   imports: [
     BrowserModule,
