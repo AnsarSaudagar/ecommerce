@@ -1,9 +1,15 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-star-rating',
   templateUrl: './star-rating.component.html',
   styleUrl: './star-rating.component.css',
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: StarRatingComponent,
+    multi: true
+  }]
 })
 export class StarRatingComponent {
   @Input() rating: number = 0;
@@ -12,6 +18,9 @@ export class StarRatingComponent {
   @Input() inactiveColor: string = '#e6e6e6';
   @Input() isInteractive: boolean = true;
   @Output() ratingChange = new EventEmitter<number>();
+
+  private onChange: (value: number) => void = () => {};
+  private onTouched: () => void = () => {};
 
   get stars(): any[] {
     const fullStars = Math.floor(this.rating);
@@ -30,7 +39,22 @@ export class StarRatingComponent {
   rate(star: number): void {
     if (this.isInteractive) {
       this.rating = star;
-      this.ratingChange.emit(this.rating);
+      this.onChange(this.rating); // Update form control value
+      this.ratingChange.emit(this.rating); // Emit change for external binding
     }
+  }
+
+  writeValue(value: number): void {
+    if (value !== undefined) {
+      this.rating = value;
+    }
+  }
+
+  registerOnChange(fn: (value: number) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
   }
 }
