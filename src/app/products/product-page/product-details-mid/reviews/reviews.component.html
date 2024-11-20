@@ -14,7 +14,7 @@
 <div class="w-[80%] m-auto mt-10 pb-8">
     <div class="w-fit">
         <p class="text-center text-4xl font-bold text-[#878787]">{{average}}</p>
-        <app-star-rating [isInteractive]="false" [rating]="average"></app-star-rating>
+        <app-star-rating-view [rating]="average" starSize="20px" ></app-star-rating-view>
         <p class="text-[#878787] text-sm text-center mt-4">{{count}} reviews</p>
         <button class="mt-3 text-white bg-[#ffb102] text-sm py-2 px-3 rounded-[3px] "
             (click)="onClickWriteReview()">Write a
