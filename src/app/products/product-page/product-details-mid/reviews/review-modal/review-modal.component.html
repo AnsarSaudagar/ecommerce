@@ -1,9 +1,54 @@
 <div id="myModal" class="modal">
     <div class="modal-content">
-        <div class="modal-top flex justify-between">
+        <div class="modal-top flex justify-between items-center">
             <p class="font-bold text-sm">Rate Us</p>
             <mat-icon aria-hidden="false" aria-label="Example close icon" fontIcon="close" (click)="onClickCross()"
                 class="cursor-pointer"></mat-icon>
         </div>
+        <div class="w-full h-16 border rounded mt-6">
+
+        </div>
+        <hr style="margin:1.5rem -20px">
+        <form>
+            <div>
+                <p class="text-[#696969] font-semibold text-sm">Quality</p>
+                <div>
+                    <svg viewBox="0 0 12.166 11.777" class="r--rate-star"
+                        style="height: 20px; margin-right: 4px; fill: rgb(253, 188, 0);">
+                        <path
+                            d="M6.7.341,8.074,3.168a.627.627,0,0,0,.483.36l3.074.463a.659.659,0,0,1,.356,1.131L9.776,7.305A.626.626,0,0,0,9.6,7.9l.533,3.084a.65.65,0,0,1-.94.694L6.448,10.209a.641.641,0,0,0-.61,0L3.069,11.674a.646.646,0,0,1-.94-.694L2.662,7.9a.721.721,0,0,0-.178-.591L.224,5.121A.666.666,0,0,1,.579,3.99l3.074-.463a.59.59,0,0,0,.483-.36L5.508.341A.67.67,0,0,1,6.7.341Z"
+                            class="animate-if colorStarForm" fill="#e6e6e6"></path>
+                        <path d="M0,0H24V24H0Z" class="animate-if" style="fill: none;"></path>
+                    </svg>
+                </div>
+            </div>
+            <label class="block text-[#696969] font-semibold text-sm mt-6" for="name-input">
+                Your Name*
+            </label>
+            <input
+                class="mt-3 w-full border border-[#bfbfbf] h-8 rounded-[3px] focus:outline-none indent-2 text-[13px] placeholder:text-[13px]"
+                placeholder="John Smith" id="name-input" type="text" name="name">
+            <label class="block text-[#696969] font-semibold text-sm mt-4" for="email-input">
+                Your Email*
+            </label>
+            <input
+                class="mt-3 w-full border border-[#bfbfbf] h-8 rounded-[3px] focus:outline-none indent-2 text-[13px] placeholder:text-[13px]"
+                placeholder="example@yourdomain.com" id="email-input" type="text" name="email">
+            <label class="block text-[#696969] font-semibold text-sm mt-4" for="title-input">
+                Review Title
+            </label>
+            <input
+                class="mt-3 w-full border border-[#bfbfbf] h-8 rounded-[3px] focus:outline-none indent-2 text-[13px] placeholder:text-[13px]"
+                placeholder="Look Great" id="title-input" type="text" name="title">
+            <label class="block text-[#696969] font-semibold text-sm mt-4" for="content-input">
+                Review Content
+            </label>
+            <textarea rows="5" placeholder="Write Something" name="content-input" id="content-input"
+                class="mt-3 w-full border border-[#bfbfbf] rounded-[3px] focus:outline-none indent-2 text-[13px] placeholder:text-[13px] pt-2 focus:border resize-none"></textarea>
+            <div class="flex justify-end ">
+                <button class="mt-3 text-white  bg-[#ffb102] font-bold text-sm py-2 px-3 rounded-[3px] ">Submit Your
+                    Review</button>
+            </div>
+        </form>
     </div>
 </div>

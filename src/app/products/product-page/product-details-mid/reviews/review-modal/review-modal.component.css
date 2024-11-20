@@ -14,10 +14,10 @@
     /* position: fixed; */
   background-color: #fefefe;
   margin: 5% auto;
-  padding: 20px;
+  padding: 30px 20px;
   border: 1px solid #888;
   width: 30%;
-  max-height: 80vh;
+  max-height: 85vh;
   overflow: auto;
 }
 
