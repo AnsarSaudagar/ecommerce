@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
-import { MatDialogModule } from '@angular/material/dialog';
 import { UserDataService } from 'src/app/auth-old/user-data.service';
 import { AuthService } from 'src/app/auth-old/auth.service';
 import { ModalService } from './modal.service';
