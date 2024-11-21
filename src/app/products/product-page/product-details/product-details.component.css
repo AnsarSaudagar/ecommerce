@@ -2,8 +2,6 @@
   transition: opacity 1s ease-out;
 }
 
-
-
 .check:hover {
   border-color: red;
 

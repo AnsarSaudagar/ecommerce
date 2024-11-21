@@ -7,6 +7,7 @@ import { DataService, ProductDetails } from 'src/app/data.service';
 import { ProductModel } from 'src/app/models/product.model';
 import { CartSharedDataService } from 'src/app/services/cart-shared-data.service';
 import { CartsService } from 'src/app/services/carts.service';
+import { ProductReviewService } from 'src/app/services/product-review.service';
 import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
@@ -15,6 +16,11 @@ import { ProductsService } from 'src/app/services/products.service';
   styleUrls: ['./product-details.component.css'],
 })
 export class ProductDetailsComponent {
+  reviewData!: {
+    rating_count: number;
+    average_rating: number;
+  };
+
   constructor(
     private dataService: DataService,
     private route: ActivatedRoute,
@@ -23,8 +29,15 @@ export class ProductDetailsComponent {
     // New product service
     private productsService: ProductsService,
     private cartService: CartsService,
-    private cartSharedService: CartSharedDataService
-  ) {}
+    private cartSharedService: CartSharedDataService,
+    private productReviewService: ProductReviewService
+  ) {
+    this.route.params.subscribe({
+      next: (params) => {
+        this.productId = +params.product_id;
+      },
+    });
+  }
 
   productId!: number;
   productArr: ProductDetails[];
@@ -81,11 +94,11 @@ export class ProductDetailsComponent {
 
   // New code
 
-  productData: ProductModel ={
+  productData: ProductModel = {
     id: 0,
     name: '',
     price: 0,
-    category_id: 0
+    category_id: 0,
   };
 
   ngOnInit(): void {
@@ -119,6 +132,14 @@ export class ProductDetailsComponent {
     // New code
 
     this.getProductData();
+
+    this.productReviewService.countAvgReview$.subscribe({
+      next: (reviewData : any) => {
+        this.reviewData = reviewData;
+      },
+    });
+
+    this.productReviewService.getAvgRatingAndCount(this.productId);
   }
 
   onClickHeart() {
@@ -152,13 +173,13 @@ export class ProductDetailsComponent {
   }
 
   onClickAddCart() {
-    this.cartService.createOrUpdateCart(this.productData.id, this.productCount).subscribe(
-      {
-        complete: ()=>{
+    this.cartService
+      .createOrUpdateCart(this.productData.id, this.productCount)
+      .subscribe({
+        complete: () => {
           this.cartSharedService.sendData(this.productCount);
-        }
-      }
-    )
+        },
+      });
   }
 
   // New backend codes integration
@@ -167,8 +188,10 @@ export class ProductDetailsComponent {
   getProductData() {
     this.route.paramMap
       .pipe(
-        switchMap((params) => this.productsService.getProduct(+params.get("product_id"))),
-        tap((product: ProductModel) => (this.productData = product)) 
+        switchMap((params) =>
+          this.productsService.getProduct(+params.get('product_id'))
+        ),
+        tap((product: ProductModel) => (this.productData = product))
       )
       .subscribe();
   }

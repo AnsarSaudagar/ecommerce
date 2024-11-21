@@ -10,7 +10,9 @@ export class ProductReviewService {
 
   private reviewSubject = new BehaviorSubject<ProductReview[]>([]);
   public reviews$ = this.reviewSubject.asObservable();
-
+  
+  private reviewCountAvgSubject = new BehaviorSubject<any>({});
+  public countAvgReview$ = this.reviewCountAvgSubject.asObservable();
   constructor(
     private http: HttpClient,
     @Inject('API_BASE_NODE_URL') private apiNodeUrl: string
@@ -26,7 +28,18 @@ export class ProductReviewService {
     ).subscribe();
   }
 
+  getAvgRatingAndCount(product_id: number){
+    return this.http.get(this.apiNodeUrl + "product-review/count-avg/" + product_id).pipe(
+      tap(reviewData => this.reviewCountAvgSubject.next(reviewData)),
+      catchError((error) => {
+        console.error('Error fetching data', error);
+        throw error;
+      })
+    ).subscribe();
+  }
+
   submitNewReview(review_details: ProductReview){
     return this.http.post(this.apiNodeUrl + 'product-review/add', review_details);
   }
+
 }
