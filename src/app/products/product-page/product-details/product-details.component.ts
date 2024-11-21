@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { map, switchMap, tap } from 'rxjs';
@@ -32,6 +32,7 @@ export class ProductDetailsComponent {
     private cartSharedService: CartSharedDataService,
     private productReviewService: ProductReviewService
   ) {
+
     this.route.params.subscribe({
       next: (params) => {
         this.productId = +params.product_id;
@@ -134,7 +135,7 @@ export class ProductDetailsComponent {
     this.getProductData();
 
     this.productReviewService.countAvgReview$.subscribe({
-      next: (reviewData : any) => {
+      next: (reviewData: any) => {
         this.reviewData = reviewData;
       },
     });
@@ -194,5 +195,13 @@ export class ProductDetailsComponent {
         tap((product: ProductModel) => (this.productData = product))
       )
       .subscribe();
+  }
+
+  onClickReviews() {
+    const element = document.querySelector('#midSection');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    this.productReviewService.showReviewSubject.next(true)
   }
 }

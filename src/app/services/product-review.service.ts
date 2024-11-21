@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { ProductReview } from '../models/product_review.model';
-import { BehaviorSubject, catchError, tap } from 'rxjs';
+import { BehaviorSubject, catchError, Subject, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +11,11 @@ export class ProductReviewService {
   private reviewSubject = new BehaviorSubject<ProductReview[]>([]);
   public reviews$ = this.reviewSubject.asObservable();
   
-  private reviewCountAvgSubject = new BehaviorSubject<any>({});
+  public reviewCountAvgSubject = new BehaviorSubject<any>({});
   public countAvgReview$ = this.reviewCountAvgSubject.asObservable();
+
+  public showReviewSubject = new Subject();
+
   constructor(
     private http: HttpClient,
     @Inject('API_BASE_NODE_URL') private apiNodeUrl: string
