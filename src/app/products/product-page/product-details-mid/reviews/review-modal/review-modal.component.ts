@@ -63,6 +63,7 @@ export class ReviewModalComponent {
           this.isSubmitted = false;
           this.onClickCross();
           this.productReviewService.getProductReviews(this.product_id);
+          this.productReviewService.getAvgRatingAndCount(this.product_id);
         },
       });
       
