@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ProductModel } from 'src/app/models/product.model';
 import { ProductCategoryModel } from 'src/app/models/product_category.model';
 import { ProductCategoryService } from 'src/app/services/product-category.service';
@@ -12,7 +13,8 @@ import { ProductsService } from 'src/app/services/products.service';
 export class AdminAllProductsComponent implements OnInit {
   constructor(
     private productService: ProductsService,
-    private categoryService: ProductCategoryService
+    private categoryService: ProductCategoryService,
+    private router: Router
   ) {}
 
   allProducts: ProductModel[];
@@ -32,5 +34,9 @@ export class AdminAllProductsComponent implements OnInit {
         })
       },
     });
+  }
+
+  onClickName(product_id :number){
+    this.router.navigate(['/admin/products/' + product_id])
   }
 }

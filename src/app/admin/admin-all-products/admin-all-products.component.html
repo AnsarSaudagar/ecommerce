@@ -15,8 +15,8 @@
         <tbody>
             @for (product of allProducts; track $index) {
             <tr class="hover:bg-gray-100">
-                <td class="border border-gray-300 px-4 py-2">{{product.id}}</td>
-                <td class="border border-gray-300 px-4 py-2">{{product.name}}</td>
+                <td class="border border-gray-300 px-4 py-2" >{{product.id}}</td>
+                <td class="border border-gray-300 px-4 py-2" (click)="onClickName(product.id)" >{{product.name}}</td>
                 <td class="border border-gray-300 px-4 py-2">{{product.price | currency}}</td>
                 <td class="border border-gray-300 px-4 py-2">{{product.description}}</td>
                 <td class="border border-gray-300 px-4 py-2">{{allCategories[product.category_id]}}</td>

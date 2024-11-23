@@ -57,6 +57,9 @@ import { StarRatingViewComponent } from './star-rating-view/star-rating-view.com
 import { TimeAgoPipe } from './time-ago.pipe';
 import { AdminComponent } from './admin/admin.component';
 import { AdminAllProductsComponent } from './admin/admin-all-products/admin-all-products.component';
+import { AdminProductFormComponent } from './admin/admin-product-form/admin-product-form.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 
 const appRoutes = [
@@ -104,6 +107,10 @@ const appRoutes = [
         path: 'products',
         component: AdminAllProductsComponent,
       },
+      {
+        path:'products/:id',
+        component: AdminProductFormComponent
+      }
     ],
   },
 ];
@@ -155,7 +162,8 @@ const appRoutes = [
     StarRatingViewComponent,
     TimeAgoPipe,
     AdminComponent,
-    AdminAllProductsComponent
+    AdminAllProductsComponent,
+    AdminProductFormComponent
   ],
   imports: [
     BrowserModule,
@@ -167,7 +175,9 @@ const appRoutes = [
     NgxPaginationModule,
     BrowserAnimationsModule,
     CommonModule,
-    MatIconModule
+    MatIconModule,
+    MatFormFieldModule,
+    MatSelectModule
 ],
   providers: [
     {
