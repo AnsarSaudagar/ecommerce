@@ -14,20 +14,22 @@ export class ProductsService {
   ) {}
 
   /**
-   * 
+   *
    * @returns An observable with all the products
    */
   getAllProducts(): Observable<ProductModel[]> {
-    return this.http.get<ProductModel[]>(this.apiNodeUrl + "products");
+    return this.http.get<ProductModel[]>(this.apiNodeUrl + 'products');
   }
 
   /**
-   * 
-   * @param id 
+   *
+   * @param id
    * @returns An observable with a single product data stored
    */
   getProduct(id: number): Observable<ProductModel> {
-    return this.http.get<ProductModel>(this.apiNodeUrl + 'products/get-product/' + id);
+    return this.http.get<ProductModel>(
+      this.apiNodeUrl + 'products/get-product/' + id
+    );
   }
 
   /**
@@ -38,13 +40,23 @@ export class ProductsService {
    * @summary  added an extra property of carts for showing it as default value while adding to cart
    */
   getProductsByCategory(category_id: number): Observable<ProductModel[]> {
-    return this.http.get<ProductModel[]>(this.apiNodeUrl + 'products/' + category_id).pipe(
-      map((products: ProductModel[]) =>
-        products.map((product: ProductModel) => ({
-          ...product,
-          cart: 1,
-        }))
-      )
+    return this.http
+      .get<ProductModel[]>(this.apiNodeUrl + 'products/' + category_id)
+      .pipe(
+        map((products: ProductModel[]) =>
+          products.map((product: ProductModel) => ({
+            ...product,
+            cart: 1,
+          }))
+        )
+      );
+  }
+
+  updateProduct(product_details: any) {
+  
+    return this.http.patch(
+      this.apiNodeUrl + 'products/update',
+      product_details,
     );
   }
 }
