@@ -55,12 +55,16 @@ import { MatIconModule } from '@angular/material/icon';
 import { StarRatingComponent } from './star-rating/star-rating.component';
 import { StarRatingViewComponent } from './star-rating-view/star-rating-view.component';
 import { TimeAgoPipe } from './time-ago.pipe';
+import { AdminComponent } from './admin/admin.component';
+import { AdminAllProductsComponent } from './admin/admin-all-products/admin-all-products.component';
 
 
 const appRoutes = [
   { path: '', component: HomeComponent },
   {
-    path: 'account', component: AccountComponent, children: [
+    path: 'account',
+    component: AccountComponent,
+    children: [
       { path: 'login', component: LoginComponent },
       { path: 'signup', component: SignupComponent },
       {
@@ -69,26 +73,40 @@ const appRoutes = [
         children: [
           { path: 'dashboard', component: DashboardComponent },
           { path: 'adress', component: AdressComponent },
-          { path: '', component: DashboardComponent }
-        ]
-      }
-    ]
+          { path: '', component: DashboardComponent },
+        ],
+      },
+    ],
   },
   {
-    path: 'collections', component: CollectionsComponent
+    path: 'collections',
+    component: CollectionsComponent,
   },
   { path: 'wishlist', component: WishlistComponent },
   { path: 'cart', component: CartComponent },
   {
-    path: 'collections/:category_id', component: ProductsComponent
+    path: 'collections/:category_id',
+    component: ProductsComponent,
   },
   {
-    path: 'products/:product_id', component: ProductPageComponent
+    path: 'products/:product_id',
+    component: ProductPageComponent,
   },
   {
-    path: 'product-form', component: ProductFormComponent
-  }
-]
+    path: 'product-form',
+    component: ProductFormComponent,
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
+    children: [
+      {
+        path: 'products',
+        component: AdminAllProductsComponent,
+      },
+    ],
+  },
+];
 
 @NgModule({
   declarations: [
@@ -135,7 +153,9 @@ const appRoutes = [
     ReviewModalComponent,
     StarRatingComponent,
     StarRatingViewComponent,
-    TimeAgoPipe
+    TimeAgoPipe,
+    AdminComponent,
+    AdminAllProductsComponent
   ],
   imports: [
     BrowserModule,
