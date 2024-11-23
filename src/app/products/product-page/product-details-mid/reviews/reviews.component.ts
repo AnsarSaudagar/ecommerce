@@ -33,15 +33,15 @@ export class ReviewsComponent implements OnInit {
         this.productReviews = reviews;
         this.count = reviews.length;
         let sum = 0;
-        this.productReviews.forEach(review => {
+        this.productReviews.forEach((review) => {
           sum += review.rating;
-        })
+        });
 
-        this.average = +(sum /this.count).toFixed(1);
+        this.average = +(sum / this.count).toFixed(1);
       },
     });
 
-    this.productReviewsService.getProductReviews(this.product_id)
+    this.productReviewsService.getProductReviews(this.product_id);
   }
 
   onClickWriteReview() {
@@ -50,5 +50,13 @@ export class ReviewsComponent implements OnInit {
 
   hideReviewModal(modalStatus: boolean) {
     this.showReviewModal = modalStatus;
+  }
+
+  onClickReviewAction(review_id: number, action: string) {
+    this.productReviewsService.likeDislikeReview(review_id, action).subscribe({
+      next: (data) => {
+        this.productReviewsService.getProductReviews(this.product_id);
+      },
+    });
   }
 }

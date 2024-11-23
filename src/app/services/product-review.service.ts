@@ -45,4 +45,8 @@ export class ProductReviewService {
     return this.http.post(this.apiNodeUrl + 'product-review/add', review_details);
   }
 
+  likeDislikeReview(review_id : number, action: string){
+    return this.http.post(`${this.apiNodeUrl}product-review/${action}/${review_id}` , {});
+  }
+
 }
