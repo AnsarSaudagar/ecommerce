@@ -5,7 +5,7 @@ import { CartSharedDataService } from '../services/cart-shared-data.service';
 
 @Component({
   selector: 'app-cart',
-  templateUrl: './cart.component.html',
+  templateUrl: './cart-new.component.html',
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {

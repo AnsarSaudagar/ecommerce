@@ -28,3 +28,9 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   /* font-family: Arial, "Helvetica Neue", sans-serif; */
 }
+
+.center-align{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
