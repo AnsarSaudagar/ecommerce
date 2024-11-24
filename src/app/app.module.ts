@@ -60,7 +60,7 @@ import { AdminAllProductsComponent } from './admin/admin-all-products/admin-all-
 import { AdminProductFormComponent } from './admin/admin-product-form/admin-product-form.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-
+import { ToastrModule } from 'ngx-toastr';  
 
 const appRoutes = [
   { path: '', component: HomeComponent },
@@ -177,7 +177,8 @@ const appRoutes = [
     CommonModule,
     MatIconModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    ToastrModule.forRoot()  
 ],
   providers: [
     {

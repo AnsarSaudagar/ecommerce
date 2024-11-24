@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
+import { ToastrService } from 'ngx-toastr';
 import { Observable, Subject, map } from 'rxjs';
 import { AuthResponseData, AuthService } from 'src/app/auth-old/auth.service';
 import { UserDataService } from 'src/app/auth-old/user-data.service';
@@ -25,7 +26,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private userDataService: UserDataService,
-    private authenticationService: AuthenticationService) { }
+    private authenticationService: AuthenticationService, private toastr: ToastrService) { }
   faError = faExclamationCircle
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -45,6 +46,7 @@ export class LoginComponent implements OnInit {
     authObs.subscribe(resData => {
       console.log(resData);
       this.router.navigate(['/'])
+      this.toastr.success("Hello, I'm the toastr message.")  
       this.authService.loginEmit.next(true);
     }, (error) => {
       console.log(error);
