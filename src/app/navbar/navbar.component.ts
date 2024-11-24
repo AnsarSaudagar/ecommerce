@@ -37,8 +37,8 @@ export class NavbarComponent {
 
   checkLogin() : boolean {
     this.userData = localStorage.getItem('userData');
-    // this.loginCheck = this.userData ? true : false;
-    return true;
+    this.loginCheck = this.userData ? true : false;
+    return this.userData;
   }
 
   ngDoCheck(): void {
@@ -52,18 +52,6 @@ export class NavbarComponent {
       
       this.getCartCount();
     }
-    
-    // this.checkLogin();
-    // this.authService.loginEmit.subscribe((data) => {
-
-    //   if(this.checkLogin()){
-    //     console.log("logged");
-        
-    //     this.getCartCount();
-    //   }
-    // });
-
-
   }
 
   onClickUser() {
@@ -104,16 +92,12 @@ export class NavbarComponent {
   getCartCount() {
     const user_id = this.authenticationService.loggedData?.id;
 
-    this.cartsService.getCartCount(+user_id).subscribe((data: any) => {
-      this.cartCount = +data.count;
+    this.cartsService.cartCountSubject.subscribe({
+      next: (count : number) => {
+        this.cartCount = count;
+      }
+    })
 
-      this.cartSharedDataService.cartSubject.subscribe((d) => {
-        if (d === 0) {
-          this.cartCount = 0;
-          return;
-        }
-        this.cartCount += +d;
-      });
-    });
+    this.cartsService.getCartCount(+user_id);
   }
 }

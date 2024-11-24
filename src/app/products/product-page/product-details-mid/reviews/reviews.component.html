@@ -1,6 +1,55 @@
-<div>
-    <div>
-        <h2>4.7</h2>
-    </div>
-    <div></div>
+@if (showReviewModal) {
+<app-review-modal (crossEmitter)="hideReviewModal($event)"></app-review-modal>
+}
+
+@if (productReviews?.length === 0) {
+<div class="text-sm text-center text-[#878787] mt-16">
+    <p class="traking-normal">There are no reviews.</p>
+    <p class="mt-4 traking-normal">Be the first to <span class="text-[#fdbc00] hover:cursor-pointer"
+            (click)="onClickWriteReview()">Write a review</span></p>
 </div>
+}
+
+@if (productReviews?.length !== 0) {
+<div class="w-[80%] m-auto mt-10 pb-8">
+    <div class="w-fit">
+        <p class="text-center text-4xl font-bold text-[#878787]">{{average}}</p>
+        <app-star-rating-view [rating]="average" starSize="20px"></app-star-rating-view>
+        <p class="text-[#878787] text-sm text-center mt-4">{{count}} reviews</p>
+        <button class="mt-3 text-white bg-[#ffb102] text-sm py-2 px-3 rounded-[3px] "
+            (click)="onClickWriteReview()">Write a
+            Review</button>
+    </div>
+    <div class="all-reviews mt-8">
+        @for (review of productReviews; track $index) {
+        <div class="review mt-5">
+            <div class="logo-div flex items-center gap-2">
+                <div class="logo text-sm rounded-full h-7 w-7 text-white bg-[#e8c23f] flex items-center justify-center">
+                    {{review.name[0] | uppercase}}</div>
+                <div class="name text-sm font-bold">{{review.name}}</div>
+            </div>
+            <div class="mt-5 flex items-center">
+                <app-star-rating-view [rating]="review.rating" starSize="12px"></app-star-rating-view>
+                <mat-icon class="text-[#66c345] text-base ml-2" fontIcon="check_circle"></mat-icon>
+                <p class="text-xs text-[#878787]">{{review.created_at | timeAgo}}</p>
+            </div>
+            <p class="mt-3 text-base font-bold text-[#878787]">{{review.title}}</p>
+            <p class="mt-3 text-sm  text-[#878787]">{{review.content}}</p>
+            <div class="mt-3 flex gap-2">
+                <p class="text-sm  text-[#878787]">Is this helpful?</p>
+                <div class=" text-[#878787] flex">
+                    <mat-icon class="text-sm cursor-pointer" fontIcon="thumb_up"
+                        (click)="onClickReviewAction(review.id, 'like')"></mat-icon>
+                    <p class="text-sm">{{review.like_count}}</p>
+                </div>
+                <div class=" text-[#878787] flex ml-2">
+                    <mat-icon class="text-sm cursor-pointer" fontIcon="thumb_down"
+                        (click)="onClickReviewAction(review.id, 'dislike')"></mat-icon>
+                    <p class="text-sm">{{review.dislike_count}}</p>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>
+}

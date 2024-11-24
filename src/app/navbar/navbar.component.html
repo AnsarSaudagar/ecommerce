@@ -66,7 +66,9 @@
 
             </li>
             <li class="text-[18px] cursor-pointer hover:text-[#56cfe1] relative">
-                <app-icon-badge [count]="cartCount"></app-icon-badge>
+                @if(checkLogin()){
+                    <app-icon-badge [count]="cartCount"></app-icon-badge>
+                }
                 <div class="hover:scale-[1.15]  transition-all">
                     <fa-icon [icon]="faCart" (click)="onClickCart()" class="text-[21px]"></fa-icon>
                 </div>

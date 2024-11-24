@@ -1,0 +1,36 @@
+<div class="m-10">
+    <table class="min-w-full border-collapse border border-gray-300 ">
+        <thead>
+            <tr class="bg-gray-200">
+                <th class="border border-gray-300 px-4 py-2 text-left">ID</th>
+                <th class="border border-gray-300 px-4 py-2 text-left">Name</th>
+                <th class="border border-gray-300 px-4 py-2 text-left">Price</th>
+                <th class="border border-gray-300 px-4 py-2 text-left">Description</th>
+                <th class="border border-gray-300 px-4 py-2 text-left">Category ID</th>
+                <th class="border border-gray-300 px-4 py-2 text-left">Image</th>
+                <th class="border border-gray-300 px-4 py-2 text-left">Created At</th>
+                <th class="border border-gray-300 px-4 py-2 text-left">Updated At</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (product of allProducts; track $index) {
+            <tr class="hover:bg-gray-100">
+                <td class="border border-gray-300 px-4 py-2">{{product.id}}</td>
+                <td class="border border-gray-300 px-4 py-2" (click)="onClickName(product.id)">{{product.name}}</td>
+                <td class="border border-gray-300 px-4 py-2">{{product.price | currency}}</td>
+                <td class="border border-gray-300 px-4 py-2">{{product.description}}</td>
+                <td class="border border-gray-300 px-4 py-2">{{allCategories[product.category_id]}}</td>
+                <td class="border border-gray-300 px-4 py-2">
+                    @if (product.image) {
+                    <a target="_blank" [href]="awsProductUrl + '/products/product_' + product.id + '/' + product.image"
+                        class="text-blue-500 underline">Image Link</a>
+                    }
+
+                </td>
+                <td class="border border-gray-300 px-4 py-2">{{product.created_at | date}}</td>
+                <td class="border border-gray-300 px-4 py-2">{{product.updated_at | date}}</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

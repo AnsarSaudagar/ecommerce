@@ -47,12 +47,27 @@ import { WishlistComponent } from './wishlist/wishlist.component';
 import { CartComponent } from './cart/cart.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { environment } from 'src/environments/environment.development';
-
+import { CommonModule } from '@angular/common';
+import { AddressFormComponent } from "./account/myaccount/adress/address-form/address-form.component";
+import { ProductFormComponent } from './product-form/product-form.component';
+import { ReviewModalComponent } from './products/product-page/product-details-mid/reviews/review-modal/review-modal.component';
+import { MatIconModule } from '@angular/material/icon';
+import { StarRatingComponent } from './star-rating/star-rating.component';
+import { StarRatingViewComponent } from './star-rating-view/star-rating-view.component';
+import { TimeAgoPipe } from './time-ago.pipe';
+import { AdminComponent } from './admin/admin.component';
+import { AdminAllProductsComponent } from './admin/admin-all-products/admin-all-products.component';
+import { AdminProductFormComponent } from './admin/admin-product-form/admin-product-form.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { ToastrModule } from 'ngx-toastr';  
 
 const appRoutes = [
   { path: '', component: HomeComponent },
   {
-    path: 'account', component: AccountComponent, children: [
+    path: 'account',
+    component: AccountComponent,
+    children: [
       { path: 'login', component: LoginComponent },
       { path: 'signup', component: SignupComponent },
       {
@@ -61,23 +76,44 @@ const appRoutes = [
         children: [
           { path: 'dashboard', component: DashboardComponent },
           { path: 'adress', component: AdressComponent },
-          { path: '', component: DashboardComponent }
-        ]
-      }
-    ]
+          { path: '', component: DashboardComponent },
+        ],
+      },
+    ],
   },
   {
-    path: 'collections', component: CollectionsComponent
+    path: 'collections',
+    component: CollectionsComponent,
   },
   { path: 'wishlist', component: WishlistComponent },
   { path: 'cart', component: CartComponent },
   {
-    path: 'collections/:category_id', component: ProductsComponent
+    path: 'collections/:category_id',
+    component: ProductsComponent,
   },
   {
-    path: 'products/:product_id', component: ProductPageComponent
-  }
-]
+    path: 'products/:product_id',
+    component: ProductPageComponent,
+  },
+  {
+    path: 'product-form',
+    component: ProductFormComponent,
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
+    children: [
+      {
+        path: 'products',
+        component: AdminAllProductsComponent,
+      },
+      {
+        path:'products/:id',
+        component: AdminProductFormComponent
+      }
+    ],
+  },
+];
 
 @NgModule({
   declarations: [
@@ -119,6 +155,15 @@ const appRoutes = [
     WishlistComponent,
     CartComponent,
     SpinnerComponent,
+    AddressFormComponent,
+    ProductFormComponent,
+    ReviewModalComponent,
+    StarRatingComponent,
+    StarRatingViewComponent,
+    TimeAgoPipe,
+    AdminComponent,
+    AdminAllProductsComponent,
+    AdminProductFormComponent
   ],
   imports: [
     BrowserModule,
@@ -128,8 +173,13 @@ const appRoutes = [
     ReactiveFormsModule,
     HttpClientModule,
     NgxPaginationModule,
-    BrowserAnimationsModule
-  ],
+    BrowserAnimationsModule,
+    CommonModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    ToastrModule.forRoot()  
+],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
@@ -143,6 +193,10 @@ const appRoutes = [
     {
       provide: 'API_BASE_NODE_URL',
       useValue: environment.backendNodeUrl
+    },
+    {
+      provide: "S3_BUCKET_URL",
+      useValue: environment.aws_s3_bucket_url
     }
   ],
   bootstrap: [AppComponent]

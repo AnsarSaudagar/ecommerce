@@ -1,0 +1,57 @@
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-top flex justify-between items-center">
+            <p class="font-bold text-sm">Rate Us</p>
+            <mat-icon aria-hidden="false" aria-label="Example close icon" fontIcon="close" (click)="onClickCross()"
+                class="cursor-pointer"></mat-icon>
+        </div>
+        <!-- <div class="w-full h-16 border rounded mt-6">
+
+        </div> -->
+        <!-- <hr style="margin:1.5rem -20px"> -->
+        <form [formGroup]="reviewForm" (ngSubmit)="onSubmitReview()">
+            @if (!reviewForm.valid &&
+            isSubmitted ) {
+            <p class="text-sm text-[#db2020] flex items-center">
+                <mat-icon class="text-base" aria-hidden="false" aria-label="Example warning icon" fontIcon="warning"></mat-icon>
+                Please enter required fields
+            </p>
+            }
+            <div class="flex gap-3 mt-4" >
+                <p class="text-[#696969] font-semibold text-sm">Quality</p>
+                <app-star-rating formControlName="rating" [rating]="reviewForm.value.rating"
+                    (ratingChange)="reviewForm.patchValue({ rating: $event })"></app-star-rating>
+            </div>
+            <label class="block text-[#696969] font-semibold text-sm mt-6" for="name-input">
+                Your Name*
+            </label>
+            <input
+                class="mt-3 w-full border border-[#bfbfbf] h-8 rounded-[3px] focus:outline-none indent-2 text-[13px] placeholder:text-[13px]"
+                placeholder="John Smith" id="name-input" type="text" formControlName="name"
+                [ngClass]="getValidationCondition('name')">
+            <label class="block text-[#696969] font-semibold text-sm mt-4" for="email-input">
+                Your Email*
+            </label>
+            <input
+                class="mt-3 w-full border border-[#bfbfbf] h-8 rounded-[3px] focus:outline-none indent-2 text-[13px] placeholder:text-[13px]"
+                placeholder="example@yourdomain.com" id="email-input" type="text" name="email" formControlName="email"
+                [ngClass]="getValidationCondition('email')">
+            <label class="block text-[#696969] font-semibold text-sm mt-4" for="title-input">
+                Review Title
+            </label>
+            <input
+                class="mt-3 w-full border border-[#bfbfbf] h-8 rounded-[3px] focus:outline-none indent-2 text-[13px] placeholder:text-[13px]"
+                placeholder="Look Great" id="title-input" type="text" formControlName="title">
+            <label class="block text-[#696969] font-semibold text-sm mt-4" for="content-input">
+                Review Content
+            </label>
+            <textarea rows="5" placeholder="Write Something" name="content-input" id="content-input"
+                class="mt-3 w-full border border-[#bfbfbf] rounded-[3px] focus:outline-none indent-2 text-[13px] placeholder:text-[13px] pt-2 focus:border resize-none"
+                formControlName="content"></textarea>
+            <div class="flex justify-end ">
+                <button class="mt-3 text-white  bg-[#ffb102] font-bold text-sm py-2 px-3 rounded-[3px] ">Submit Your
+                    Review</button>
+            </div>
+        </form>
+    </div>
+</div>

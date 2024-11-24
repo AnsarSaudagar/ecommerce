@@ -5,7 +5,7 @@ import { CartSharedDataService } from '../services/cart-shared-data.service';
 
 @Component({
   selector: 'app-cart',
-  templateUrl: './cart.component.html',
+  templateUrl: './cart-new.component.html',
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
@@ -22,11 +22,11 @@ export class CartComponent implements OnInit {
   totalPrice: number = 0;
 
   ngOnInit(): void {
-    const userId = +this.authenticationService.loggedData.id;
+
+    const userId = +JSON.parse(localStorage.getItem("userData"))?.id;
 
     this.cartsService.getActiveCartProducts(userId).subscribe((carts: any) => {
       this.cartProducts = carts;
-      console.log(this.cartProducts);
 
       this.calculateTotalPrice();
     });
@@ -78,7 +78,7 @@ export class CartComponent implements OnInit {
    * Removing the product from the cart list and updating the cart list
    */
   onClickRemoveCart(product_id: number) {
-    const userId = +this.authenticationService.loggedData?.id;
+    const userId = +JSON.parse(localStorage.getItem("userData"))?.id;
 
     this.cartsService.deleteSingleProductCart(userId, product_id).subscribe({
       complete: this.filterProductList(product_id),

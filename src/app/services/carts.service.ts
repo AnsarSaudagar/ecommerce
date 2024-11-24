@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, Subject, tap } from 'rxjs';
 import { CartModel } from '../models/cart.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartsService {
-  // cartCountSubject = new Subject<any>();
+  cartCountSubject = new BehaviorSubject<number>(0);
 
   constructor(
     private http: HttpClient,
@@ -58,7 +58,13 @@ export class CartsService {
   }
 
   getCartCount(user_id: number) {
-    return this.http.get(this.apiNodeUrl + 'cart/count/' + user_id);
+    return this.http.get(this.apiNodeUrl + 'cart/count/' + user_id).pipe(
+      tap(count => this.cartCountSubject.next(count['count'])),
+      catchError((error) => {
+        console.error('Error fetching data', error);
+        throw error;
+      })
+    ).subscribe();
   }
 
   deleteFullUserCart(user_id: number) {

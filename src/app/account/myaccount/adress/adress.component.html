@@ -1,3 +1,22 @@
-<div class="w-[800px] ml-10 border">
-    ansar
+<div class="w-[800px] ml-10 ">
+    <button class="m-auto block h-10 w-52 text-white bg-black text-sm" (click)="onClickNewAddress()">Add a New
+        Address</button>
+    @if (showAddressForm) {
+    <app-address-form (cancelEmitter)="onCancelEmitter()"></app-address-form>
+    }
+    <div class="mt-8">
+        @for (address of addresses; track $index) {
+        <div class="address text-center my-8">
+            @if (address.is_default) {
+                <p class="font-semibold">Default</p>
+            }
+            <p class="text-[#878787] text-sm mt-4">{{address.first_name + " " + address.last_name}}</p>
+            <p class="text-[#878787] text-sm">{{address.address}}</p>
+            <p class="text-[#878787] text-sm">{{address.pincode}} {{address.city}}</p>
+            <p class="text-[#878787] text-sm">{{address.phone_number}}</p>
+            <button type="submit" class=" h-10 w-24 text-white bg-black text-sm mt-4">Edit</button>
+            <button type="button" class=" h-10 w-24 text-black border border-[#ddd] text-sm ml-3">Delete</button>
+        </div>
+        }
+    </div>
 </div>

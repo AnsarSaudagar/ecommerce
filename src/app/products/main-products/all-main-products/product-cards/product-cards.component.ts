@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { AuthenticationService } from 'src/app/auth/authentication.service';
@@ -33,6 +34,7 @@ export class ProductCardsComponent implements OnInit {
   allProducts = [];
 
   cartProductIds: any = [];
+  awsImageUrl : string;
 
   constructor(
     private productsService: ProductsService,
@@ -40,12 +42,16 @@ export class ProductCardsComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService,
     private cartsService: CartsService,
-    private cartSharedDataService: CartSharedDataService
-  ) {}
+    private cartSharedDataService: CartSharedDataService,
+    @Inject('S3_BUCKET_URL') awsUrl: string,
+  ) {
+    this.awsImageUrl = awsUrl;
+  }
 
   ngOnInit(): void {
     this.getProductsCategoryWise();
     this.getCartCategoryWise();
+    
   }
 
   /**
@@ -87,12 +93,14 @@ export class ProductCardsComponent implements OnInit {
       product_id: product_id,
     };
 
-    // Sending data for increasing cart count 
-    this.cartSharedDataService.sendData(1);
-
     // when product is added we are calling the function to handle the add to cart button
     this.cartsService.addProductToCart(cartData).subscribe({
-      complete: () => this.getCartCategoryWise(),
+      complete: () => {
+        this.getCartCategoryWise();
+
+        // Getting the updated cart count for handling the navbar
+        this.cartsService.getCartCount(+user.id);
+      },
     });
   }
 
@@ -109,7 +117,10 @@ export class ProductCardsComponent implements OnInit {
     this.cartSharedDataService.sendData(-1);
 
     this.cartsService.deleteSingleProductCart(user_id, product_id).subscribe({
-      complete: () => this.getCartCategoryWise(),
+      complete: () => {
+        this.getCartCategoryWise();
+        this.cartsService.getCartCount(user_id);
+      },
     });
   }
 
@@ -129,5 +140,14 @@ export class ProductCardsComponent implements OnInit {
       .subscribe((ids: number[]) => {
         this.cartProductIds = ids;
       });
+  }
+
+  onTableDataChange(event: any) {
+    this.page = event;
+    // this.gettingData()
+  }
+
+  getImageUrl(product_id: number, product_image_name: string){
+    return `${this.awsImageUrl}/products/product_${product_id}/${product_image_name}`;
   }
 }
