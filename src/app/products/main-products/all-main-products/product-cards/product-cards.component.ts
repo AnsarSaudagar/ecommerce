@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { AuthenticationService } from 'src/app/auth/authentication.service';
@@ -34,6 +34,7 @@ export class ProductCardsComponent implements OnInit {
   allProducts = [];
 
   cartProductIds: any = [];
+  awsImageUrl : string;
 
   constructor(
     private productsService: ProductsService,
@@ -41,12 +42,16 @@ export class ProductCardsComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService,
     private cartsService: CartsService,
-    private cartSharedDataService: CartSharedDataService
-  ) {}
+    private cartSharedDataService: CartSharedDataService,
+    @Inject('S3_BUCKET_URL') awsUrl: string,
+  ) {
+    this.awsImageUrl = awsUrl;
+  }
 
   ngOnInit(): void {
     this.getProductsCategoryWise();
     this.getCartCategoryWise();
+    
   }
 
   /**
@@ -130,5 +135,14 @@ export class ProductCardsComponent implements OnInit {
       .subscribe((ids: number[]) => {
         this.cartProductIds = ids;
       });
+  }
+
+  onTableDataChange(event: any) {
+    this.page = event;
+    // this.gettingData()
+  }
+
+  getImageUrl(product_id: number, product_image_name: string){
+    return `${this.awsImageUrl}/products/product_${product_id}/${product_image_name}`;
   }
 }

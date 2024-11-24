@@ -92,16 +92,12 @@ export class NavbarComponent {
   getCartCount() {
     const user_id = this.authenticationService.loggedData?.id;
 
-    this.cartsService.getCartCount(+user_id).subscribe((data: any) => {
-      this.cartCount = +data.count;
+    this.cartsService.cartCountSubject.subscribe({
+      next: (count : number) => {
+        this.cartCount = count;
+      }
+    })
 
-      this.cartSharedDataService.cartSubject.subscribe((d) => {
-        if (d === 0) {
-          this.cartCount = 0;
-          return;
-        }
-        this.cartCount += +d;
-      });
-    });
+    this.cartsService.getCartCount(+user_id);
   }
 }

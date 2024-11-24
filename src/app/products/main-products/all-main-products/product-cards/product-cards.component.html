@@ -6,8 +6,9 @@
         totalItems: count
     }; index as i">
         <div class="h-[85%] relative border overflow-hidden">
-            <img src="https://cdn.shopify.com/s/files/1/0616/9480/4174/products/20046729-1-offwhite.jpg?v=1652169256&width=700"
-                alt class="transition duration-500 w-full cursor-pointer hover:scale-125"
+            <img 
+                [src]="getImageUrl(product.id, product.image)"
+                alt class="object-cover transition duration-500 w-full cursor-pointer hover:scale-125"
                 (click)="showProduct(product.id)">
         </div>
         <div class="h-fit">
@@ -40,16 +41,16 @@
             </ng-template>
         </div>
     </div>
-    @if (productArr.length > 0) {
-    <div class="text-center mt-10">
+    @if (true) {
+    <!-- <div class="text-center mt-10">
         <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
         </pagination-controls>
-    </div>
+    </div> -->
     }
     
     @if (productArr.length===0) {
     <div class="mt-10">
-        <p class="text-center">No items in wishlist</p>
+        <p class="text-center">No Products available</p>
     </div>
     }
     
