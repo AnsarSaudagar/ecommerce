@@ -6,6 +6,7 @@ import { User } from './user';
 import { Router } from '@angular/router';
 import { UserModel } from '../models/user.model';
 import { environment } from 'src/environments/environment.development';
+import { ToastrService } from 'ngx-toastr';
 
 export interface AuthResponseData {
   kind: string;
@@ -37,7 +38,8 @@ export class AuthenticationService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    @Inject('API_BASE_NODE_URL') private apiNodeUrl: string
+    @Inject('API_BASE_NODE_URL') private apiNodeUrl: string,
+    private toastr: ToastrService
   ) {
     this.apiNodeUrl += 'auth/';
   }
@@ -65,7 +67,16 @@ export class AuthenticationService {
       )
       .pipe(
         tap(({ user, token }) => {
+          this.toastr.success("Hello, I'm the toastr message.")  
           this.handleAuthentication(user.email, user.id, token, 60*60);
+        }),
+        catchError((error) => {
+          return throwError(
+            () => {
+              // console.log(error.error.message);
+              this.toastr.error(error.error.message) 
+            }
+          );
         })
       );
   }

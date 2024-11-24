@@ -46,10 +46,7 @@ export class LoginComponent implements OnInit {
     authObs.subscribe(resData => {
       console.log(resData);
       this.router.navigate(['/'])
-      this.toastr.success("Hello, I'm the toastr message.")  
       this.authService.loginEmit.next(true);
-    }, (error) => {
-      console.log(error);
     })
   }
   // passType = 'password'
