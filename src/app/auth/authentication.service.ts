@@ -67,7 +67,7 @@ export class AuthenticationService {
       )
       .pipe(
         tap(({ user, token }) => {
-          this.toastr.success("Hello, I'm the toastr message.")  
+          this.toastr.success("You are logged In")  
           this.handleAuthentication(user.email, user.id, token, 60*60);
         }),
         catchError((error) => {

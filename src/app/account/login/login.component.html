@@ -25,12 +25,12 @@
         <input type="email"
             class="border border-[#ddd] w-full h-10 placeholder:font-[300] placeholder:pl-4 placeholder:text-[#878787]"
             placeholder="Email*" [formControlName]="'email'"
-            [ngClass]="{'border-[red]':!loginForm.get('email').valid && loginForm.get('email').touched}" required email>
+            [ngClass]="{'border-[red]':handleInputValidation('email')}" required email>
 
         <input type="{{passType}}"
             class="border border-[#ddd] w-full h-10 placeholder:font-[300] placeholder:pl-4 placeholder:text-[#878787] mt-8"
             placeholder="Password*"
-            [ngClass]="{'border-[red]':!loginForm.get('password').valid && loginForm.get('password').touched}"
+            [ngClass]="{'border-[red]':handleInputValidation('password')}"
             [formControlName]="'password'" required>
         <label for>
             <input type="checkbox" name id (click)="onClick()">

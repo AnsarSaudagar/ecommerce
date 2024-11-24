@@ -11,47 +11,63 @@ import { AuthenticationService } from 'src/app/auth/authentication.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
   error = false;
   loginForm: FormGroup;
-  emails = []
+  emails = [];
   userData!: any;
-  email = ""
-  passType = 'password'
-
+  email = '';
+  passType = 'password';
+  isFormSubmitted: boolean = false;
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private userDataService: UserDataService,
-    private authenticationService: AuthenticationService, private toastr: ToastrService) { }
-  faError = faExclamationCircle
+    private authenticationService: AuthenticationService,
+    private toastr: ToastrService
+  ) {}
+  faError = faExclamationCircle;
   ngOnInit(): void {
     this.loginForm = new FormGroup({
-      'email': new FormControl(null, [Validators.required, Validators.email]),
-      'password': new FormControl(null),
-    })
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      password: new FormControl(null),
+    });
 
-    this.userDataService.getUserEmails().subscribe(data => {
+    this.userDataService.getUserEmails().subscribe((data) => {
       this.emails = data;
-    })
+    });
   }
 
   OnSubmit(form: any) {
-    console.log(this.loginForm.value);
-    let authObs: Observable<any> = this.authenticationService.login(form.value)
+    this.isFormSubmitted = true;
 
-    authObs.subscribe(resData => {
-      console.log(resData);
-      this.router.navigate(['/'])
-      this.authService.loginEmit.next(true);
-    })
+    if (this.loginForm.valid) {
+      let authObs: Observable<any> = this.authenticationService.login(
+        form.value
+      );
+      this.isFormSubmitted = false;
+      authObs.subscribe((resData) => {
+        console.log(resData);
+        this.router.navigate(['/']);
+        this.authService.loginEmit.next(true);
+      });
+    }
   }
   // passType = 'password'
   onClick() {
-    this.passType = this.passType === 'password' ? 'text' : 'password'
+    this.passType = this.passType === 'password' ? 'text' : 'password';
+  }
+
+  handleInputValidation(type: string) {
+    return (
+      (!this.loginForm.get(type).valid && this.loginForm.get(type).touched) ||
+      (!this.loginForm.valid &&
+        this.isFormSubmitted &&
+        !this.loginForm.get(type).valid)
+    );
   }
 
   // invalidEmail(control: FormControl): { [s: string]: boolean } {
@@ -73,7 +89,6 @@ export class LoginComponent implements OnInit {
   //     })
   //   ).subscribe((info: any) => {
   //     console.log(mainData);
-
 
   //   });
   //   if (control.controls['password'].value !== mainData.password) {
