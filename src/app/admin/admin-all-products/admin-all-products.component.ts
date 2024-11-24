@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductModel } from 'src/app/models/product.model';
 import { ProductCategoryModel } from 'src/app/models/product_category.model';
@@ -11,11 +11,18 @@ import { ProductsService } from 'src/app/services/products.service';
   styleUrl: './admin-all-products.component.css',
 })
 export class AdminAllProductsComponent implements OnInit {
+  
+  awsProductUrl :string;
   constructor(
     private productService: ProductsService,
     private categoryService: ProductCategoryService,
-    private router: Router
-  ) {}
+    private router: Router,
+    @Inject('S3_BUCKET_URL') awsUrl: string
+  ) {
+    // console.log(awsUrl);
+    this.awsProductUrl = awsUrl;
+    
+  }
 
   allProducts: ProductModel[];
   allCategories: any = {};
@@ -29,14 +36,14 @@ export class AdminAllProductsComponent implements OnInit {
 
     this.categoryService.getProductCategories().subscribe({
       next: (categories: ProductCategoryModel[]) => {
-        categories.forEach(category => {
+        categories.forEach((category) => {
           this.allCategories[category.id] = category.name;
-        })
+        });
       },
     });
   }
 
-  onClickName(product_id :number){
-    this.router.navigate(['/admin/products/' + product_id])
+  onClickName(product_id: number) {
+    this.router.navigate(['/admin/products/' + product_id]);
   }
 }

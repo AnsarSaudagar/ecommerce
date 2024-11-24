@@ -6,7 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ProductsService } from 'src/app/services/products.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-product-form',
@@ -24,7 +24,8 @@ export class AdminProductFormComponent implements OnInit {
     private fb: FormBuilder,
     private categoryService: ProductCategoryService,
     private productService: ProductsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.productForm = this.fb.group({
       id: [{ value: 1, disabled: true }], // Read-only
@@ -112,6 +113,7 @@ export class AdminProductFormComponent implements OnInit {
     // Send FormData to the backend
     this.productService.updateProduct(formData).subscribe((res) => {
       console.log("done");
+      this.router.navigate(['admin', "products"]);
       
     })
   }
