@@ -93,12 +93,14 @@ export class ProductCardsComponent implements OnInit {
       product_id: product_id,
     };
 
-    // Sending data for increasing cart count 
-    this.cartSharedDataService.sendData(1);
-
     // when product is added we are calling the function to handle the add to cart button
     this.cartsService.addProductToCart(cartData).subscribe({
-      complete: () => this.getCartCategoryWise(),
+      complete: () => {
+        this.getCartCategoryWise();
+
+        // Getting the updated cart count for handling the navbar
+        this.cartsService.getCartCount(+user.id);
+      },
     });
   }
 
@@ -115,7 +117,10 @@ export class ProductCardsComponent implements OnInit {
     this.cartSharedDataService.sendData(-1);
 
     this.cartsService.deleteSingleProductCart(user_id, product_id).subscribe({
-      complete: () => this.getCartCategoryWise(),
+      complete: () => {
+        this.getCartCategoryWise();
+        this.cartsService.getCartCount(user_id);
+      },
     });
   }
 
