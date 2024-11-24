@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { map, switchMap, tap } from 'rxjs';
 import { UserDataService } from 'src/app/auth-old/user-data.service';
@@ -30,7 +30,8 @@ export class ProductDetailsComponent {
     private productsService: ProductsService,
     private cartService: CartsService,
     private cartSharedService: CartSharedDataService,
-    private productReviewService: ProductReviewService
+    private productReviewService: ProductReviewService,
+    private router: Router,
   ) {
 
     this.route.params.subscribe({
@@ -174,11 +175,19 @@ export class ProductDetailsComponent {
   }
 
   onClickAddCart() {
+
+    const user_id = JSON.parse(localStorage.getItem("userData"))?.id;
+
+    if(!user_id){
+      this.router.navigate(['account', 'login']);
+    }
+
     this.cartService
       .createOrUpdateCart(this.productData.id, this.productCount)
       .subscribe({
         complete: () => {
           this.cartSharedService.sendData(this.productCount);
+          this.cartService.getCartCount(user_id)
         },
       });
   }
