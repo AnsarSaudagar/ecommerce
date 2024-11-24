@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from './data.service';
 import { AuthService } from './auth-old/auth.service';
 import { AuthenticationService } from './auth/authentication.service';
+import { initFlowbite } from 'flowbite';
 
 @Component({
   selector: 'app-root',
@@ -18,5 +19,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.authenticationService.autoLogin();
+    initFlowbite();
   }
 }
