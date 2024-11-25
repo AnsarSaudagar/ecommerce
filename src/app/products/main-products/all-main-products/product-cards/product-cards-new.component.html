@@ -1,0 +1,11 @@
+<div class="grid grid-cols-4 gap-8">
+    <div *ngFor="let product of productArr | async" class="card flex flex-col h-[28rem] cursor-pointer"
+        (click)="showProduct(product.id)">
+        <div class="h-[85%] overflow-hidden">
+            <img class="h-full object-cover hover:scale-125 duration-500 hover:opacity-80 transition"
+                [src]="getImageUrl(product.id, product.image)" alt="">
+        </div>
+        <p class="text-sm font-medium mt-2 transition hover:text-[#56cfe1]">{{product.name}}</p>
+        <p class="text-sm text-[#878787] mt-1">{{product.price | currency}}</p>
+    </div>
+</div>

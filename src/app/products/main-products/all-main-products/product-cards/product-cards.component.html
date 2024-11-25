@@ -1,4 +1,3 @@
-
 <div class="two-col-card">
     <div class="main-card h-[270px] border border-[#ddd] justify-between items-center px-5" *ngFor="let product of productArr | async | paginate :{
         itemsPerPage: tableSize,
@@ -6,9 +5,8 @@
         totalItems: count
     }; index as i">
         <div class="h-[85%] relative border overflow-hidden">
-            <img 
-                [src]="getImageUrl(product.id, product.image)"
-                alt class="object-cover transition duration-500 w-full cursor-pointer hover:scale-125"
+            <img [src]="getImageUrl(product.id, product.image)" alt
+                class="object-cover transition duration-500 w-full cursor-pointer hover:scale-125"
                 (click)="showProduct(product.id)">
         </div>
         <div class="h-fit">
@@ -47,11 +45,11 @@
         </pagination-controls>
     </div> -->
     }
-    
+
     @if (productArr.length===0) {
     <div class="mt-10">
         <p class="text-center">No Products available</p>
     </div>
     }
-    
+
 </div>

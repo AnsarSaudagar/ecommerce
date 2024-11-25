@@ -10,7 +10,7 @@ import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
   selector: 'app-product-cards',
-  templateUrl: './product-cards.component.html',
+  templateUrl: './product-cards-new.component.html',
   styleUrls: ['./product-cards.component.css'],
 })
 export class ProductCardsComponent implements OnInit {
@@ -34,7 +34,7 @@ export class ProductCardsComponent implements OnInit {
   allProducts = [];
 
   cartProductIds: any = [];
-  awsImageUrl : string;
+  awsImageUrl: string;
 
   constructor(
     private productsService: ProductsService,
@@ -43,7 +43,7 @@ export class ProductCardsComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private cartsService: CartsService,
     private cartSharedDataService: CartSharedDataService,
-    @Inject('S3_BUCKET_URL') awsUrl: string,
+    @Inject('S3_BUCKET_URL') awsUrl: string
   ) {
     this.awsImageUrl = awsUrl;
   }
@@ -51,7 +51,6 @@ export class ProductCardsComponent implements OnInit {
   ngOnInit(): void {
     this.getProductsCategoryWise();
     this.getCartCategoryWise();
-    
   }
 
   /**
@@ -88,7 +87,7 @@ export class ProductCardsComponent implements OnInit {
     }
 
     const user = this.authenticationService.loggedData;
-    const cartData : CartModel = {
+    const cartData: CartModel = {
       user_id: +user.id,
       product_id: product_id,
     };
@@ -105,15 +104,15 @@ export class ProductCardsComponent implements OnInit {
   }
 
   /**
-   * 
-   * @param product_id 
-   * 
-   * 
+   *
+   * @param product_id
+   *
+   *
    */
   onClickRemoveFromCart(product_id: number) {
     const user_id = +this.authenticationService.loggedData.id;
 
-    // Sending data for decreasing 
+    // Sending data for decreasing
     this.cartSharedDataService.sendData(-1);
 
     this.cartsService.deleteSingleProductCart(user_id, product_id).subscribe({
@@ -147,7 +146,7 @@ export class ProductCardsComponent implements OnInit {
     // this.gettingData()
   }
 
-  getImageUrl(product_id: number, product_image_name: string){
+  getImageUrl(product_id: number, product_image_name: string) {
     return `${this.awsImageUrl}/products/product_${product_id}/${product_image_name}`;
   }
 }
