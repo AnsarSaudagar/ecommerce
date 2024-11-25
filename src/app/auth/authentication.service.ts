@@ -50,10 +50,10 @@ export class AuthenticationService {
     return this.http
       .post<UserModel>(this.apiNodeUrl + 'register', userData)
       .pipe(
+        tap(res => this.toastr.success("Successfully Registered")),
         catchError((error) => {
-          console.error('Registration error:', error);
           return throwError(
-            () => new Error('Registration failed. Please try again.')
+            () => this.toastr.error(error.error.message)
           );
         })
       );
