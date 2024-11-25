@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { map, switchMap, tap } from 'rxjs';
@@ -16,6 +16,8 @@ import { ProductsService } from 'src/app/services/products.service';
   styleUrls: ['./product-details.component.css'],
 })
 export class ProductDetailsComponent {
+  awsImageUrl: string;
+
   reviewData!: {
     rating_count: number;
     average_rating: number;
@@ -32,8 +34,9 @@ export class ProductDetailsComponent {
     private cartSharedService: CartSharedDataService,
     private productReviewService: ProductReviewService,
     private router: Router,
+    @Inject('S3_BUCKET_URL') awsUrl: string
   ) {
-
+    this.awsImageUrl = awsUrl;
     this.route.params.subscribe({
       next: (params) => {
         this.productId = +params.product_id;
@@ -212,5 +215,9 @@ export class ProductDetailsComponent {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
     this.productReviewService.showReviewSubject.next(true)
+  }
+
+  getImageUrl(product_id: number, product_image_name: string) {
+    return `${this.awsImageUrl}/products/product_${product_id}/${product_image_name}`;
   }
 }

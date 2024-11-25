@@ -6,26 +6,29 @@
         </p>
     </div>
     <div class="flex w-[80%] m-auto h-[80vh] justify-between mt-10">
-        <div class="w-[8%] h-full flex flex-col justify-between ">
-            @for (img of imgArr; track $index) {
-            <div class="imgsub" [ngClass]="{'opacity-40':!imgArrStyle[$index]}" class="hover:opacity-100 duration-500"
-                (click)="clickSubImg($index)">
-                <img [src]="img" alt class="h-[120px]">
+        <div>
+            <!-- <div class="w-[8%] h-full flex flex-col justify-between ">
+                @for (img of imgArr; track $index) {
+                <div class="imgsub" [ngClass]="{'opacity-40':!imgArrStyle[$index]}" class="hover:opacity-100 duration-500"
+                    (click)="clickSubImg($index)">
+                    <img [src]="img" alt class="h-[120px]">
+                </div>
+                }
+            </div> -->
+    
+            <div class="h-full w-full">
+                <img [src]="getImageUrl(productData.id, productData.image)" class="object-cover" alt>
             </div>
-            }
-        </div>
-
-        <div class="h-full w-[35%]">
-            <img [src]="mainImg" class="object-cover" alt>
         </div>
 
         <div class="w-[45%] ml-9">
             <p class="font-semibold ">{{productData.name}}</p>
             <div class="flex justify-between" (click)="onClickReviews()">
                 <p class="text-[#696969] text-2xl mt-2">${{productData.price}}</p>
-                <div class="product-rating flex cursor-pointer " >
-                    <app-star-rating-view [rating]="reviewData.average_rating" starSize="15px" ></app-star-rating-view>
-                    <p class=" text-[#878787] text-sm hover:text-[#56cfe1] transition-all" >({{reviewData.rating_count}} reviews)</p>
+                <div class="product-rating flex cursor-pointer ">
+                    <app-star-rating-view [rating]="reviewData.average_rating" starSize="15px"></app-star-rating-view>
+                    <p class=" text-[#878787] text-sm hover:text-[#56cfe1] transition-all">({{reviewData.rating_count}}
+                        reviews)</p>
                 </div>
             </div>
             <p class="text-[#878787] text-sm my-5">
