@@ -9,8 +9,8 @@
     @for (cart of cartProducts; track $index) {
         <div class="flex text-[0.938rem] font-medium border-b border-b-[#ddd] py-8">
             <div class="w-[40%] h-40 flex items-center">
-                <img [src]="'https://demo-kalles-4-1.myshopify.com/cdn/shop/products/14609539-1-grey.jpg?v=1652169191&width=240'"
-                    class="h-full object-cover w-[8rem]" src="" alt="">
+                <img [src]='awsImageUrl + "/products/product_" + cart.product.id +"/" + cart.product.image'
+                    class="h-full object-cover w-[8rem]"  alt="">
                 <div class="ml-4">
                     <p class=" text-[0.938rem] font-semibold">{{cart.product.name}}</p>
                     <mat-icon (click)="onClickRemoveCart(cart.product_id)" class="mt-2 cursor-pointer" fontIcon="delete_forever"></mat-icon>

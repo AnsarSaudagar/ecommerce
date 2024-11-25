@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { AuthenticationService } from '../auth/authentication.service';
 import { CartsService } from '../services/carts.service';
 import { CartSharedDataService } from '../services/cart-shared-data.service';
@@ -9,11 +9,17 @@ import { CartSharedDataService } from '../services/cart-shared-data.service';
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
+
+  awsImageUrl : string;
+
   constructor(
     private authenticationService: AuthenticationService,
     private cartsService: CartsService,
-    private cartSharedDataService: CartSharedDataService
-  ) {}
+    private cartSharedDataService: CartSharedDataService,
+    @Inject('S3_BUCKET_URL') awsUrl: string,
+  ) {
+    this.awsImageUrl = awsUrl;
+  }
 
   cartProducts: any;
   discount: number = 100;
