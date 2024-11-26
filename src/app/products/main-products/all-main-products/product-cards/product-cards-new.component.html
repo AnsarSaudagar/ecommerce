@@ -1,4 +1,4 @@
-<div class="grid grid-cols-4 gap-8">
+<div class="grid lg:grid-cols-4 gap-8">
     <div *ngFor="let product of productArr | async" class="card flex flex-col h-[28rem] cursor-pointer"
         (click)="showProduct(product.id)">
         <div class="h-[85%] overflow-hidden">
