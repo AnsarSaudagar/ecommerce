@@ -6,6 +6,7 @@ import { AdminProductsService } from '../../services/admin-products.service';
 import { AdminCategoriesService } from '../../services/admin-categories.service';
 import { ProductModel } from '../../models/product.model';
 import { ProductCategoryModel } from '../../models/product-category.model';
+import { environment } from 'projects/ecommerce/src/environments/environment.development';
 
 @Component({
   selector: 'app-product-form',
@@ -78,11 +79,11 @@ export class ProductFormComponent implements OnInit {
           name: product.name,
           price: product.price,
           description: product.description,
-          category_id: product.category_id
+          category_id: product.categoryId
         });
         
         if (product.image) {
-          this.imagePreview = product.image;
+          this.imagePreview = `${environment.aws_s3_bucket_url}/products/product_${product.id}/${product.image}`;
         }
         
         this.isLoading = false;
