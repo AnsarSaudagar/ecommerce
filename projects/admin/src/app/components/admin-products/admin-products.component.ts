@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AdminProductsService } from '../../services/admin-products.service';
 import { ProductModel } from '../../models/product.model';
+import { environment } from 'projects/ecommerce/src/environments/environment.development';
 
 @Component({
   selector: 'app-admin-products',
@@ -19,8 +20,10 @@ export class AdminProductsComponent implements OnInit {
   isLoading = false;
   currentPage = 1;
   itemsPerPage = 10;
+  awsUrl = environment.aws_s3_bucket_url;
 
-  constructor(private productsService: AdminProductsService) { }
+  constructor(private productsService: AdminProductsService) { 
+  }
 
   ngOnInit(): void {
     this.loadProducts();
@@ -86,5 +89,9 @@ export class AdminProductsComponent implements OnInit {
       pages.push(i);
     }
     return pages;
+  }
+
+  getImageUrl(product_id : number, img_name : string){
+    return `${this.awsUrl}/products/product_${product_id}/${img_name}`;
   }
 }

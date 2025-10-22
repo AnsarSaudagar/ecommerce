@@ -40,8 +40,10 @@
           <tbody class="bg-white divide-y divide-gray-200">
             <tr *ngFor="let product of paginatedProducts" class="hover:bg-gray-50">
               <td class="px-6 py-4 whitespace-nowrap">
-                <img 
-                  [src]="product.image || '/assets/placeholder-product.png'" 
+                {{product.img}}
+                <img
+                 
+                  [src]="getImageUrl(product.id, product.image) || '/assets/placeholder-product.png'" 
                   [alt]="product.name"
                   class="w-12 h-12 object-cover rounded-lg border border-gray-200">
               </td>
