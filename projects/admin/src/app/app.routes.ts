@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/admin', pathMatch: 'full' },
   { 
     path: 'admin', 
     loadComponent: () => import('./components/admin-dashboard/admin-dashboard.component').then(m => m.AdminDashboardComponent)
   },
+  { path: '', redirectTo: '/admin', pathMatch: 'full' },
   { 
     path: 'admin/products', 
     loadComponent: () => import('./components/admin-products/admin-products.component').then(m => m.AdminProductsComponent)

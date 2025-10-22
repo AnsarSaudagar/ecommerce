@@ -7,5 +7,6 @@ export const environment = {
     // backendUrl: process.env['BACKEND_URL']
     backendUrl: "http://localhost:8000/api/",
     backendNodeUrl: "http://localhost:9000/",
+    backendJavaUrl: "http://localhost:8081/",
     aws_s3_bucket_url: "https://angularecommerce.s3.us-east-1.amazonaws.com"
 };
