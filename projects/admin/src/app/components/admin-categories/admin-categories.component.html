@@ -28,7 +28,7 @@
       <div *ngFor="let category of paginatedCategories" class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden hover:shadow-xl transition-shadow duration-200">
         <div class="w-full h-48 bg-gray-100 overflow-hidden">
           <img 
-            [src]="category.image || '/assets/placeholder-category.png'" 
+            [src]="getImageUrl(category.image) || '/assets/placeholder-category.png'" 
             [alt]="category.name"
             class="w-full h-full object-cover">
         </div>

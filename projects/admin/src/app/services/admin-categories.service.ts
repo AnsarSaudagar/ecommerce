@@ -2,13 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProductCategoryModel } from '../models/product-category.model';
-import { environment } from '../../environments/environment';
+import { environment } from 'projects/ecommerce/src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminCategoriesService {
-  private apiUrl = environment.apiUrl;
+  private apiUrl = environment.backendJavaUrl + "admin";
 
   constructor(private http: HttpClient) {}
 

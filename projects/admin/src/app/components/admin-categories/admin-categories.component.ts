@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AdminCategoriesService } from '../../services/admin-categories.service';
 import { ProductCategoryModel } from '../../models/product-category.model';
+import { environment } from 'projects/ecommerce/src/environments/environment.development';
 
 @Component({
   selector: 'app-admin-categories',
@@ -19,6 +20,7 @@ export class AdminCategoriesComponent implements OnInit {
   isLoading = false;
   currentPage = 1;
   itemsPerPage = 10;
+  awsUrl = environment.aws_s3_bucket_url;
 
   constructor(private categoriesService: AdminCategoriesService) { }
 
@@ -85,5 +87,9 @@ export class AdminCategoriesComponent implements OnInit {
       pages.push(i);
     }
     return pages;
+  }
+
+  getImageUrl(imageName: string){
+    return `${this.awsUrl}/category-images/${imageName}`;
   }
 }
