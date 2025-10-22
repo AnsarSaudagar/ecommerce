@@ -4,6 +4,7 @@ import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { AdminCategoriesService } from '../../services/admin-categories.service';
 import { ProductCategoryModel } from '../../models/product-category.model';
+import { environment } from 'projects/ecommerce/src/environments/environment.development';
 
 @Component({
   selector: 'app-category-form',
@@ -60,7 +61,7 @@ export class CategoryFormComponent implements OnInit {
         });
         
         if (category.image) {
-          this.imagePreview = category.image;
+          this.imagePreview = `${environment.aws_s3_bucket_url}/category-images/${category.image}`;
         }
         
         this.isLoading = false;
