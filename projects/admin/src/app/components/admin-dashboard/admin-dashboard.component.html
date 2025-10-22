@@ -1,0 +1,70 @@
+<div class="p-8 max-w-7xl mx-auto">
+  <div class="mb-8">
+    <h1 class="text-4xl font-bold text-gray-900 mb-2">Admin Dashboard</h1>
+    <p class="text-lg text-gray-600">Welcome to your ecommerce admin panel</p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+    <div class="bg-white rounded-xl p-6 shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-200">
+      <div class="text-3xl mb-4">📦</div>
+      <div class="mb-4">
+        <h3 class="text-3xl font-bold text-gray-900 mb-1">{{ stats.totalProducts }}</h3>
+        <p class="text-gray-600 text-sm">Total Products</p>
+      </div>
+      <a routerLink="/admin/products" class="text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors">
+        Manage Products →
+      </a>
+    </div>
+
+    <div class="bg-white rounded-xl p-6 shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-200">
+      <div class="text-3xl mb-4">👥</div>
+      <div class="mb-4">
+        <h3 class="text-3xl font-bold text-gray-900 mb-1">{{ stats.totalUsers }}</h3>
+        <p class="text-gray-600 text-sm">Total Users</p>
+      </div>
+      <a routerLink="/admin/users" class="text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors">
+        Manage Users →
+      </a>
+    </div>
+
+    <div class="bg-white rounded-xl p-6 shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-200">
+      <div class="text-3xl mb-4">🏷️</div>
+      <div class="mb-4">
+        <h3 class="text-3xl font-bold text-gray-900 mb-1">{{ stats.totalCategories }}</h3>
+        <p class="text-gray-600 text-sm">Categories</p>
+      </div>
+      <a routerLink="/admin/categories" class="text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors">
+        Manage Categories →
+      </a>
+    </div>
+
+    <div class="bg-white rounded-xl p-6 shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-200">
+      <div class="text-3xl mb-4">⭐</div>
+      <div class="mb-4">
+        <h3 class="text-3xl font-bold text-gray-900 mb-1">{{ stats.totalReviews }}</h3>
+        <p class="text-gray-600 text-sm">Reviews</p>
+      </div>
+      <a routerLink="/admin/reviews" class="text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors">
+        Manage Reviews →
+      </a>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-xl p-8 shadow-lg border border-gray-200">
+    <h2 class="text-2xl font-bold text-gray-900 mb-6">Quick Actions</h2>
+    <div class="flex flex-wrap gap-4">
+      <a routerLink="/admin/products/new" class="flex items-center space-x-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium">
+        <span class="text-lg">➕</span>
+        <span>Add New Product</span>
+      </a>
+      <a routerLink="/admin/categories/new" class="flex items-center space-x-2 bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors duration-200 font-medium">
+        <span class="text-lg">🏷️</span>
+        <span>Add New Category</span>
+      </a>
+      <a routerLink="/admin/users" class="flex items-center space-x-2 bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors duration-200 font-medium">
+        <span class="text-lg">👥</span>
+        <span>View All Users</span>
+      </a>
+    </div>
+  </div>
+</div>

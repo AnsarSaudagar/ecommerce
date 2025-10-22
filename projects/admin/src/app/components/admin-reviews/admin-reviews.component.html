@@ -1,0 +1,118 @@
+<div class="reviews-container">
+  <div class="reviews-header">
+    <h1>Reviews Management</h1>
+  </div>
+
+  <div class="reviews-controls">
+    <div class="search-box">
+      <input 
+        type="text" 
+        placeholder="Search reviews..." 
+        [(ngModel)]="searchTerm"
+        (input)="searchReviews()"
+        class="search-input">
+      <span class="search-icon">🔍</span>
+    </div>
+    
+    <div class="results-info">
+      <span>{{ filteredReviews.length }} reviews found</span>
+    </div>
+  </div>
+
+  <div class="reviews-content" *ngIf="!isLoading">
+    <div class="reviews-list" *ngIf="paginatedReviews.length > 0">
+      <div class="review-card" *ngFor="let review of paginatedReviews">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">{{ review.name.charAt(0) }}</div>
+            <div class="reviewer-details">
+              <h3 class="reviewer-name">{{ review.name }}</h3>
+              <p class="reviewer-email">{{ review.email }}</p>
+            </div>
+          </div>
+          <div class="review-rating">
+            <div class="stars">
+              <span *ngFor="let star of getStars(review.rating)" class="star">{{ star }}</span>
+            </div>
+            <span class="rating-number">{{ review.rating }}/5</span>
+          </div>
+        </div>
+
+        <div class="review-content">
+          <h4 class="review-title" *ngIf="review.title">{{ review.title }}</h4>
+          <p class="review-text">{{ review.content }}</p>
+        </div>
+
+        <div class="review-meta">
+          <div class="review-stats">
+            <span class="like-count">👍 {{ review.like_count || 0 }}</span>
+            <span class="dislike-count">👎 {{ review.dislike_count || 0 }}</span>
+          </div>
+          <div class="review-status">
+            <span class="status-badge" [class.verified]="review.is_verified" [class.unverified]="!review.is_verified">
+              {{ review.is_verified ? 'Verified' : 'Unverified' }}
+            </span>
+          </div>
+          <div class="review-date">
+            {{ review.created_at | date:'MMM dd, yyyy' }}
+          </div>
+        </div>
+
+        <div class="review-actions">
+          <button 
+            (click)="verifyReview(review.id!)" 
+            class="btn-verify"
+            *ngIf="!review.is_verified">
+            ✅ Verify
+          </button>
+          <button 
+            (click)="deleteReview(review.id!)" 
+            class="btn-delete">
+            🗑️ Delete
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="no-reviews" *ngIf="paginatedReviews.length === 0">
+      <div class="no-reviews-content">
+        <span class="no-reviews-icon">⭐</span>
+        <h3>No reviews found</h3>
+        <p *ngIf="searchTerm">Try adjusting your search terms</p>
+        <p *ngIf="!searchTerm">No reviews have been submitted yet</p>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination" *ngIf="totalPages > 1">
+      <button 
+        (click)="goToPage(currentPage - 1)" 
+        [disabled]="currentPage === 1"
+        class="pagination-btn">
+        ← Previous
+      </button>
+      
+      <div class="pagination-numbers">
+        <button 
+          *ngFor="let page of getPageNumbers()" 
+          (click)="goToPage(page)"
+          [class.active]="page === currentPage"
+          class="pagination-number">
+          {{ page }}
+        </button>
+      </div>
+      
+      <button 
+        (click)="goToPage(currentPage + 1)" 
+        [disabled]="currentPage === totalPages"
+        class="pagination-btn">
+        Next →
+      </button>
+    </div>
+  </div>
+
+  <div class="loading" *ngIf="isLoading">
+    <div class="loading-spinner"></div>
+    <p>Loading reviews...</p>
+  </div>
+</div>

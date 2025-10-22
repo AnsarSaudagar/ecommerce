@@ -1,0 +1,44 @@
+<nav class="bg-gray-800 text-white sticky top-0 z-50 shadow-lg">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex justify-between items-center py-4">
+      <h2 class="text-xl font-bold">🛍️ Ecommerce Admin</h2>
+      <button 
+        class="md:hidden flex flex-col space-y-1 p-2"
+        (click)="toggleMenu()" 
+        [class.active]="isMenuOpen">
+        <span class="w-6 h-0.5 bg-white transition-all duration-300" 
+              [class.rotate-45]="isMenuOpen" 
+              [class.translate-y-1.5]="isMenuOpen"></span>
+        <span class="w-6 h-0.5 bg-white transition-all duration-300" 
+              [class.opacity-0]="isMenuOpen"></span>
+        <span class="w-6 h-0.5 bg-white transition-all duration-300" 
+              [class.-rotate-45]="isMenuOpen" 
+              [class.-translate-y-1.5]="isMenuOpen"></span>
+      </button>
+    </div>
+
+    <div class="md:flex md:space-x-1" 
+         [class.hidden]="!isMenuOpen" 
+         [class.block]="isMenuOpen"
+         [class.absolute]="isMenuOpen"
+         [class.top-full]="isMenuOpen"
+         [class.left-0]="isMenuOpen"
+         [class.right-0]="isMenuOpen"
+         [class.bg-gray-800]="isMenuOpen"
+         [class.shadow-lg]="isMenuOpen"
+         [class.p-4]="isMenuOpen">
+      <ul class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2">
+        <li *ngFor="let item of navItems">
+          <a 
+            routerLink="{{ item.path }}" 
+            routerLinkActive="bg-blue-600"
+            class="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors duration-200"
+            (click)="isMenuOpen = false">
+            <span class="text-lg">{{ item.icon }}</span>
+            <span class="text-sm font-medium">{{ item.label }}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

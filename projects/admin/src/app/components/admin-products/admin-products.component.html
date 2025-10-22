@@ -1,0 +1,127 @@
+<div class="p-8 max-w-7xl mx-auto">
+  <div class="flex justify-between items-center mb-8">
+    <h1 class="text-3xl font-bold text-gray-900">Products Management</h1>
+    <a routerLink="/admin/products/new" class="flex items-center space-x-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium">
+      <span class="text-lg">➕</span>
+      <span>Add New Product</span>
+    </a>
+  </div>
+
+  <div class="flex justify-between items-center mb-8 gap-4">
+    <div class="relative flex-1 max-w-md">
+      <input 
+        type="text" 
+        placeholder="Search products..." 
+        [(ngModel)]="searchTerm"
+        (input)="searchProducts()"
+        class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+      <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">🔍</span>
+    </div>
+    
+    <div class="text-gray-600 text-sm">
+      <span>{{ filteredProducts.length }} products found</span>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading">
+    <div *ngIf="paginatedProducts.length > 0" class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Image</th>
+              <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+              <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
+              <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
+              <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
+              <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <tr *ngFor="let product of paginatedProducts" class="hover:bg-gray-50">
+              <td class="px-6 py-4 whitespace-nowrap">
+                <img 
+                  [src]="product.image || '/assets/placeholder-product.png'" 
+                  [alt]="product.name"
+                  class="w-12 h-12 object-cover rounded-lg border border-gray-200">
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm font-medium text-gray-900">{{ product.name }}</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm font-semibold text-green-600">${{ product.price }}</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-500">{{ product.category_id }}</div>
+              </td>
+              <td class="px-6 py-4">
+                <div class="text-sm text-gray-500 max-w-xs truncate">
+                  {{ product.description?.substring(0, 50) }}{{ product.description && product.description.length > 50 ? '...' : '' }}
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap space-x-2">
+                <a 
+                  [routerLink]="['/admin/products', product.id, 'edit']" 
+                  class="inline-flex items-center px-3 py-1 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700 transition-colors">
+                  ✏️ Edit
+                </a>
+                <button 
+                  (click)="deleteProduct(product.id)" 
+                  class="inline-flex items-center px-3 py-1 bg-red-600 text-white text-sm rounded-md hover:bg-red-700 transition-colors">
+                  🗑️ Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div *ngIf="paginatedProducts.length === 0" class="flex justify-center items-center min-h-96">
+      <div class="text-center">
+        <span class="text-6xl mb-4 block">📦</span>
+        <h3 class="text-xl font-semibold text-gray-900 mb-2">No products found</h3>
+        <p *ngIf="searchTerm" class="text-gray-600 mb-4">Try adjusting your search terms</p>
+        <p *ngIf="!searchTerm" class="text-gray-600 mb-4">Get started by adding your first product</p>
+        <a routerLink="/admin/products/new" class="inline-flex items-center space-x-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium" *ngIf="!searchTerm">
+          Add First Product
+        </a>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <div *ngIf="totalPages > 1" class="flex justify-center items-center space-x-2 mt-8">
+      <button 
+        (click)="goToPage(currentPage - 1)" 
+        [disabled]="currentPage === 1"
+        class="px-4 py-2 border border-gray-300 rounded-md bg-white text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+        ← Previous
+      </button>
+      
+      <div class="flex space-x-1">
+        <button 
+          *ngFor="let page of getPageNumbers()" 
+          (click)="goToPage(page)"
+          [class.bg-blue-600]="page === currentPage"
+          [class.text-white]="page === currentPage"
+          [class.bg-white]="page !== currentPage"
+          [class.text-gray-700]="page !== currentPage"
+          class="px-3 py-2 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
+          {{ page }}
+        </button>
+      </div>
+      
+      <button 
+        (click)="goToPage(currentPage + 1)" 
+        [disabled]="currentPage === totalPages"
+        class="px-4 py-2 border border-gray-300 rounded-md bg-white text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+        Next →
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="isLoading" class="flex flex-col items-center justify-center min-h-96 text-gray-600">
+    <div class="w-10 h-10 border-4 border-gray-200 border-t-blue-600 rounded-full animate-spin mb-4"></div>
+    <p>Loading products...</p>
+  </div>
+</div>

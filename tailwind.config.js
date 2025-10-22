@@ -2,6 +2,7 @@
 module.exports = {
   content: [
     "./projects/ecommerce/src/**/*.{html,ts}",
+    "./projects/admin/src/**/*.{html,ts}",
     "./node_modules/flowbite/**/*.js"
   ],
   theme: {
