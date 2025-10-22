@@ -7,6 +7,7 @@ export interface ProductModel {
   category_id: number;
   created_at?: Date | null;
   updated_at?: Date | null;
+  categoryName?: string;
 }
 
 export interface ProductDetails {
