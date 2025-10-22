@@ -40,13 +40,13 @@ export class SignupComponent {
       ]),
     });
 
-    this.userDataService.getUserEmails().subscribe((data) => {
-      this.emails = data;
-    });
+    // this.userDataService.getUserEmails().subscribe((data) => {
+    //   this.emails = data;
+    // });
 
-    this.userDataService.getUsernames().subscribe((data) => {
-      this.usernames = data;
-    });
+    // this.userDataService.getUsernames().subscribe((data) => {
+    //   this.usernames = data;
+    // });
   }
 
   //Validator Function
