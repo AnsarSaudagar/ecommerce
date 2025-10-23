@@ -13,7 +13,7 @@ import { environment } from 'projects/ecommerce/src/environments/environment.dev
   standalone: true,
   imports: [CommonModule, RouterModule, ReactiveFormsModule],
   templateUrl: './product-form.component.html',
-  styleUrls: ['./product-form.component.css']
+  styleUrls: ['./product-form.component.css'],
 })
 export class ProductFormComponent implements OnInit {
   productForm!: FormGroup;
@@ -24,6 +24,8 @@ export class ProductFormComponent implements OnInit {
   productId: number | null = null;
   isLoading = false;
   isSubmitting = false;
+  s3Path = null;
+  imageName = null;
 
   constructor(
     private fb: FormBuilder,
@@ -46,14 +48,15 @@ export class ProductFormComponent implements OnInit {
       price: ['', [Validators.required, Validators.min(0)]],
       description: [''],
       category_id: ['', Validators.required],
-      image: ['']
+      image: [''],
     });
   }
 
   checkEditMode(): void {
-    this.productId = this.route.snapshot.paramMap.get('id') ? 
-      +this.route.snapshot.paramMap.get('id')! : null;
-    
+    this.productId = this.route.snapshot.paramMap.get('id')
+      ? +this.route.snapshot.paramMap.get('id')!
+      : null;
+
     if (this.productId) {
       this.isEditMode = true;
       this.loadProduct(this.productId);
@@ -67,7 +70,7 @@ export class ProductFormComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error loading categories:', error);
-      }
+      },
     });
   }
 
@@ -79,19 +82,21 @@ export class ProductFormComponent implements OnInit {
           name: product.name,
           price: product.price,
           description: product.description,
-          category_id: product.categoryId
+          category_id: product.categoryId,
         });
-        
+
         if (product.image) {
+          this.s3Path = `products/product_${product.id}/${product.image}`;
+          this.imageName = product.image;
           this.imagePreview = `${environment.aws_s3_bucket_url}/products/product_${product.id}/${product.image}`;
         }
-        
+
         this.isLoading = false;
       },
       error: (error) => {
         console.error('Error loading product:', error);
         this.isLoading = false;
-      }
+      },
     });
   }
 
@@ -99,7 +104,7 @@ export class ProductFormComponent implements OnInit {
     const file = event.target.files[0];
     if (file) {
       this.selectedImage = file;
-      
+
       // Create preview
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -118,18 +123,18 @@ export class ProductFormComponent implements OnInit {
   onSubmit(): void {
     if (this.productForm.valid && !this.isSubmitting) {
       this.isSubmitting = true;
-      
+
       const formData = new FormData();
       formData.append('name', this.productForm.value.name);
       formData.append('price', this.productForm.value.price);
       formData.append('description', this.productForm.value.description || '');
       formData.append('category_id', this.productForm.value.category_id);
-      
+
       if (this.selectedImage) {
         formData.append('image', this.selectedImage);
       }
 
-      const request = this.isEditMode 
+      const request = this.isEditMode
         ? this.productsService.updateProduct(this.productId!, formData)
         : this.productsService.createProduct(formData);
 
@@ -140,12 +145,29 @@ export class ProductFormComponent implements OnInit {
         error: (error) => {
           console.error('Error saving product:', error);
           this.isSubmitting = false;
-        }
+        },
       });
     }
   }
 
   onCancel(): void {
     this.router.navigate(['/admin/products']);
+  }
+
+  onClickDownloadImage() {
+    if (this.s3Path) {
+      this.productsService.downloadFile(this.s3Path).subscribe({
+        next: (blob : Blob) => {
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = this.imageName ? this.imageName : this.s3Path; 
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          window.URL.revokeObjectURL(url);
+        },
+      });
+    }
   }
 }

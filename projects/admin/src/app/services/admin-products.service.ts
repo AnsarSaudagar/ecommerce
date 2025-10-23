@@ -43,4 +43,8 @@ export class AdminProductsService {
     formData.append('image', file);
     return this.http.post<{url: string}>(`${this.apiUrl}/products/upload-image`, formData);
   }
+
+  downloadFile(filePath: string) {
+    return this.http.get(`${this.apiUrl}/products/download?path=${filePath}`, {responseType: 'blob'});
+  }
 }
