@@ -24,7 +24,7 @@ export class AdminCategoriesService {
 
   // Create new category
   createCategory(category: FormData): Observable<ProductCategoryModel> {
-    return this.http.post<ProductCategoryModel>(`${this.apiUrl}/product-categories`, category);
+    return this.http.post<ProductCategoryModel>(`${this.apiUrl}/product-categories/add-product-category`, category);
   }
 
   // Update category
