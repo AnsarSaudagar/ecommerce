@@ -2,11 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { ProductCategoryModel } from '../models/product_category.model';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductCategoryService {
+  apiJavaUrl = environment.backendJavaUrl;
   constructor(
     private http: HttpClient,
     @Inject('API_BASE_URL') private apiUrl: string,
@@ -15,7 +17,7 @@ export class ProductCategoryService {
 
   getProductCategories(): Observable<ProductCategoryModel[]> {
     return this.http.get<ProductCategoryModel[]>(
-      this.apiNodeUrl + 'product-category'
+      this.apiJavaUrl + 'product/category'
     );
   }
 }
