@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { DashboardDataCounts } from '../../models/dashboard-data-counts';
+import { AdminDashboardService } from '../../services/admin-dashboard.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -10,14 +12,14 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./admin-dashboard.component.css']
 })
 export class AdminDashboardComponent implements OnInit {
-  stats = {
-    totalProducts: 0,
-    totalUsers: 0,
-    totalCategories: 0,
-    totalReviews: 0
+  stats : DashboardDataCounts = {
+    products: 0,
+    users: 0,
+    categories: 0,
+    reviews: 0
   };
 
-  constructor() { }
+  constructor(private dashboardService: AdminDashboardService) { }
 
   ngOnInit(): void {
     // Load dashboard statistics
@@ -25,13 +27,14 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   loadDashboardStats(): void {
-    // This would typically load from your services
-    // For now, we'll set placeholder values
-    this.stats = {
-      totalProducts: 150,
-      totalUsers: 89,
-      totalCategories: 12,
-      totalReviews: 234
-    };
+    
+
+    this.dashboardService.getCardDataCounts().subscribe({
+      next: (totalStatCounts : DashboardDataCounts) => {
+        this.stats = totalStatCounts;
+      }
+    })
+
+    
   }
 }
