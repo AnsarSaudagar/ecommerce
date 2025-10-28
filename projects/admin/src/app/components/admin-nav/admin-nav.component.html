@@ -1,7 +1,7 @@
 <nav class="bg-gray-800 text-white sticky top-0 z-50 shadow-lg">
   <div class="max-w-7xl px-4 flex items-center gap-5">
     <div class="flex justify-between items-center py-4">
-      <h2 class="text-xl font-bold">🛍️ Ecommerce Admin</h2>
+      <h2 class="text-xl font-bold">🛍️  E-Admin</h2>
       <button 
         class="md:hidden flex flex-col space-y-1 p-2"
         (click)="toggleMenu()" 
@@ -30,7 +30,7 @@
       <ul class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2">
         <li *ngFor="let item of navItems">
           <a 
-            routerLink="{{ item.path }}" 
+            [routerLink]="item.path" 
             routerLinkActive="bg-blue-600"
             [routerLinkActiveOptions]="{ exact: true }"
             class="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors duration-200"
