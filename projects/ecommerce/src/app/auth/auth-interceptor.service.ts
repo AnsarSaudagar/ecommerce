@@ -27,8 +27,7 @@ export class AuthInterceptorService implements HttpInterceptor {
           headers: new HttpHeaders({
             Authorization: `Bearer ${user.token}`,
             'Content-Type': 'application/json',
-          }),
-          params: new HttpParams().set('auth', user.token),
+          })
         });
         return next.handle(modifiedReq);
       })

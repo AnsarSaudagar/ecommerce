@@ -6,6 +6,7 @@ import { User } from './user';
 import { Router } from '@angular/router';
 import { UserModel } from '../models/user.model';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from '../../environments/environment.development';
 
 export interface AuthResponseData {
   kind: string;
@@ -34,6 +35,8 @@ export class AuthenticationService {
 
   private tokenExpirationTimer: any;
 
+  apiUrl = environment.backendJavaUrl;
+
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -47,7 +50,7 @@ export class AuthenticationService {
 
   register(userData: UserModel): Observable<UserModel> {
     return this.http
-      .post<UserModel>(this.apiNodeUrl + 'register', userData)
+      .post<UserModel>(this.apiUrl + 'user/signup', userData)
       .pipe(
         tap(res => this.toastr.success("Successfully Registered")),
         catchError((error) => {
@@ -61,7 +64,7 @@ export class AuthenticationService {
   login(credentials: { email: string; password: string }) {
     return this.http
       .post<{ user: UserModel; token: string }>(
-        this.apiNodeUrl + 'login',
+        this.apiUrl + 'user/login',
         credentials
       )
       .pipe(
