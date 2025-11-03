@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -61,6 +61,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { ToastrModule } from 'ngx-toastr';  
 import { environment } from '../environments/environment.development';
+import { ForgotPasswordComponent } from './account/forgot-password/forgot-password.component';
 
 const appRoutes = [
   { path: '', component: HomeComponent },
@@ -70,6 +71,7 @@ const appRoutes = [
     children: [
       { path: 'login', component: LoginComponent },
       { path: 'signup', component: SignupComponent },
+      {path: 'forgot-password', component: ForgotPasswordComponent},
       {
         path: 'myAccount',
         component: MyaccountComponent,
@@ -163,7 +165,8 @@ const appRoutes = [
     TimeAgoPipe,
     AdminComponent,
     AdminAllProductsComponent,
-    AdminProductFormComponent
+    AdminProductFormComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
